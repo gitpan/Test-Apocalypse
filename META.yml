@@ -1,0 +1,111 @@
+---
+name: Test-Apocalypse
+version: 0.02
+author:
+  - 'Apocalypse <APOCAL@cpan.org>'
+abstract: Apocalypse's favorite tests bundled into a simple interface
+license: perl
+resources:
+  license: http://dev.perl.org/licenses/
+requires:
+  CPANPLUS::Backend: 0
+  CPANPLUS::Configure: 0
+  Devel::PPPort: 0
+  File::Find::Rule: 0
+  Module::CPANTS::Analyse: 0
+  Module::CoreList: 0
+  Perl::Metrics::Simple: 0
+  Test::Block: 0
+  Test::CheckManifest: 0
+  Test::Compile: 0
+  Test::Dependencies: 0
+  Test::Distribution: 0
+  Test::Fixme: 0
+  Test::HasVersion: 0
+  Test::MinimumVersion: 0
+  Test::More: 0
+  Test::NoWarnings: 0
+  Test::Perl::Critic: 0
+  Test::Pod: 0
+  Test::Pod::Coverage: 0
+  Test::Prereq: 0
+  Test::Prereq::Build: 0
+  Test::Spelling: 0
+  Test::Strict: 0
+  Test::UseAllModules: 0
+  Test::YAML::Meta: 0
+  YAML: 0
+  perl: 5.008
+  version: 0
+dynamic_config: 0
+provides:
+  Test::Apocalypse:
+    file: lib/Test/Apocalypse.pm
+    version: 0.02
+  Test::Apocalypse::Compile:
+    file: lib/Test/Apocalypse/Compile.pm
+    version: 0.02
+  Test::Apocalypse::DOSnewline:
+    file: lib/Test/Apocalypse/DOSnewline.pm
+    version: 0.02
+  Test::Apocalypse::Dependencies:
+    file: lib/Test/Apocalypse/Dependencies.pm
+    version: 0.02
+  Test::Apocalypse::Distribution:
+    file: lib/Test/Apocalypse/Distribution.pm
+    version: 0.02
+  Test::Apocalypse::Fixme:
+    file: lib/Test/Apocalypse/Fixme.pm
+    version: 0.02
+  Test::Apocalypse::HasVersion:
+    file: lib/Test/Apocalypse/HasVersion.pm
+    version: 0.02
+  Test::Apocalypse::Kwalitee:
+    file: lib/Test/Apocalypse/Kwalitee.pm
+    version: 0.02
+  Test::Apocalypse::METAyml:
+    file: lib/Test/Apocalypse/METAyml.pm
+    version: 0.02
+  Test::Apocalypse::Manifest:
+    file: lib/Test/Apocalypse/Manifest.pm
+    version: 0.02
+  Test::Apocalypse::MinimumVersion:
+    file: lib/Test/Apocalypse/MinimumVersion.pm
+    version: 0.02
+  Test::Apocalypse::OutdatedPrereqs:
+    file: lib/Test/Apocalypse/OutdatedPrereqs.pm
+    version: 0.02
+  Test::Apocalypse::PPPort:
+    file: lib/Test/Apocalypse/PPPort.pm
+    version: 0.02
+  Test::Apocalypse::PerlCritic:
+    file: lib/Test/Apocalypse/PerlCritic.pm
+    version: 0.02
+  Test::Apocalypse::PerlMetrics:
+    file: lib/Test/Apocalypse/PerlMetrics.pm
+    version: 0.02
+  Test::Apocalypse::Pod:
+    file: lib/Test/Apocalypse/Pod.pm
+    version: 0.02
+  Test::Apocalypse::Pod_Coverage:
+    file: lib/Test/Apocalypse/Pod_Coverage.pm
+    version: 0.02
+  Test::Apocalypse::Pod_Spelling:
+    file: lib/Test/Apocalypse/Pod_Spelling.pm
+    version: 0.02
+  Test::Apocalypse::Prereq:
+    file: lib/Test/Apocalypse/Prereq.pm
+    version: 0.02
+  Test::Apocalypse::Prereq_Build:
+    file: lib/Test/Apocalypse/Prereq_Build.pm
+    version: 0.02
+  Test::Apocalypse::Strict:
+    file: lib/Test/Apocalypse/Strict.pm
+    version: 0.02
+  Test::Apocalypse::UseAllModules:
+    file: lib/Test/Apocalypse/UseAllModules.pm
+    version: 0.02
+generated_by: Module::Build version 0.280801
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.2.html
+  version: 1.2
