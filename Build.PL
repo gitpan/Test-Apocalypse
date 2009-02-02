@@ -1,93 +1,61 @@
+# Build.PL
+use strict; use warnings;
+use Module::Build;
 
-use strict;
-use warnings;
+my $build = Module::Build->new(
+	# look up Module::Build::API for the info!
+	'dynamic_config'	=> 0,
+	'module_name'		=> 'Test::Apocalypse',
+	'license'		=> 'perl',
 
-use Module::Build 0.3601;
+	'dist_abstract'		=> "Apocalypse's favorite tests bundled into a simple interface",
+	'dist_author'		=> 'Apocalypse <APOCAL@cpan.org>',
 
+	'create_packlist'	=> 1,
+	'create_makefile_pl'	=> 'traditional',
+	'create_readme'		=> 1,
 
-my %module_build_args = (
-  'build_requires' => {
-    'File::Find' => '0',
-    'File::Temp' => '0',
-    'Module::Build' => '0.3601'
-  },
-  'configure_requires' => {
-    'Module::Build' => '0.3601'
-  },
-  'dist_abstract' => 'Apocalypse\'s favorite tests bundled into a simple interface',
-  'dist_author' => [
-    'Apocalypse <APOCAL@cpan.org>'
-  ],
-  'dist_name' => 'Test-Apocalypse',
-  'dist_version' => '1.002',
-  'license' => 'perl',
-  'module_name' => 'Test::Apocalypse',
-  'recommends' => {},
-  'recursive_test_files' => 1,
-  'requires' => {
-    'CPANPLUS' => '0.90',
-    'CPANPLUS::Backend' => '0',
-    'CPANPLUS::Configure' => '0',
-    'Capture::Tiny' => '0.10',
-    'Data::Dumper' => '0',
-    'Devel::PPPort' => '3.19',
-    'Exporter' => '0',
-    'File::Find::Rule' => '0.32',
-    'File::Slurp' => '9999.13',
-    'File::Spec' => '3.31',
-    'File::Which' => '1.09',
-    'JSON::Any' => '1.25',
-    'Module::CPANTS::Analyse' => '0.85',
-    'Module::CoreList' => '2.23',
-    'Module::Pluggable' => '3.9',
-    'Perl::Critic::Utils::Constants' => '0',
-    'Perl::Metrics::Simple' => '0.13',
-    'Perl::PrereqScanner' => '1.000',
-    'Pod::Coverage::TrustPod' => '0.092830',
-    'Task::Perl::Critic' => '1.007',
-    'Test::AutoLoader' => '0.03',
-    'Test::Block' => '0.11',
-    'Test::Builder' => '0.96',
-    'Test::CPAN::Meta' => '0.18',
-    'Test::CPAN::Meta::JSON' => '0.10',
-    'Test::CPAN::Meta::YAML' => '0.17',
-    'Test::CheckChanges' => '0',
-    'Test::Compile' => '0.11',
-    'Test::ConsistentVersion' => '0.2.2',
-    'Test::Deep' => '0.108',
-    'Test::Dir' => '1.006',
-    'Test::DistManifest' => '1.005',
-    'Test::EOL' => '0.3',
-    'Test::File' => '1.29',
-    'Test::Fixme' => '0.04',
-    'Test::HasVersion' => '0.012',
-    'Test::MinimumVersion' => '0.101080',
-    'Test::More' => '0.96',
-    'Test::NoBreakpoints' => '0.13',
-    'Test::NoPlan' => '0.0.6',
-    'Test::Perl::Critic' => '1.02',
-    'Test::Pod' => '1.41',
-    'Test::Pod::Coverage' => '1.08',
-    'Test::Pod::LinkCheck' => '0.004',
-    'Test::Pod::No404s' => '0.01',
-    'Test::Pod::Spelling::CommonMistakes' => '1.000',
-    'Test::Portability::Files' => '0',
-    'Test::Script' => '1.07',
-    'Test::Signature' => '1.10',
-    'Test::Spelling' => '0.11',
-    'Test::Strict' => '0.14',
-    'Test::Synopsis' => '0.06',
-    'Test::Vars' => '0.001',
-    'YAML' => '0.70',
-    'YAML::Any' => '0.72',
-    'parent' => '0',
-    'perl' => '5.006',
-    'version' => '0.77'
-  },
-  'script_files' => []
+	'test_files'		=> 't/*.t',
+
+	'add_to_cleanup'	=> [ 'META.yml', 'Makefile.PL', 'README', 'Makefile' ],	# automatically generated
+
+	'requires'		=> {
+		# Test stuff
+		'Test::More'		=> 0,
+		'Test::Compile'		=> 0,
+		'Test::Perl::Critic'	=> 0,
+		'Test::Dependencies'	=> 0,
+		'Test::Distribution'	=> 0,
+		'Test::Fixme'		=> 0,
+		'Test::HasVersion'	=> 0,
+		'Test::CheckManifest'	=> 0,
+		'Test::MinimumVersion'	=> 0,
+		'Test::Pod::Coverage'	=> 0,
+		'Test::Spelling'	=> 0,
+		'Test::Pod'		=> 0,
+		'Test::Prereq'		=> 0,
+		'Test::Prereq::Build'	=> 0,
+		'Test::Strict'		=> 0,
+		'Test::UseAllModules'	=> 0,
+		'Test::YAML::Meta'	=> 0,
+		'Test::NoWarnings'	=> 0,
+
+		# handy tools
+		'File::Find::Rule'		=> 0,
+		'Module::CPANTS::Analyse'	=> 0,
+		'Perl::Metrics::Simple'		=> 0,
+		'Test::Block'			=> 0,
+		'YAML'				=> 0,
+		'version'			=> 0,
+		'CPANPLUS::Backend'		=> 0,
+		'CPANPLUS::Configure'		=> 0,
+		'Devel::PPPort'			=> 0,
+		'Module::CoreList'		=> 0,
+
+		# we need a recent perl
+		'perl'			=> '5.008',
+	},
 );
 
-
-my $build = Module::Build->new(%module_build_args);
-
+# all done!
 $build->create_build_script;

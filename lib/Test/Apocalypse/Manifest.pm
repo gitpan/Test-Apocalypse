@@ -1,5 +1,5 @@
 # Declare our package
-package Test::Apocalypse::Compile;
+package Test::Apocalypse::Manifest;
 use strict; use warnings;
 
 # Initialize our version
@@ -7,11 +7,17 @@ use vars qw( $VERSION );
 $VERSION = '0.01';
 
 # setup our tests and etc
-use Test::Compile;
+use Test::CheckManifest;	# FIXME Test::DistManifest seems better but it is br0ken :(
 
 # does our stuff!
 sub do_test {
-	all_pm_files_ok();
+	ok_manifest( {
+		# for now, exclude some annoying stuff
+		'filter' => [ qr/\.svn/, qr/\.git/, qr/\.tar\.gz$/,	# RCS systems
+			qr/\.project$/,					# Eclipse file
+			qr/\.c$/, qr/\.o$/,				# compiled stuff ( XS )
+		],
+	} );
 
 	return;
 }
@@ -20,7 +26,7 @@ sub do_test {
 __END__
 =head1 NAME
 
-Test::Apocalypse::Compile - Plugin for Test::Compile
+Test::Apocalypse::Manifest - Plugin for Test::CheckManifest
 
 =head1 SYNOPSIS
 
@@ -28,11 +34,11 @@ Test::Apocalypse::Compile - Plugin for Test::Compile
 
 =head1 ABSTRACT
 
-Encapsulates Test::Compile functionality.
+Encapsulates Test::CheckManifest functionality.
 
 =head1 DESCRIPTION
 
-Encapsulates Test::Compile functionality.
+Encapsulates Test::CheckManifest functionality.
 
 =head1 EXPORT
 
@@ -42,7 +48,7 @@ None.
 
 L<Test::Apocalypse>
 
-L<Test::Compile>
+L<Test::CheckManifest>
 
 =head1 AUTHOR
 

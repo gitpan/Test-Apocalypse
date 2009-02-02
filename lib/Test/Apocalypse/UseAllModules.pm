@@ -1,5 +1,5 @@
 # Declare our package
-package Test::Apocalypse::Compile;
+package Test::Apocalypse::UseAllModules;
 use strict; use warnings;
 
 # Initialize our version
@@ -7,11 +7,11 @@ use vars qw( $VERSION );
 $VERSION = '0.01';
 
 # setup our tests and etc
-use Test::Compile;
+use Test::UseAllModules;
 
 # does our stuff!
 sub do_test {
-	all_pm_files_ok();
+	all_uses_ok();
 
 	return;
 }
@@ -20,7 +20,7 @@ sub do_test {
 __END__
 =head1 NAME
 
-Test::Apocalypse::Compile - Plugin for Test::Compile
+Test::Apocalypse::UseAllModules - Plugin for Test::UseAllModules
 
 =head1 SYNOPSIS
 
@@ -28,11 +28,11 @@ Test::Apocalypse::Compile - Plugin for Test::Compile
 
 =head1 ABSTRACT
 
-Encapsulates Test::Compile functionality.
+Encapsulates Test::UseAllModules functionality.
 
 =head1 DESCRIPTION
 
-Encapsulates Test::Compile functionality.
+Encapsulates Test::UseAllModules functionality.
 
 =head1 EXPORT
 
@@ -42,7 +42,7 @@ None.
 
 L<Test::Apocalypse>
 
-L<Test::Compile>
+L<Test::UseAllModules>
 
 =head1 AUTHOR
 

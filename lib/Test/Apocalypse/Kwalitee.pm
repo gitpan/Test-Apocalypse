@@ -1,54 +1,23 @@
-#
-# This file is part of Test-Apocalypse
-#
-# This software is copyright (c) 2011 by Apocalypse.
-#
-# This is free software; you can redistribute it and/or modify it under
-# the same terms as the Perl 5 programming language system itself.
-#
-use strict; use warnings;
+# Declare our package
 package Test::Apocalypse::Kwalitee;
-BEGIN {
-  $Test::Apocalypse::Kwalitee::VERSION = '1.002';
-}
-BEGIN {
-  $Test::Apocalypse::Kwalitee::AUTHORITY = 'cpan:APOCAL';
-}
+use strict; use warnings;
 
-# ABSTRACT: Plugin for Test::Kwalitee
+# Initialize our version
+use vars qw( $VERSION );
+$VERSION = '0.01';
 
+# setup our tests and etc
 use Test::More;
-use Module::CPANTS::Analyse 0.85;
-use version 0.77;
+use Module::CPANTS::Analyse;
+use version;
 
-sub _do_automated { 0 }
-
+# does our stuff!
 sub do_test {
 	# the following code was copied/plagarized/transformed from Test::Kwalitee, thanks!
-	# The reason why I didn't just use that module is because it doesn't print the kwalitee or consider extra metrics...
 
 	# init CPANTS with the latest tarball
-	my $tarball = _get_tarball( '.' );
-	if ( ! defined $tarball ) {
-		# Dist::Zilla-specific code, the tarball we want is 3 levels up ( when using dzp::TestRelease :)
-		# [@Apocalyptic/TestRelease] Extracting /home/apoc/mygit/perl-pod-weaver-pluginbundle-apocalyptic/Pod-Weaver-PluginBundle-Apocalyptic-0.001.tar.gz to .build/MiNXla4CY7
-		$tarball = _get_tarball( '../../..' );
-		if ( ! defined $tarball ) {
-			plan skip_all => 'Distribution tarball not found, unable to run CPANTS Kwalitee tests!';
-			return;
-		}
-	}
-
-	_analyze( $tarball ) if defined $tarball;
-
-	return;
-}
-
-sub _analyze {
-	my $tarball = shift;
-
 	my $analyzer = Module::CPANTS::Analyse->new({
-		'dist'	=> $tarball,
+		'dist'	=> get_tarball(),
 	});
 
 	# set the number of tests / run analyzer
@@ -65,7 +34,6 @@ sub _analyze {
 		foreach my $metric ( @{ $gen->kwalitee_indicators() } ) {
 			# skip problematic ones
 			if ( $metric->{'name'} =~ /^(?:is_prereq|prereq_matches_use|build_prereq_matches_use)$/ ) { next }
-			#if ( $metric->{'name'} =~ /^(?:is_prereq)$/ ) { next }
 
 			# get the result
 			my $result = $metric->{'code'}->( $analyzer->d(), $metric );
@@ -76,21 +44,12 @@ sub _analyze {
 			if ( exists $metric->{'is_extra'} and $metric->{'is_extra'} ) {
 				$type = 'EXTRA';
 			}
-
-			# non-core tests PASS automatically
-			if ( $type eq 'CORE' or $result ) {
-				ok( $result, "[$type] $metric->{'name'}" );
-			} else {
-				pass( "[$type] $metric->{'name'} treated as PASS" );
-			}
+			ok( $result, "[$type] $metric->{'name'}" );
 
 			# print more diag if it failed
 			if ( ! $result && $ENV{TEST_VERBOSE} ) {
 				diag( '[' . $metric->{'name'} . '] error(' . $metric->{'error'} . ') remedy(' . $metric->{'remedy'} . ')' );
-				if ( $metric->{'name'} eq 'prereq_matches_use' or $metric->{'name'} eq 'build_prereq_matches_use' ) {
-					require Data::Dumper;
-					diag( "module information: " . Data::Dumper::Dumper( $analyzer->d->{'uses'} ) );
-				}
+
 			}
 
 			# should we tally up the kwalitee?
@@ -110,39 +69,31 @@ sub _analyze {
 	diag( "Kwalitee rating: " . sprintf( "%.2f%%", 100 * ( $kwalitee_points / $available_kwalitee ) ) . " [$kwalitee_points / $available_kwalitee]" );
 
 	# That piece of crap dumps files all over :(
-	_cleanup_debian_files();
+	cleanup_debian_files();
 
 	return;
 }
 
-sub _get_tarball {
-	my $path = shift;
-
+sub get_tarball {
 	# get our list of stuff, and try to find the latest tarball
-	opendir( my $dir, $path ) or die "Unable to opendir: $!";
+	opendir( my $dir, '.' ) or die "unable to opendir: $!";
 	my @dirlist = readdir( $dir );
-	closedir( $dir ) or die "Unable to closedir: $!";
+	closedir( $dir );
 
 	# get the tarballs
-	@dirlist = grep { /(?:tar(?:\.gz|\.bz2)?|tgz|zip)$/ } @dirlist;
-
-	# short-circuit
-	if ( scalar @dirlist == 0 ) {
-		return;
-	}
+	@dirlist = grep { /\.tar\.gz$/ } @dirlist;
 
 	# get the versions
 	@dirlist = map { [ $_, $_ ] } @dirlist;
 	for ( @dirlist ) {
-		$_->[0] =~ s/^.*\-([^\-]+)(?:tar(?:\.gz|\.bz2)?|tgz|zip)$/$1/;
+		$_->[0] =~ s/^.*\-([^\-]+)\.tar\.gz$/$1/;
 		$_->[0] = version->new( $_->[0] );
 	}
 
 	# sort by version
-	@dirlist = reverse sort { $a->[0] <=> $b->[0] } @dirlist;
+	@dirlist = sort { $b->[0] <=> $a->[0] } @dirlist;
 
-	# TODO should we use file::spec and stuff here?
-	return $path . '/' . $dirlist[0]->[1];
+	return $dirlist[0]->[1];
 }
 
 # Module::CPANTS::Kwalitee::Distros suck!
@@ -153,7 +104,7 @@ sub _get_tarball {
 ## The following files are not named in the MANIFEST file: /home/apoc/workspace/VCS-perl-trunk/VCS-2.12.2/Debian_CPANTS.txt
 ## Looks like you failed 1 test of 1.
 #t/a_manifest.............. Dubious, test returned 1 (wstat 256, 0x100)
-sub _cleanup_debian_files {
+sub cleanup_debian_files {
 	foreach my $file ( qw( Debian_CPANTS.txt ../Debian_CPANTS.txt ) ) {
 		if ( -e $file and -f _ ) {
 			my $status = unlink( $file );
@@ -167,76 +118,42 @@ sub _cleanup_debian_files {
 }
 
 1;
-
-
 __END__
-=pod
-
-=for :stopwords Apocalypse kwalitee
-
-=encoding utf-8
-
-=for Pod::Coverage do_test
-
 =head1 NAME
 
 Test::Apocalypse::Kwalitee - Plugin for Test::Kwalitee
 
-=head1 VERSION
+=head1 SYNOPSIS
 
-  This document describes v1.002 of Test::Apocalypse::Kwalitee - released April 21, 2011 as part of Test-Apocalypse.
+	Please do not use this module directly.
+
+=head1 ABSTRACT
+
+Encapsulates Test::Kwalitee functionality.
 
 =head1 DESCRIPTION
 
-Encapsulates L<Test::Kwalitee> functionality. This plugin also processes the extra metrics, and prints out the kwalitee as a diag() for info.
+Encapsulates Test::Kwalitee functionality.
+
+=head1 EXPORT
+
+None.
 
 =head1 SEE ALSO
 
-Please see those modules/websites for more information related to this module.
+L<Test::Apocalypse>
 
-=over 4
-
-=item *
-
-L<Test::Apocalypse|Test::Apocalypse>
-
-=back
+L<Test::Kwalitee>
 
 =head1 AUTHOR
 
-Apocalypse <APOCAL@cpan.org>
+Apocalypse E<lt>apocal@cpan.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Apocalypse.
+Copyright 2009 by Apocalypse
 
-This is free software; you can redistribute it and/or modify it under
-the same terms as the Perl 5 programming language system itself.
-
-The full text of the license can be found in the LICENSE file included with this distribution.
-
-=head1 DISCLAIMER OF WARRANTY
-
-BECAUSE THIS SOFTWARE IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
-FOR THE SOFTWARE, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT
-WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER
-PARTIES PROVIDE THE SOFTWARE "AS IS" WITHOUT WARRANTY OF ANY KIND,
-EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE
-SOFTWARE IS WITH YOU. SHOULD THE SOFTWARE PROVE DEFECTIVE, YOU ASSUME
-THE COST OF ALL NECESSARY SERVICING, REPAIR, OR CORRECTION.
-
-IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
-WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR
-REDISTRIBUTE THE SOFTWARE AS PERMITTED BY THE ABOVE LICENCE, BE LIABLE
-TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL, OR
-CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE
-SOFTWARE (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING
-RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
-FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
-SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
-DAMAGES.
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
-
