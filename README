@@ -53,16 +53,53 @@ EXPORT
     Automatically exports the "is_apocalypse_here" sub.
 
 MORE IDEAS
-    *   Make sure we have no unnecessary +x files ( especially Build.PL! )
-
     *   Document the way we do plugins so others can add to this testsuite
         :)
 
     *   Per-plugin configuration for distros so we can override the default
         config
 
-    *   POD standards check ( do we have SYNOPSIS, ABSTRACT, SUPPORT, etc
-        sections? )
+    *   POD standards check
+
+        Do we have SYNOPSIS, ABSTRACT, SUPPORT, etc sections?
+
+    *   Use Test::AutoLoader to check for .al files
+
+        Br0ken install at this time...
+
+    *   Help with version updates automatically
+
+        This little snippet helps a lot, I was wondering if I could
+        integrate it into the testsuite hah!
+
+                find -name '*.pm' | grep -v /blib/ | xargs sed -i "s/\$VERSION = '[^']\+\?';/\$VERSION = '0.03';/"
+
+    *   Help Test::CheckChanges author for more formats
+
+        I already filed a ticket, RT#42976 but if others have different
+        formats please contribute!
+
+    *   Use Test::DistManifest instead of Test::CheckManifest
+
+        DistManifest has better support for MANIFEST.SKIP but the install is
+        br0ken at this time...
+
+    *   Use Test::GreaterVersion to sanity check versions
+
+        The problem here is that I've got to learn the CPAN backend to
+        extract the module name from the distro tarball, and pass it on to
+        the test...
+
+    *   Use Test::PerlTidy to check code style
+
+        Br0ken install at this time...
+
+    *   Integrate Test::UniqueTestNames into the testsuite
+
+        This would be nice, but I'm not sure if I can actually force this on
+        other tests. Otherwise I'll be just making sure that the
+        Test::Apocalypse tests is unique, which is worthless to $dist trying
+        to clean itself up...
 
 SEE ALSO
     None.
