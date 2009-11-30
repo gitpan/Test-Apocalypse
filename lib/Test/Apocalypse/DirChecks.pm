@@ -4,7 +4,7 @@ use strict; use warnings;
 
 # Initialize our version
 use vars qw( $VERSION );
-$VERSION = '0.03';
+$VERSION = '0.04';
 
 # setup our tests and etc
 use Test::More;
@@ -28,6 +28,9 @@ sub do_test {
 
 1;
 __END__
+
+=for stopwords dist
+
 =head1 NAME
 
 Test::Apocalypse::DirChecks - Plugin to test for directory sanity

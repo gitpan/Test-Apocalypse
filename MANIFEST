@@ -20,7 +20,6 @@ lib/Test/Apocalypse/Prereq_Build.pm
 lib/Test/Apocalypse/Prereq.pm
 lib/Test/Apocalypse/Strict.pm
 lib/Test/Apocalypse/UseAllModules.pm
-lib/Test/Apocalypse/Manifest.pm
 lib/Test/Apocalypse/Distribution.pm
 lib/Test/Apocalypse/OutdatedPrereqs.pm
 lib/Test/Apocalypse/PPPort.pm
@@ -29,6 +28,7 @@ lib/Test/Apocalypse/FileChecks.pm
 lib/Test/Apocalypse/DirChecks.pm
 lib/Test/Apocalypse/Signature.pm
 lib/Test/Apocalypse/FilePortability.pm
+lib/Test/Apocalypse/DistManifest.pm
 Makefile.PL
 META.yml
 Changes
@@ -37,4 +37,4 @@ LICENSE
 examples/simple.pl
 
 t/1_load.t
-t/a_apocalypse.t
+t/apocalypse.t

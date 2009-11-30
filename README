@@ -61,7 +61,8 @@ MORE IDEAS
 
     *   POD standards check
 
-        Do we have SYNOPSIS, ABSTRACT, SUPPORT, etc sections?
+        Do we have SYNOPSIS, ABSTRACT, SUPPORT, etc sections? ( PerlCritic
+        can do that! Need to investigate more... )
 
     *   Use Test::AutoLoader to check for .al files
 
@@ -72,17 +73,12 @@ MORE IDEAS
         This little snippet helps a lot, I was wondering if I could
         integrate it into the testsuite hah!
 
-                find -name '*.pm' | grep -v /blib/ | xargs sed -i "s/\$VERSION = '[^']\+\?';/\$VERSION = '0.03';/"
+                find -name '*.pm' | grep -v /blib/ | xargs sed -i "s/\$VERSION = '[^']\+\?';/\$VERSION = '0.04';/"
 
     *   Help Test::CheckChanges author for more formats
 
         I already filed a ticket, RT#42976 but if others have different
         formats please contribute!
-
-    *   Use Test::DistManifest instead of Test::CheckManifest
-
-        DistManifest has better support for MANIFEST.SKIP but the install is
-        br0ken at this time...
 
     *   Use Test::GreaterVersion to sanity check versions
 
@@ -92,7 +88,8 @@ MORE IDEAS
 
     *   Use Test::PerlTidy to check code style
 
-        Br0ken install at this time...
+        Br0ken install at this time... ( PerlCritic can do that! Need to
+        investigate more... )
 
     *   Integrate Test::UniqueTestNames into the testsuite
 
@@ -100,6 +97,21 @@ MORE IDEAS
         other tests. Otherwise I'll be just making sure that the
         Test::Apocalypse tests is unique, which is worthless to $dist trying
         to clean itself up...
+
+    *   Use Test::CPAN::Meta
+
+        I'm not sure of the difference between this and Test::YAML::Meta but
+        more tests == the better ;)
+
+    *   META.yml checks
+
+        We should make sure that the META.yml includes the "repository",
+        "license", and other useful keys!
+
+    *   Other AUTHORs
+
+        As always, we should keep up on the "latest" in the perl world and
+        look at other authors for what they are doing.
 
 SEE ALSO
     None.
@@ -126,6 +138,10 @@ SUPPORT
 
         <http://search.cpan.org/dist/Test-Apocalypse>
 
+    *   CPAN Testing Service
+
+        <http://cpants.perl.org/dist/overview/Test-Apocalypse>
+
   Bugs
     Please report any bugs or feature requests to "bug-test-apocalypse at
     rt.cpan.org", or through the web interface at
@@ -135,6 +151,9 @@ SUPPORT
 
 AUTHOR
     Apocalypse <apocal@cpan.org>
+
+    Thanks to jawnsy@cpan.org for the prodding and help in getting this
+    package ready to be bundled into debian!
 
 COPYRIGHT AND LICENSE
     Copyright 2009 by Apocalypse

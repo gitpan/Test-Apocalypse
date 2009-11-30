@@ -1,23 +1,17 @@
 # Declare our package
-package Test::Apocalypse::Manifest;
+package Test::Apocalypse::DistManifest;
 use strict; use warnings;
 
 # Initialize our version
 use vars qw( $VERSION );
-$VERSION = '0.03';
+$VERSION = '0.04';
 
 # setup our tests and etc
-use Test::CheckManifest;
+use Test::DistManifest;
 
 # does our stuff!
 sub do_test {
-	ok_manifest( {
-		# for now, exclude some annoying stuff
-		'filter' => [ qr/\.svn/, qr/\.git/, qr/\.tar\.gz$/,	# RCS systems
-			qr/\.project$/,					# Eclipse file
-			qr/\.c$/, qr/\.o$/,				# compiled stuff ( XS )
-		],
-	} );
+	manifest_ok();
 
 	return;
 }
@@ -26,7 +20,7 @@ sub do_test {
 __END__
 =head1 NAME
 
-Test::Apocalypse::Manifest - Plugin for Test::CheckManifest
+Test::Apocalypse::DistManifest - Plugin for Test::DistManifest
 
 =head1 SYNOPSIS
 
@@ -34,11 +28,11 @@ Test::Apocalypse::Manifest - Plugin for Test::CheckManifest
 
 =head1 ABSTRACT
 
-Encapsulates Test::CheckManifest functionality.
+Encapsulates Test::DistManifest functionality.
 
 =head1 DESCRIPTION
 
-Encapsulates Test::CheckManifest functionality.
+Encapsulates Test::DistManifest functionality.
 
 =head1 EXPORT
 
@@ -48,7 +42,7 @@ None.
 
 L<Test::Apocalypse>
 
-L<Test::CheckManifest>
+L<Test::DistManifest>
 
 =head1 AUTHOR
 

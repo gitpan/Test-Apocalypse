@@ -4,7 +4,7 @@ use strict; use warnings;
 
 # Initialize our version
 use vars qw( $VERSION );
-$VERSION = '0.03';
+$VERSION = '0.04';
 
 # setup our tests and etc
 use Test::More;
@@ -126,6 +126,9 @@ sub check_cpan {
 
 1;
 __END__
+
+=for stopwords CPAN prereq prereqs
+
 =head1 NAME
 
 Test::Apocalypse::OutdatedPrereqs - Plugin to detect outdated prereqs

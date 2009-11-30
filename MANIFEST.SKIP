@@ -7,7 +7,6 @@
 \B\.git\b
 
 # Avoid Makemaker generated and utility files.
-\bMANIFEST\.SKIP
 \bMakefile$
 \bblib/
 \bMakeMaker-\d
@@ -24,6 +23,5 @@
 \b\.#
 \.bak$
 
-# our tarballs + stuff we spew
+# our tarballs
 \.tar\.gz$
-Debian_CPANTS\.txt

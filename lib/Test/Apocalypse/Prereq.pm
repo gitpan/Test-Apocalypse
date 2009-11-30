@@ -4,7 +4,7 @@ use strict; use warnings;
 
 # Initialize our version
 use vars qw( $VERSION );
-$VERSION = '0.03';
+$VERSION = '0.04';
 
 # setup our tests and etc
 use Test::More;
@@ -38,6 +38,8 @@ Encapsulates Test::Prereq functionality.
 =head1 DESCRIPTION
 
 Encapsulates Test::Prereq functionality.
+
+NOTE: This test normally takes FOREVER to run! Please set $ENV{PERL_TEST_PREREQ} = 1 in order to enable this test.
 
 =head1 EXPORT
 

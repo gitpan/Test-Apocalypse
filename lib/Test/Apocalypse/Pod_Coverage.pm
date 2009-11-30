@@ -4,7 +4,7 @@ use strict; use warnings;
 
 # Initialize our version
 use vars qw( $VERSION );
-$VERSION = '0.03';
+$VERSION = '0.04';
 
 # setup our tests and etc
 use Test::More;
@@ -36,6 +36,8 @@ Encapsulates Test::Pod::Coverage functionality.
 =head1 DESCRIPTION
 
 Encapsulates Test::Pod::Coverage functionality.
+
+NOTE: This module is currently disabled.
 
 =head1 EXPORT
 

@@ -4,21 +4,24 @@ use strict; use warnings;
 
 # Initialize our version
 use vars qw( $VERSION );
-$VERSION = '0.03';
+$VERSION = '0.04';
 
 # setup our tests and etc
 use Test::Spelling;
-
-# our list of common stopwords
-my @stopwords = qw( AnnoCPAN CPAN RT dist prereqs API XS );
-
-# FIXME figure this out per-dist! I'm adding myself for now :)
-push( @stopwords, 'APOCAL' );
+use File::Spec;
 
 # does our stuff!
 sub do_test {
-	# Add our global list of stopwords
-	add_stopwords( @stopwords );
+	# get our list of files, and add the "namespaces" as stopwords
+	foreach my $p ( Test::Spelling::all_pod_files() ) {
+		foreach my $word ( File::Spec->splitdir( $p ) ) {
+			next if ! length $word;
+			if ( $word eq 'lib' or $word eq 'blib' ) { next }
+			if ( $word =~ /^(.+)\.pm$/ ) { $word = $1 }
+
+			add_stopwords( $word );
+		}
+	}
 
 	all_pod_files_spelling_ok();
 
@@ -27,6 +30,9 @@ sub do_test {
 
 1;
 __END__
+
+=for stopwords spellchecker stopword stopwords pm
+
 =head1 NAME
 
 Test::Apocalypse::Pod_Spelling - Plugin for Test::Spelling
@@ -41,7 +47,9 @@ Encapsulates Test::Spelling functionality.
 
 =head1 DESCRIPTION
 
-Encapsulates Test::Spelling functionality.
+Encapsulates Test::Spelling functionality. We also add each filename as a stopword, to reduce "noise" from the spellchecker.
+
+If you need to add stopwords, please look at L<Pod::Spell> for ways to add it to each .pm file!
 
 =head1 EXPORT
 

@@ -4,7 +4,7 @@ use strict; use warnings;
 
 # Initialize our version
 use vars qw( $VERSION );
-$VERSION = '0.03';
+$VERSION = '0.04';
 
 # setup our tests and etc
 use Test::Block qw( $Plan );
@@ -77,6 +77,8 @@ sub is_apocalypse_here {
 1;
 __END__
 
+=for stopwords APOCAL AUTHORs AnnoCPAN CPAN RT al backend debian distro distros dists env hackish plugins testsuite yml
+
 =head1 NAME
 
 Test::Apocalypse - Apocalypse's favorite tests bundled into a simple interface
@@ -139,7 +141,7 @@ Automatically exports the "is_apocalypse_here" sub.
 
 =item * POD standards check
 
-Do we have SYNOPSIS, ABSTRACT, SUPPORT, etc sections?
+Do we have SYNOPSIS, ABSTRACT, SUPPORT, etc sections? ( PerlCritic can do that! Need to investigate more... )
 
 =item * Use Test::AutoLoader to check for .al files
 
@@ -149,15 +151,11 @@ Br0ken install at this time...
 
 This little snippet helps a lot, I was wondering if I could integrate it into the testsuite hah!
 
-	find -name '*.pm' | grep -v /blib/ | xargs sed -i "s/\$VERSION = '[^']\+\?';/\$VERSION = '0.03';/"
+	find -name '*.pm' | grep -v /blib/ | xargs sed -i "s/\$VERSION = '[^']\+\?';/\$VERSION = '0.04';/"
 
 =item * Help Test::CheckChanges author for more formats
 
 I already filed a ticket, RT#42976 but if others have different formats please contribute!
-
-=item * Use Test::DistManifest instead of Test::CheckManifest
-
-DistManifest has better support for MANIFEST.SKIP but the install is br0ken at this time...
 
 =item * Use Test::GreaterVersion to sanity check versions
 
@@ -166,12 +164,24 @@ and pass it on to the test...
 
 =item * Use Test::PerlTidy to check code style
 
-Br0ken install at this time...
+Br0ken install at this time... ( PerlCritic can do that! Need to investigate more... )
 
 =item * Integrate Test::UniqueTestNames into the testsuite
 
 This would be nice, but I'm not sure if I can actually force this on other tests. Otherwise I'll be just making
 sure that the Test::Apocalypse tests is unique, which is worthless to $dist trying to clean itself up...
+
+=item * Use Test::CPAN::Meta
+
+I'm not sure of the difference between this and Test::YAML::Meta but more tests == the better ;)
+
+=item * META.yml checks
+
+We should make sure that the META.yml includes the "repository", "license", and other useful keys!
+
+=item * Other AUTHORs
+
+As always, we should keep up on the "latest" in the perl world and look at other authors for what they are doing.
 
 =back
 
@@ -205,6 +215,10 @@ L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Test-Apocalypse>
 
 L<http://search.cpan.org/dist/Test-Apocalypse>
 
+=item * CPAN Testing Service
+
+L<http://cpants.perl.org/dist/overview/Test-Apocalypse>
+
 =back
 
 =head2 Bugs
@@ -216,6 +230,8 @@ notified, and then you'll automatically be notified of progress on your bug as I
 =head1 AUTHOR
 
 Apocalypse E<lt>apocal@cpan.orgE<gt>
+
+Thanks to jawnsy@cpan.org for the prodding and help in getting this package ready to be bundled into debian!
 
 =head1 COPYRIGHT AND LICENSE
 

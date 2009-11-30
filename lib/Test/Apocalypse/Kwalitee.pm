@@ -4,7 +4,7 @@ use strict; use warnings;
 
 # Initialize our version
 use vars qw( $VERSION );
-$VERSION = '0.03';
+$VERSION = '0.04';
 
 # setup our tests and etc
 use Test::More;
@@ -34,6 +34,7 @@ sub do_test {
 		foreach my $metric ( @{ $gen->kwalitee_indicators() } ) {
 			# skip problematic ones
 			if ( $metric->{'name'} =~ /^(?:is_prereq|prereq_matches_use|build_prereq_matches_use)$/ ) { next }
+			#if ( $metric->{'name'} =~ /^(?:is_prereq)$/ ) { next }
 
 			# get the result
 			my $result = $metric->{'code'}->( $analyzer->d(), $metric );
@@ -49,7 +50,10 @@ sub do_test {
 			# print more diag if it failed
 			if ( ! $result && $ENV{TEST_VERBOSE} ) {
 				diag( '[' . $metric->{'name'} . '] error(' . $metric->{'error'} . ') remedy(' . $metric->{'remedy'} . ')' );
-
+				if ( $metric->{'name'} eq 'prereq_matches_use' or $metric->{'name'} eq 'build_prereq_matches_use' ) {
+					require Data::Dumper;
+					diag( "module information: " . Data::Dumper::Dumper( $analyzer->d->{'uses'} ) );
+				}
 			}
 
 			# should we tally up the kwalitee?

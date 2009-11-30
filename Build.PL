@@ -14,10 +14,12 @@ my $build = Module::Build->new(
 	'create_packlist'	=> 1,
 	'create_makefile_pl'	=> 'traditional',
 	'create_readme'		=> 1,
+	'create_license'	=> 1,
+	'sign'			=> 0,
 
 	'test_files'		=> 't/*.t',
 
-	'add_to_cleanup'	=> [ 'META.yml', 'Makefile.PL', 'README', 'Makefile' ],	# automatically generated
+	'add_to_cleanup'	=> [ 'META.yml', 'Makefile.PL', 'README', 'Makefile', 'LICENSE' ], # automatically generated
 
 	'requires'		=> {
 		# Test stuff
@@ -28,7 +30,6 @@ my $build = Module::Build->new(
 		'Test::Distribution'		=> 0,
 		'Test::Fixme'			=> 0,
 		'Test::HasVersion'		=> 0,
-		'Test::CheckManifest'		=> 0,
 		'Test::MinimumVersion'		=> 0,
 		'Test::Pod::Coverage'		=> 0,
 		'Test::Spelling'		=> 0,
@@ -44,8 +45,10 @@ my $build = Module::Build->new(
 		'Test::Dir'			=> 0,
 		'Test::Signature'		=> 0,
 		'Test::Portability::Files'	=> 0,
+		'Test::DistManifest'		=> 0,
 
 		# handy tools
+		'File::Spec'			=> 0,
 		'File::Find::Rule'		=> 0,
 		'Module::CPANTS::Analyse'	=> 0,
 		'Perl::Metrics::Simple'		=> 0,
@@ -59,6 +62,16 @@ my $build = Module::Build->new(
 
 		# we need a recent perl
 		'perl'				=> '5.008',
+	},
+
+	# include the standard stuff in META.yml
+	'meta_merge'	=> {
+		'resources'	=> {
+			'license'	=> 'http://dev.perl.org/licenses/',
+			'homepage'	=> 'http://search.cpan.org/dist/Test-Apocalypse',
+			'bugtracker'	=> 'http://rt.cpan.org/NoAuth/Bugs.html?Dist=Test-Apocalypse',
+			'repository'	=> 'http://github.com/apocalypse/perl-test-apocalypse',
+		},
 	},
 );
 
