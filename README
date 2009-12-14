@@ -73,12 +73,7 @@ MORE IDEAS
         This little snippet helps a lot, I was wondering if I could
         integrate it into the testsuite hah!
 
-                find -name '*.pm' | grep -v /blib/ | xargs sed -i "s/\$VERSION = '[^']\+\?';/\$VERSION = '0.04';/"
-
-    *   Help Test::CheckChanges author for more formats
-
-        I already filed a ticket, RT#42976 but if others have different
-        formats please contribute!
+                find -name '*.pm' | grep -v /blib/ | xargs sed -i "s/\$VERSION = '[^']\+\?';/\$VERSION = '0.05';/"
 
     *   Use Test::GreaterVersion to sanity check versions
 
@@ -98,11 +93,6 @@ MORE IDEAS
         Test::Apocalypse tests is unique, which is worthless to $dist trying
         to clean itself up...
 
-    *   Use Test::CPAN::Meta
-
-        I'm not sure of the difference between this and Test::YAML::Meta but
-        more tests == the better ;)
-
     *   META.yml checks
 
         We should make sure that the META.yml includes the "repository",
@@ -112,6 +102,12 @@ MORE IDEAS
 
         As always, we should keep up on the "latest" in the perl world and
         look at other authors for what they are doing.
+
+    *   indirect syntax
+
+        We should figure out how to use indirect.pm to detect this
+        deprecated method of coding. There's a Perl::Critic plugin for this,
+        yay!
 
 SEE ALSO
     None.
