@@ -2,6 +2,11 @@ Build.PL
 MANIFEST
 MANIFEST.SKIP
 README
+Makefile.PL
+META.yml
+Changes
+LICENSE
+
 lib/Test/Apocalypse.pm
 lib/Test/Apocalypse/Compile.pm
 lib/Test/Apocalypse/Dependencies.pm
@@ -32,10 +37,10 @@ lib/Test/Apocalypse/DistManifest.pm
 lib/Test/Apocalypse/ModuleUsed.pm
 lib/Test/Apocalypse/CPANMeta.pm
 lib/Test/Apocalypse/Synopsis.pm
-Makefile.PL
-META.yml
-Changes
-LICENSE
+lib/Test/Apocalypse/NoBreakpoints.pm
+lib/Test/Apocalypse/EOL.pm
+lib/Test/Apocalypse/ConsistentVersion.pm
+lib/Test/Apocalypse/AutoLoader.pm
 
 examples/simple.pl
 

@@ -1,5 +1,5 @@
 # Declare our package
-package Test::Apocalypse::Pod_Coverage;
+package Test::Apocalypse::EOL;
 use strict; use warnings;
 
 # Initialize our version
@@ -10,7 +10,7 @@ use Test::More;
 
 sub do_test {
 	my %MODULES = (
-		'Test::Pod::Coverage'	=> '1.08',
+		'Test::EOL'	=> '0.3',
 	);
 
 	while (my ($module, $version) = each %MODULES) {
@@ -25,7 +25,7 @@ sub do_test {
 	}
 
 	# Run the test!
-	all_pod_coverage_ok( 'lib/');
+	all_perl_files_ok();
 
 	return;
 }
@@ -34,7 +34,7 @@ sub do_test {
 __END__
 =head1 NAME
 
-Test::Apocalypse::Pod_Coverage - Plugin for Test::Pod::Coverage
+Test::Apocalypse::EOL - Plugin for Test::EOL
 
 =head1 SYNOPSIS
 
@@ -42,11 +42,11 @@ Test::Apocalypse::Pod_Coverage - Plugin for Test::Pod::Coverage
 
 =head1 ABSTRACT
 
-Encapsulates Test::Pod::Coverage functionality.
+Encapsulates Test::EOL functionality.
 
 =head1 DESCRIPTION
 
-Encapsulates Test::Pod::Coverage functionality.
+Encapsulates Test::EOL functionality.
 
 =head2 do_test()
 
@@ -56,7 +56,7 @@ The main entry point for this plugin. Automatically called by L<Test::Apocalypse
 
 L<Test::Apocalypse>
 
-L<Test::Pod::Coverage>
+L<Test::Pod>
 
 =head1 AUTHOR
 

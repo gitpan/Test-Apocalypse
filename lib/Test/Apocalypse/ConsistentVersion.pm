@@ -1,5 +1,5 @@
 # Declare our package
-package Test::Apocalypse::Pod_Coverage;
+package Test::Apocalypse::ConsistentVersion;
 use strict; use warnings;
 
 # Initialize our version
@@ -10,7 +10,7 @@ use Test::More;
 
 sub do_test {
 	my %MODULES = (
-		'Test::Pod::Coverage'	=> '1.08',
+		'Test::ConsistentVersion'	=> '0.2.2',
 	);
 
 	while (my ($module, $version) = each %MODULES) {
@@ -25,7 +25,10 @@ sub do_test {
 	}
 
 	# Run the test!
-	all_pod_coverage_ok( 'lib/');
+	Test::ConsistentVersion::check_consistent_versions(
+		no_pod		=> 1,
+		no_readme	=> 1,
+	);
 
 	return;
 }
@@ -34,7 +37,7 @@ sub do_test {
 __END__
 =head1 NAME
 
-Test::Apocalypse::Pod_Coverage - Plugin for Test::Pod::Coverage
+Test::Apocalypse::ConsistentVersion - Plugin for Test::ConsistentVersion
 
 =head1 SYNOPSIS
 
@@ -42,11 +45,12 @@ Test::Apocalypse::Pod_Coverage - Plugin for Test::Pod::Coverage
 
 =head1 ABSTRACT
 
-Encapsulates Test::Pod::Coverage functionality.
+Encapsulates Test::ConsistentVersion functionality.
 
 =head1 DESCRIPTION
 
-Encapsulates Test::Pod::Coverage functionality.
+Encapsulates Test::ConsistentVersion functionality. We disable the pod/readme checks because it's not "common practice" to put
+them in POD, I think...
 
 =head2 do_test()
 
@@ -56,7 +60,7 @@ The main entry point for this plugin. Automatically called by L<Test::Apocalypse
 
 L<Test::Apocalypse>
 
-L<Test::Pod::Coverage>
+L<Test::ConsistentVersion>
 
 =head1 AUTHOR
 

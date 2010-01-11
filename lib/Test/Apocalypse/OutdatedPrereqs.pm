@@ -4,16 +4,15 @@ use strict; use warnings;
 
 # Initialize our version
 use vars qw( $VERSION );
-$VERSION = '0.05';
+$VERSION = '0.06';
 
 use Test::More;
 
 sub do_test {
 	my %MODULES = (
 		'YAML'			=> '0.70',
-		'CPANPLUS::Configure'	=> '0.88',
-		'CPANPLUS::Backend'	=> '0.88',
-		'version'		=> '0.78',
+		'CPANPLUS'		=> '0.90',
+		'version'		=> '0.77',
 		'Module::CoreList'	=> '2.23',
 	);
 
@@ -22,7 +21,7 @@ sub do_test {
 		next unless $@;
 
 		if ( $ENV{RELEASE_TESTING} ) {
-			die 'Could not load release-testing module ' . $module;
+			die 'Could not load release-testing module ' . $module . " -> $@";
 		} else {
 			plan skip_all => $module . ' not available for testing';
 		}
@@ -31,11 +30,11 @@ sub do_test {
 	# Run the test!
 	# does META.yml exist?
 	if ( -e 'META.yml' and -f _ ) {
-		load_yml( 'META.yml' );
+		_load_yml( 'META.yml' );
 	} else {
 		# maybe one directory up?
 		if ( -e '../META.yml' and -f _ ) {
-			load_yml( '../META.yml' );
+			_load_yml( '../META.yml' );
 		} else {
 			plan tests => 1;
 			fail( 'META.yml is missing, unable to process it!' );
@@ -45,8 +44,7 @@ sub do_test {
 	return;
 }
 
-# main entry point
-sub load_yml {
+sub _load_yml {
 	# we'll load a file
 	my $file = shift;
 
@@ -62,10 +60,13 @@ sub load_yml {
 	}
 
 	# massage the data
+	## no critic ( ProhibitAccessOfPrivateData )
 	$data = $data->{'requires'};
 	delete $data->{'perl'} if exists $data->{'perl'};
 
 	# init the backend ( and set some options )
+	require CPANPLUS::Configure;
+	require CPANPLUS::Backend;
 	my $cpanconfig = CPANPLUS::Configure->new;
 	$cpanconfig->set_conf( 'verbose' => 0 );
 	$cpanconfig->set_conf( 'no_update' => 1 );
@@ -80,18 +81,22 @@ sub load_yml {
 	}
 
 	# Okay, how many prereqs do we have?
-	plan tests => scalar keys %$data;
+	if ( scalar keys %$data > 0 ) {
+		plan tests => scalar keys %$data;
+	} else {
+		plan skip_all => "No prereqs found in META.yml";
+	}
 
 	# analyze every one of them!
 	foreach my $prereq ( keys %$data ) {
-		check_cpan( $cpanplus, $prereq, $data->{ $prereq } );
+		_check_cpan( $cpanplus, $prereq, $data->{ $prereq } );
 	}
 
 	return;
 }
 
 # checks a prereq against CPAN
-sub check_cpan {
+sub _check_cpan {
 	my $backend = shift;
 	my $prereq = shift;
 	my $version = shift;
@@ -107,7 +112,7 @@ sub check_cpan {
 
 		# Does the prereq have funky characters that we're unable to process now?
 		if ( $version =~ /[<>=,!]+/ ) {
-			# FIXME simplistic style of parsing
+			# simple style of parsing, may blow up in the future!
 			my @versions = split( ',', $version );
 
 			# sort them by version, descending
@@ -148,7 +153,7 @@ Test::Apocalypse::OutdatedPrereqs - Plugin to detect outdated prereqs
 
 =head1 SYNOPSIS
 
-	# Please do not use this module directly.
+	die "Don't use this module directly. Please use Test::Apocalypse instead.";
 
 =head1 ABSTRACT
 
@@ -157,6 +162,10 @@ This plugin detects outdated prereqs in F<META.yml> specified relative to CPAN.
 =head1 DESCRIPTION
 
 This plugin detects outdated prereqs in F<META.yml> specified relative to CPAN.
+
+=head2 do_test()
+
+The main entry point for this plugin. Automatically called by L<Test::Apocalypse>, you don't need to know anything more :)
 
 =head1 SEE ALSO
 
@@ -168,7 +177,7 @@ Apocalypse E<lt>apocal@cpan.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2009 by Apocalypse
+Copyright 2010 by Apocalypse
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
