@@ -117,7 +117,7 @@ MORE IDEAS
         This little snippet helps a lot, I was wondering if I could
         integrate it into the testsuite hah!
 
-                find -name '*.pm' | grep -v /blib/ | xargs sed -i "s/\$VERSION = '[^']\+\?';/\$VERSION = '0.06';/"
+                find -name '*.pm' | grep -v /blib/ | xargs sed -i "s/\$VERSION = '[^']\+\?';/\$VERSION = '0.07';/"
 
     *   Use Test::GreaterVersion to sanity check versions
 
@@ -192,6 +192,10 @@ SUPPORT
     *   CPAN Ratings
 
         <http://cpanratings.perl.org/d/Test-Apocalypse>
+
+    *   CPAN Forum
+
+        <http://cpanforum.com/dist/Test-Apocalypse>
 
     *   RT: CPAN's Request Tracker
 

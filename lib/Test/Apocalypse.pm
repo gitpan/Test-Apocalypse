@@ -4,7 +4,7 @@ use strict; use warnings;
 
 # Initialize our version
 use vars qw( $VERSION );
-$VERSION = '0.06';
+$VERSION = '0.07';
 
 # setup our tests and etc
 use Test::Block qw( $Plan );
@@ -246,7 +246,7 @@ Do we have SYNOPSIS, ABSTRACT, SUPPORT, etc sections? ( PerlCritic can do that! 
 
 This little snippet helps a lot, I was wondering if I could integrate it into the testsuite hah!
 
-	find -name '*.pm' | grep -v /blib/ | xargs sed -i "s/\$VERSION = '[^']\+\?';/\$VERSION = '0.06';/"
+	find -name '*.pm' | grep -v /blib/ | xargs sed -i "s/\$VERSION = '[^']\+\?';/\$VERSION = '0.07';/"
 
 =item * Use Test::GreaterVersion to sanity check versions
 
@@ -317,6 +317,10 @@ L<http://annocpan.org/dist/Test-Apocalypse>
 =item * CPAN Ratings
 
 L<http://cpanratings.perl.org/d/Test-Apocalypse>
+
+=item * CPAN Forum
+
+L<http://cpanforum.com/dist/Test-Apocalypse>
 
 =item * RT: CPAN's Request Tracker
 
