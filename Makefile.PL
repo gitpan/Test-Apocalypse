@@ -38,6 +38,7 @@ WriteMakefile
                            'Test::Perl::Critic' => '1.02',
                            'Test::Pod' => '1.40',
                            'Test::Pod::Coverage' => '1.08',
+                           'Test::Pod::No404s' => '0.01',
                            'Test::Portability::Files' => '0.05',
                            'Test::Prereq' => '1.037',
                            'Test::Prereq::Build' => '1.037',

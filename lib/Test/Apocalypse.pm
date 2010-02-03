@@ -4,7 +4,7 @@ use strict; use warnings;
 
 # Initialize our version
 use vars qw( $VERSION );
-$VERSION = '0.07';
+$VERSION = '0.08';
 
 # setup our tests and etc
 use Test::Block qw( $Plan );
@@ -246,7 +246,7 @@ Do we have SYNOPSIS, ABSTRACT, SUPPORT, etc sections? ( PerlCritic can do that! 
 
 This little snippet helps a lot, I was wondering if I could integrate it into the testsuite hah!
 
-	find -name '*.pm' | grep -v /blib/ | xargs sed -i "s/\$VERSION = '[^']\+\?';/\$VERSION = '0.07';/"
+	find -name '*.pm' | grep -v /blib/ | xargs sed -i "s/\$VERSION = '[^']\+\?';/\$VERSION = '0.08';/"
 
 =item * Use Test::GreaterVersion to sanity check versions
 
@@ -289,6 +289,18 @@ This rocks, as I don't care about unicode in my perl! ;)
 =item * Test::Pod::Content
 
 Maybe this is useful to test my "common" boilerplate POD and make sure they are the "latest", eh?
+
+=item * Test::ModuleReady
+
+This looks like a nice module, but I believe what it does is already covered by the numerous tests in this dist?
+
+=item * Test::MyDeps
+
+This is a crazy test, but would help tremendously in finding regressions in your code!
+
+=item * Test::JSON::Meta
+
+Yet another META.* test!
 
 =back
 
@@ -337,6 +349,10 @@ L<http://cpantesters.org/distro/T/Test-Apocalypse.html>
 =item * CPAN Testers Matrix
 
 L<http://matrix.cpantesters.org/?dist=Test-Apocalypse>
+
+=item * Git Source Code Repository
+
+L<http://github.com/apocalypse/perl-test-apocalypse>
 
 =back
 
