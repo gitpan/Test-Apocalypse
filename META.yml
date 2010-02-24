@@ -14,109 +14,112 @@ name: Test-Apocalypse
 provides:
   Test::Apocalypse:
     file: lib/Test/Apocalypse.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::AutoLoader:
     file: lib/Test/Apocalypse/AutoLoader.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::CPANMeta:
     file: lib/Test/Apocalypse/CPANMeta.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::CheckChanges:
     file: lib/Test/Apocalypse/CheckChanges.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::Compile:
     file: lib/Test/Apocalypse/Compile.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::ConsistentVersion:
     file: lib/Test/Apocalypse/ConsistentVersion.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::DOSnewline:
     file: lib/Test/Apocalypse/DOSnewline.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::Dependencies:
     file: lib/Test/Apocalypse/Dependencies.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::DirChecks:
     file: lib/Test/Apocalypse/DirChecks.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::DistManifest:
     file: lib/Test/Apocalypse/DistManifest.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::Distribution:
     file: lib/Test/Apocalypse/Distribution.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::EOL:
     file: lib/Test/Apocalypse/EOL.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::FileChecks:
     file: lib/Test/Apocalypse/FileChecks.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::FilePortability:
     file: lib/Test/Apocalypse/FilePortability.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::Fixme:
     file: lib/Test/Apocalypse/Fixme.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::HasVersion:
     file: lib/Test/Apocalypse/HasVersion.pm
-    version: 0.08
+    version: 0.09
+  Test::Apocalypse::JSONMeta:
+    file: lib/Test/Apocalypse/JSONMeta.pm
+    version: 0.09
   Test::Apocalypse::Kwalitee:
     file: lib/Test/Apocalypse/Kwalitee.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::METAyml:
     file: lib/Test/Apocalypse/METAyml.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::MinimumVersion:
     file: lib/Test/Apocalypse/MinimumVersion.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::ModuleUsed:
     file: lib/Test/Apocalypse/ModuleUsed.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::NoBreakpoints:
     file: lib/Test/Apocalypse/NoBreakpoints.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::OutdatedPrereqs:
     file: lib/Test/Apocalypse/OutdatedPrereqs.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::PPPort:
     file: lib/Test/Apocalypse/PPPort.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::PerlCritic:
     file: lib/Test/Apocalypse/PerlCritic.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::PerlMetrics:
     file: lib/Test/Apocalypse/PerlMetrics.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::Pod:
     file: lib/Test/Apocalypse/Pod.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::Pod_Coverage:
     file: lib/Test/Apocalypse/Pod_Coverage.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::Pod_No404s:
     file: lib/Test/Apocalypse/Pod_No404s.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::Pod_Spelling:
     file: lib/Test/Apocalypse/Pod_Spelling.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::Prereq:
     file: lib/Test/Apocalypse/Prereq.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::Prereq_Build:
     file: lib/Test/Apocalypse/Prereq_Build.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::Signature:
     file: lib/Test/Apocalypse/Signature.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::Strict:
     file: lib/Test/Apocalypse/Strict.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::Synopsis:
     file: lib/Test/Apocalypse/Synopsis.pm
-    version: 0.08
+    version: 0.09
   Test::Apocalypse::UseAllModules:
     file: lib/Test/Apocalypse/UseAllModules.pm
-    version: 0.08
+    version: 0.09
 requires:
   CPANPLUS: 0.90
   Devel::PPPort: 3.19
@@ -142,6 +145,7 @@ requires:
   Test::File: 1.29
   Test::Fixme: 0.04
   Test::HasVersion: 0.012
+  Test::JSON::Meta: 0.04
   Test::MinimumVersion: 0.011
   Test::Module::Used: 0.001002
   Test::More: 0.94
@@ -168,4 +172,4 @@ resources:
   homepage: http://search.cpan.org/dist/Test-Apocalypse
   license: http://dev.perl.org/licenses/
   repository: http://github.com/apocalypse/perl-test-apocalypse
-version: 0.08
+version: 0.09

@@ -95,6 +95,9 @@ Methods
     package to find out what plugins are available. Handy if you need to
     know what plugins to skip, for example.
 
+    WARNING: We enable the "require" option to Module::Pluggable so that
+    means the plugins returned are objects.
+
             my @tests = Test::Apocalypse->plugins;
 
 EXPORT
@@ -103,9 +106,6 @@ EXPORT
 MORE IDEAS
     *   Document the way we do plugins so others can add to this testsuite
         :)
-
-    *   Per-plugin configuration for distros so we can override the default
-        config
 
     *   POD standards check
 
@@ -117,7 +117,7 @@ MORE IDEAS
         This little snippet helps a lot, I was wondering if I could
         integrate it into the testsuite hah!
 
-                find -name '*.pm' | grep -v /blib/ | xargs sed -i "s/\$VERSION = '[^']\+\?';/\$VERSION = '0.08';/"
+                find -name '*.pm' | grep -v /blib/ | xargs sed -i "s/\$VERSION = '[^']\+\?';/\$VERSION = '0.09';/"
 
     *   Use Test::GreaterVersion to sanity check versions
 
@@ -182,10 +182,6 @@ MORE IDEAS
         This is a crazy test, but would help tremendously in finding
         regressions in your code!
 
-    *   Test::JSON::Meta
-
-        Yet another META.* test!
-
 SEE ALSO
     None.
 
@@ -228,6 +224,11 @@ SUPPORT
         <http://matrix.cpantesters.org/?dist=Test-Apocalypse>
 
     *   Git Source Code Repository
+
+        This code is currently hosted on github.com under the account
+        "apocalypse". Please feel free to browse it and pull from it, or
+        whatever. If you want to contribute patches, please send me a diff
+        or prod me to pull from your repository :)
 
         <http://github.com/apocalypse/perl-test-apocalypse>
 

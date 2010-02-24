@@ -30,6 +30,7 @@ WriteMakefile
                            'Test::File' => '1.29',
                            'Test::Fixme' => '0.04',
                            'Test::HasVersion' => '0.012',
+                           'Test::JSON::Meta' => '0.04',
                            'Test::MinimumVersion' => '0.011',
                            'Test::Module::Used' => '0.001002',
                            'Test::More' => '0.94',
