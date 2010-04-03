@@ -4,34 +4,24 @@ use strict; use warnings;
 
 # Initialize our version
 use vars qw( $VERSION );
-$VERSION = '0.09';
+$VERSION = '0.10';
 
 use Test::More;
 
-sub do_test {
-	my %MODULES = (
+sub _load_prereqs {
+	return (
 		'Perl::Metrics::Simple'	=> '0.13',
 	);
+}
 
-	while (my ($module, $version) = each %MODULES) {
-		eval "use $module $version";	## no critic ( ProhibitStringyEval )
-		next unless $@;
-
-		if ( $ENV{RELEASE_TESTING} ) {
-			die 'Could not load release-testing module ' . $module . " -> $@";
-		} else {
-			plan skip_all => $module . ' not available for testing';
-		}
-	}
-
-	# Run the test!
+sub do_test {
 	plan tests => 1;
 	my $analzyer = Perl::Metrics::Simple->new;
 	my $analysis = $analzyer->analyze_files( 'lib/' );
 	my $numdisplay = 10;
 
 	## no critic ( ProhibitAccessOfPrivateData )
-	if ( ok( $analysis->file_count(), 'analyzed at least one file' ) ) {
+	if ( ok( $analysis->file_count(), 'Analyzed at least one file' ) ) {
 		# only print extra stuff if necessary
 		if ( $ENV{TEST_VERBOSE} ) {
 			diag( '-- Perl Metrics Summary --' );

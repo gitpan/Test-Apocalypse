@@ -19,10 +19,9 @@ my $build = Module::Build->new(
 
 	'test_files'		=> 't/*.t',
 
-	'add_to_cleanup'	=> [ 'META.yml', 'Makefile.PL', 'README', 'Makefile', 'LICENSE' ], # automatically generated
-
 	'requires'		=> {
 		# FIXME this sucks, I have to repeat the version here and in the Test::Apocalypse::XYZ module...
+		# Dist::Zilla will solve it! I need to switch someday :)
 
 		# Test stuff
 		'Test::More'			=> '0.94',
@@ -38,7 +37,7 @@ my $build = Module::Build->new(
 		'Test::Pod'			=> '1.40',
 		'Test::Prereq'			=> '1.037',
 		'Test::Prereq::Build'		=> '1.037',
-		'Test::Strict'			=> '0.13',
+		'Test::Strict'			=> '0.14',
 		'Test::UseAllModules'		=> '0.12',
 		'Test::YAML::Meta'		=> '0.14',
 		'Test::NoWarnings'		=> '0.084',
@@ -59,6 +58,7 @@ my $build = Module::Build->new(
 		'Test::AutoLoader'		=> '0.03',
 		'Test::Pod::No404s'		=> '0.01',
 		'Test::JSON::Meta'		=> '0.04',
+		'Test::NoPlan'			=> '0.000002',	# Same M::B::Compat issue for 0.0.2
 
 		# handy tools
 		'File::Spec'			=> '3.31',
@@ -68,11 +68,18 @@ my $build = Module::Build->new(
 		'Test::Block'			=> '0.11',
 		'YAML'				=> '0.70',
 		'version'			=> '0.77',
-		'CPANPLUS'			=> '0.90',
 		'Devel::PPPort'			=> '3.19',
 		'Module::CoreList'		=> '2.23',
 		'Module::Pluggable'		=> '3.9',
 		'File::Which'			=> '1.09',
+
+		# We can't specify the CPANPLUS::Configure/Backend module because...
+#apoc@blackhole:~/mygit/perl-test-apocalypse$ perl Build.PL
+#Checking prerequisites...
+#  requires:
+#    !  CPANPLUS::Backend (0) is installed, but we need version >= 0.90
+#    !  CPANPLUS::Configure (0) is installed, but we need version >= 0.90
+		'CPANPLUS'			=> '0.90',
 
 		# Perl::Critic extensions so we're sure we are testing every one of them, ha!
 		'Task::Perl::Critic'		=> '1.007',

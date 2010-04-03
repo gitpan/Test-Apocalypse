@@ -4,30 +4,24 @@ use strict; use warnings;
 
 # Initialize our version
 use vars qw( $VERSION );
-$VERSION = '0.09';
+$VERSION = '0.10';
 
 use Test::More;
 
-sub do_test {
-	my %MODULES = (
+# RELEASE test only!
+sub _do_automated { 0 }
+
+sub _load_prereqs {
+	return (
 		'YAML'			=> '0.70',
-		'CPANPLUS'		=> '0.90',
+		'CPANPLUS::Configure'	=> '0.90',
+		'CPANPLUS::Backend'	=> '0.90',
 		'version'		=> '0.77',
 		'Module::CoreList'	=> '2.23',
 	);
+}
 
-	while (my ($module, $version) = each %MODULES) {
-		eval "use $module $version";	## no critic ( ProhibitStringyEval )
-		next unless $@;
-
-		if ( $ENV{RELEASE_TESTING} ) {
-			die 'Could not load release-testing module ' . $module . " -> $@";
-		} else {
-			plan skip_all => $module . ' not available for testing';
-		}
-	}
-
-	# Run the test!
+sub do_test {
 	# does META.yml exist?
 	if ( -e 'META.yml' and -f _ ) {
 		_load_yml( 'META.yml' );
@@ -65,8 +59,6 @@ sub _load_yml {
 	delete $data->{'perl'} if exists $data->{'perl'};
 
 	# init the backend ( and set some options )
-	require CPANPLUS::Configure;
-	require CPANPLUS::Backend;
 	my $cpanconfig = CPANPLUS::Configure->new;
 	$cpanconfig->set_conf( 'verbose' => 0 );
 	$cpanconfig->set_conf( 'no_update' => 1 );
@@ -74,6 +66,7 @@ sub _load_yml {
 
 	# silence CPANPLUS!
 	{
+		# TODO do we need eval's here?
 		no warnings 'redefine';
 		## no critic ( ProhibitStringyEval )
 		eval "sub Log::Message::Handlers::cp_msg { return }";
@@ -81,13 +74,32 @@ sub _load_yml {
 	}
 
 	# Okay, how many prereqs do we have?
-	if ( scalar keys %$data > 0 ) {
-		plan tests => scalar keys %$data;
-	} else {
+	if ( scalar keys %$data == 0 ) {
 		plan skip_all => "No prereqs found in META.yml";
+		return;
+	}
+
+	# Argh, check for CPANPLUS sanity!
+#   Failed test 'no warnings'
+#   at /usr/local/share/perl/5.10.0/Test/NoWarnings.pm line 45.
+# There were 1 warning(s)
+# 	Previous test 189 'no breakpoint test of blib/lib/POE/Component/SSLify/ClientHandle.pm'
+# 	Key 'archive' (/home/apoc/.cpanplus/01mailrc.txt.gz) is of invalid type for 'Archive::Extract::new' provided by CPANPLUS::Internals::Source::__create_author_tree at /usr/share/perl/5.10/CPANPLUS/Internals/Source.pm line 539
+#  at /usr/share/perl/5.10/Params/Check.pm line 565
+# 	Params::Check::_store_error('Key \'archive\' (/home/apoc/.cpanplus/01mailrc.txt.gz) is of ...', 1) called at /usr/share/perl/5.10/Params/Check.pm line 345
+# 	Params::Check::check('HASH(0x3ce9f50)', 'HASH(0x3cf7b08)') called at /usr/share/perl/5.10/Archive/Extract.pm line 227
+	{
+		my @warn;
+		local $SIG{'__WARN__'} = sub { push @warn, shift };
+		my $module = $cpanplus->parse_module( 'module' => 'Test::Apocalypse' );
+		if ( @warn ) {
+			plan skip_all => "Unable to sanely use CPANPLUS, aborting!";
+			return;
+		}
 	}
 
 	# analyze every one of them!
+	plan tests => scalar keys %$data;
 	foreach my $prereq ( keys %$data ) {
 		_check_cpan( $cpanplus, $prereq, $data->{ $prereq } );
 	}

@@ -4,7 +4,7 @@ use strict; use warnings;
 
 # Initialize our version
 use vars qw( $VERSION );
-$VERSION = '0.09';
+$VERSION = '0.10';
 
 # setup our tests and etc
 use Test::Block qw( $Plan );
@@ -77,22 +77,54 @@ sub is_apocalypse_here {
 			if ( exists $opt{'allow'} ) {
 				if ( $t =~ /^Test::Apocalypse::(.+)$/ ) {
 					if ( $1 !~ $opt{'allow'} ) {
-						diag( "Skipping '$t' tests..." );
+						diag( "Skipping $t ( via allow policy )..." );
 						next;
 					}
 				}
 			} elsif ( exists $opt{'deny'} ) {
 				if ( $t =~ /^Test::Apocalypse::(.+)$/ ) {
 					if ( $1 =~ $opt{'deny'} ) {
-						diag( "Skipping '$t' tests..." );
+						diag( "Skipping $t ( via deny policy )..." );
 						next;
 					}
 				}
 			}
 		}
 
+		# Check for AUTOMATED_TESTING
+		if ( $ENV{AUTOMATED_TESTING} and ! $ENV{PERL_APOCALYPSE} and $t->can( '_do_automated' ) and ! $t->_do_automated() ) {
+			diag( "Skipping $t ( for RELEASE_TESTING only )..." );
+			next;
+		}
+
+		# Load the modules the plugin needs
+		if ( $t->can( '_load_prereqs' ) ) {
+			my %MODULES = $t->_load_prereqs;
+			my $load_fail = undef;
+
+			while (my ($module, $version) = each %MODULES) {
+				eval "package $t; use $module $version";	## no critic ( ProhibitStringyEval )
+				next unless $@;
+
+				if ( $ENV{RELEASE_TESTING} ) {
+					die 'Could not load release-testing module "' . $module . " v$version\" for $t -> $@";
+				} else {
+					# TODO include $@ here somehow? I want to pretty-print it...
+					$load_fail = "$module v$version";
+					last;
+				}
+			}
+
+			if ( defined $load_fail ) {
+				diag( "Skipping $t ( unable to load required module: $load_fail )..." );
+				next;
+			}
+		} else {
+			diag( "Skipping $t ( unable to parse required modules - YELL AT THE AUTHOR! )..." );
+			next;
+		}
+
 		# do nasty override of Test::Builder::plan
-		my $oldplan = \&Test::Builder::plan;		## no critic ( ProhibitCallsToUnexportedSubs )
 		my $newplan = sub {
 			my( $self, $cmd, $arg ) = @_;
 			return unless $cmd;
@@ -101,29 +133,34 @@ sub is_apocalypse_here {
 			if ( $cmd eq 'skip_all' ) {
 				$Plan = { $t => 1 };
 				SKIP: {
-					$self->skip( "skipping $t", 1 );
+					$self->skip( "skipping $t - $arg", 1 );
 				}
 			} elsif ( $cmd eq 'tests' ) {
 				$Plan = { $t => $arg };
 			} elsif ( $cmd eq 'no_plan' ) {
 				# ignore it
 				$Plan = { $t => 0 };
+			} else {
+				die "Unknown cmd: $cmd";
 			}
 
 			return 1;
 		};
 
+		# Same thing for Test::Builder::create - Test::NoPlan uses it, argh!
+		my $newcreate = sub {
+			diag( "ARGH! $t uses Test::Builder::create() - go patch it!" ) if $ENV{RELEASE_TESTING};
+			goto &Test::Builder::new;
+		};
+
 		no warnings 'redefine'; no strict 'refs';	## no critic ( ProhibitNoStrict )
-		*{'Test::Builder::plan'} = $newplan;
+		local *{'Test::Builder::plan'} = $newplan;
+		local *{'Test::Builder::create'} = $newcreate;
 
 		# run it!
 		use warnings; use strict;
-		diag( "Running '$t' tests..." );
+		diag( "Running $t..." );
 		$t->do_test();
-
-		# revert the override
-		no warnings 'redefine'; no strict 'refs';	## no critic ( ProhibitNoStrict )
-		*{'Test::Builder::plan'} = $oldplan;
 	}
 
 	# done with testing
@@ -165,9 +202,9 @@ the tons of t/foo.t scripts + managing them in every distro. I thought it would 
 one module and toss it on CPAN :) That way, every time I update this module all of my dists would be magically
 updated!
 
-This module respects the RELEASE_TESTING env variable, if it is not set it will skip the entire testsuite. Normally
-end-users should not run it; but you can if you want to see how bad my dists are, ha! The scheme is exactly the same
-as the one Alias proposed in L<Test::XT> and in his blog post, L<http://use.perl.org/~Alias/journal/38822>.
+This module respects the RELEASE_TESTING/AUTOMATED_TESTING env variable, if it is not set it will skip the entire
+testsuite. Normally end-users should not run it; but you can if you want to see how bad my dists are, ha! The scheme
+is exactly the same as the one Alias proposed in L<Test::XT> and in his blog post, L<http://use.perl.org/~Alias/journal/38822>.
 
 This module uses L<Module::Pluggable> to have custom "backends" that process various tests. We wrap them in a hackish
 L<Test::Block> block per-plugin and it seems to work nicely. If you want to write your own, it should be a breeze
@@ -249,16 +286,7 @@ Do we have SYNOPSIS, ABSTRACT, SUPPORT, etc sections? ( PerlCritic can do that! 
 
 This little snippet helps a lot, I was wondering if I could integrate it into the testsuite hah!
 
-	find -name '*.pm' | grep -v /blib/ | xargs sed -i "s/\$VERSION = '[^']\+\?';/\$VERSION = '0.09';/"
-
-=item * Use Test::GreaterVersion to sanity check versions
-
-The problem here is that I've got to learn the CPAN backend to extract the module name from the distro tarball,
-and pass it on to the test...
-
-=item * Use Test::PerlTidy to check code style
-
-Br0ken install at this time... ( PerlCritic can do that! Need to investigate more... )
+	find -name '*.pm' | grep -v /blib/ | xargs sed -i "s/\$VERSION = '[^']\+\?';/\$VERSION = '0.10';/"
 
 =item * Integrate Test::UniqueTestNames into the testsuite
 
@@ -277,29 +305,85 @@ As always, we should keep up on the "latest" in the perl world and look at other
 
 We should figure out how to use indirect.pm to detect this deprecated method of coding. There's a L<Perl::Critic> plugin for this, yay!
 
-=item * Test::LatestPrereqs
-
-This looks cool but we need to fiddle with config files? My OutdatedPrereqs test already covers it pretty well...
-
 =item * Test::PPPort
 
 Already implemented as PPPort.pm but it's less invasive than my version, ha!
+
+=item * Test::DependentModules
+
+This is a crazy test, but would help tremendously in finding regressions in your code!
+
+=item * Test::CleanNamespaces
+
+I don't exclusively code in Moose, but this could be useful...
+
+=item * Test::Vars
+
+This looks useful to detect unused vars ( copy/paste errors? heh )
+
+=back
+
+=head2 Modules that I considered but decided against using
+
+=over 4
+
+=item * Test::MyDeps
+
+Superseded by Test::DependentModules
+
+=item * Test::NoTabs
+
+I always use tabs! :(
+
+=item * Test::CheckManifest
+
+This was a buggy dist that I dropped and is now using Test::DistManifest
+
+=item * Test::Dist
+
+This is pretty much the same thing as this dist ;)
 
 =item * Test::PureASCII
 
 This rocks, as I don't care about unicode in my perl! ;)
 
+=item * Test::LatestPrereqs
+
+This looks cool but we need to fiddle with config files? My OutdatedPrereqs test already covers it pretty well...
+
 =item * Test::Pod::Content
 
-Maybe this is useful to test my "common" boilerplate POD and make sure they are the "latest", eh?
+This is useful, but not everyone has the same POD layout. It would be too much work to try and generalize this...
+
+=item * Test::GreaterVersion
+
+Since I never use CPAN, this is non-functional for me. However, it might be useful for someone?
+
+=item * Test::Kwalitee
+
+This dist rocks, but it doesn't print the info nor utilize the extra metrics. My homebrew solution actually copied
+a lot of code from this, so I have to give it props!
+
+=item * Test::LoadAllModules
+
+This is very similar to Test::UseAllModules but looks more complicated. Also, I already have enough tests that do that ;)
 
 =item * Test::ModuleReady
 
-This looks like a nice module, but I believe what it does is already covered by the numerous tests in this dist?
+This looks like a nice module, but what it does is already covered by the numerous tests in this dist...
 
-=item * Test::MyDeps
+=item * Test::PerlTidy
 
-This is a crazy test, but would help tremendously in finding regressions in your code!
+Br0ken install at this time... ( PerlCritic can do that! Need to investigate more... ) Also, all it does is... run your module
+through perltidy and compare the outputs. Not that useful imo because I never could get perltidy to match my prefs :(
+
+=item * Test::Install::METArequires
+
+This looks like a lazy way to do auto_install and potentially dangerous! Better to just use the prereq logic in Build.PL/Makefile.PL
+
+=item * Test::Perl::Metrics::Simple
+
+This just tests your Cyclomatic complexity and was the starting point for my homebrew solution.
 
 =back
 
@@ -377,5 +461,7 @@ Copyright 2010 by Apocalypse
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
+
+The full text of the license can be found in the LICENSE file included with this module.
 
 =cut

@@ -4,28 +4,21 @@ use strict; use warnings;
 
 # Initialize our version
 use vars qw( $VERSION );
-$VERSION = '0.09';
+$VERSION = '0.10';
 
 use Test::More;
 
-sub do_test {
-	my %MODULES = (
-		'version'	=> '0.77',
+# RELEASE test only!
+sub _do_automated { 0 }
+
+sub _load_prereqs {
+	return (
+		'version'	=> '0.77',	# TODO why do we need this?
 		'Devel::PPPort'	=> '3.19',
 	);
+}
 
-	while (my ($module, $version) = each %MODULES) {
-		eval "use $module $version";	## no critic ( ProhibitStringyEval )
-		next unless $@;
-
-		if ( $ENV{RELEASE_TESTING} ) {
-			die 'Could not load release-testing module ' . $module . " -> $@";
-		} else {
-			plan skip_all => $module . ' not available for testing';
-		}
-	}
-
-	# Run the test!
+sub do_test {
 	plan tests => 2;
 
 	# do we have an existing ppport.h file?
@@ -36,7 +29,7 @@ sub do_test {
 			# generate our own ppport.h file
 			Devel::PPPort::WriteFile( 'ppport.h' );
 
-			skip( 'distro did not come with a ppport.h file', 1 );
+			skip( 'Distro did not come with a ppport.h file', 1 );
 		}
 
 		$haveppport++;
@@ -51,7 +44,7 @@ sub do_test {
 		}
 
 		# remove it and create a new one so we have the latest one, always
-		unlink( 'ppport.h' ) or die "unable to unlink: $!";
+		unlink( 'ppport.h' ) or die "Unable to unlink 'ppport.h': $!";
 		Devel::PPPort::WriteFile( 'ppport.h' );
 	}
 
@@ -72,17 +65,17 @@ sub do_test {
 			}
 		}
 	} else {
-		die 'unable to run ppport.h and get the output';
+		die 'Unable to run ppport.h and get the output';
 	}
 
 	# remove our generated ppport.h file
 	if ( ! $haveppport ) {
-		unlink( 'ppport.h' ) or die "Unable to unlink: $!";
+		unlink( 'ppport.h' ) or die "Unable to unlink 'ppport.h': $!";
 	} else {
 		if ( $needstrip ) {
 			my @result = `$^X ppport.h --strip 2>&1`;
 			if ( scalar @result ) {
-				die 'unable to strip ppport.h file';
+				die 'Unable to strip ppport.h file';
 			}
 		}
 	}

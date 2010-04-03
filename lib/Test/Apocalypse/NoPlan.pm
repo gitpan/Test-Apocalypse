@@ -1,5 +1,5 @@
 # Declare our package
-package Test::Apocalypse::NoBreakpoints;
+package Test::Apocalypse::NoPlan;
 use strict; use warnings;
 
 # Initialize our version
@@ -10,12 +10,15 @@ use Test::More;
 
 sub _load_prereqs {
 	return (
-		'Test::NoBreakpoints'	=> '0.13',
+		'Test::NoPlan'	=> '0.0.2',	# TODO wait for new version that fixes Test::Builder::create() error
 	);
 }
 
 sub do_test {
-	all_files_no_breakpoints_ok();
+	all_plans_ok( {
+		'topdir'	=> 't',
+		'recurse'	=> 1,
+	} );
 
 	return;
 }
@@ -24,7 +27,7 @@ sub do_test {
 __END__
 =head1 NAME
 
-Test::Apocalypse::NoBreakpoints - Plugin for Test::NoBreakpoints
+Test::Apocalypse::CPANMeta - Plugin for Test::NoPlan
 
 =head1 SYNOPSIS
 
@@ -32,11 +35,11 @@ Test::Apocalypse::NoBreakpoints - Plugin for Test::NoBreakpoints
 
 =head1 ABSTRACT
 
-Encapsulates Test::NoBreakpoints functionality.
+Encapsulates Test::NoPlan functionality.
 
 =head1 DESCRIPTION
 
-Encapsulates Test::NoBreakpoints functionality.
+Encapsulates Test::NoPlan functionality.
 
 =head2 do_test()
 
@@ -46,7 +49,7 @@ The main entry point for this plugin. Automatically called by L<Test::Apocalypse
 
 L<Test::Apocalypse>
 
-L<Test::NoBreakpoints>
+L<Test::NoPlan>
 
 =head1 AUTHOR
 
