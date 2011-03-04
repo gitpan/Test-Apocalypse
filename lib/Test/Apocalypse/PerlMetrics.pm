@@ -1,18 +1,24 @@
-# Declare our package
-package Test::Apocalypse::PerlMetrics;
+#
+# This file is part of Test-Apocalypse
+#
+# This software is copyright (c) 2011 by Apocalypse.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 use strict; use warnings;
+package Test::Apocalypse::PerlMetrics;
+BEGIN {
+  $Test::Apocalypse::PerlMetrics::VERSION = '1.000';
+}
+BEGIN {
+  $Test::Apocalypse::PerlMetrics::AUTHORITY = 'cpan:APOCAL';
+}
 
-# Initialize our version
-use vars qw( $VERSION );
-$VERSION = '0.10';
+# ABSTRACT: Plugin for Perl::Metrics::Simple
 
 use Test::More;
-
-sub _load_prereqs {
-	return (
-		'Perl::Metrics::Simple'	=> '0.13',
-	);
-}
+use Perl::Metrics::Simple 0.13;
 
 sub do_test {
 	plan tests => 1;
@@ -20,7 +26,6 @@ sub do_test {
 	my $analysis = $analzyer->analyze_files( 'lib/' );
 	my $numdisplay = 10;
 
-	## no critic ( ProhibitAccessOfPrivateData )
 	if ( ok( $analysis->file_count(), 'Analyzed at least one file' ) ) {
 		# only print extra stuff if necessary
 		if ( $ENV{TEST_VERBOSE} ) {
@@ -40,7 +45,7 @@ sub do_test {
 			diag( ' Median: lines(' . $summary_stats->{sub_length}->{median} . ') McCabe(' . $summary_stats->{sub_complexity}->{median} . ')' );
 
 			diag( "-- Top$numdisplay subroutines by McCabe Complexity --" );
-			my @sorted_subs = sort { $b->{'mccabe_complexity'} <=> $a->{'mccabe_complexity'} } @{ $analysis->subs };
+			my @sorted_subs = reverse sort { $a->{'mccabe_complexity'} <=> $b->{'mccabe_complexity'} } @{ $analysis->subs };
 			foreach my $i ( 0 .. ( $numdisplay - 1 ) ) {
 				last if ! defined $sorted_subs[$i];
 
@@ -51,7 +56,7 @@ sub do_test {
 			}
 
 			diag( "-- Top$numdisplay subroutines by lines --" );
-			@sorted_subs = sort { $b->{'lines'} <=> $a->{'lines'} } @sorted_subs;
+			@sorted_subs = reverse sort { $a->{'lines'} <=> $b->{'lines'} } @sorted_subs;
 			foreach my $i ( 0 .. ( $numdisplay - 1 ) ) {
 				last if ! defined $sorted_subs[$i];
 
@@ -71,43 +76,49 @@ sub do_test {
 }
 
 1;
+
+
 __END__
+=pod
+
+=for Pod::Coverage do_test
 
 =head1 NAME
 
 Test::Apocalypse::PerlMetrics - Plugin for Perl::Metrics::Simple
 
-=head1 SYNOPSIS
+=head1 VERSION
 
-	die "Don't use this module directly. Please use Test::Apocalypse instead.";
-
-=head1 ABSTRACT
-
-Encapsulates Perl::Metrics::Simple functionality.
+  This document describes v1.000 of Test::Apocalypse::PerlMetrics - released March 04, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 
-Encapsulates Perl::Metrics::Simple functionality. Enable TEST_VERBOSE to get a diag() output of some metrics.
-
-=head2 do_test()
-
-The main entry point for this plugin. Automatically called by L<Test::Apocalypse>, you don't need to know anything more :)
+Encapsulates L<Perl::Metrics::Simple> functionality. Enable TEST_VERBOSE to get a diag() output of some metrics.
 
 =head1 SEE ALSO
 
+Please see those modules/websites for more information related to this module.
+
+=over 4
+
+=item *
+
 L<Test::Apocalypse>
 
-L<Perl::Metrics::Simple>
+=back
 
 =head1 AUTHOR
 
-Apocalypse E<lt>apocal@cpan.orgE<gt>
+Apocalypse <APOCAL@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2010 by Apocalypse
+This software is copyright (c) 2011 by Apocalypse.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+The full text of the license can be found in the LICENSE file included with this distribution.
 
 =cut
+

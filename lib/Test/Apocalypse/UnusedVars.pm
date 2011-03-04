@@ -7,20 +7,24 @@
 # the same terms as the Perl 5 programming language system itself.
 #
 use strict; use warnings;
-package Test::Apocalypse::NoBreakpoints;
+package Test::Apocalypse::UnusedVars;
 BEGIN {
-  $Test::Apocalypse::NoBreakpoints::VERSION = '1.000';
+  $Test::Apocalypse::UnusedVars::VERSION = '1.000';
 }
 BEGIN {
-  $Test::Apocalypse::NoBreakpoints::AUTHORITY = 'cpan:APOCAL';
+  $Test::Apocalypse::UnusedVars::AUTHORITY = 'cpan:APOCAL';
 }
 
-# ABSTRACT: Plugin for Test::NoBreakpoints
+# ABSTRACT: Plugin for Test::Vars
 
-use Test::NoBreakpoints 0.13;
+use Test::Vars 0.001;
+
+# TODO Disabled because Test::Vars doesn't like running under a Test::Block :(
+# I think I got it to work using Test::More::subtest() but need to test more...
+sub _is_disabled { 1 }
 
 sub do_test {
-	all_files_no_breakpoints_ok();
+	all_vars_ok();
 
 	return;
 }
@@ -35,15 +39,15 @@ __END__
 
 =head1 NAME
 
-Test::Apocalypse::NoBreakpoints - Plugin for Test::NoBreakpoints
+Test::Apocalypse::UnusedVars - Plugin for Test::Vars
 
 =head1 VERSION
 
-  This document describes v1.000 of Test::Apocalypse::NoBreakpoints - released March 04, 2011 as part of Test-Apocalypse.
+  This document describes v1.000 of Test::Apocalypse::UnusedVars - released March 04, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 
-Encapsulates L<Test::NoBreakpoints> functionality.
+Encapsulates L<Test::Vars> functionality.
 
 =head1 SEE ALSO
 

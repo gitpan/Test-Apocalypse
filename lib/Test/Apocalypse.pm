@@ -1,20 +1,31 @@
-# Declare our package
-package Test::Apocalypse;
+#
+# This file is part of Test-Apocalypse
+#
+# This software is copyright (c) 2011 by Apocalypse.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 use strict; use warnings;
+package Test::Apocalypse;
+BEGIN {
+  $Test::Apocalypse::VERSION = '1.000';
+}
+BEGIN {
+  $Test::Apocalypse::AUTHORITY = 'cpan:APOCAL';
+}
 
-# Initialize our version
-use vars qw( $VERSION );
-$VERSION = '0.10';
+# ABSTRACT: Apocalypse's favorite tests bundled into a simple interface
 
 # setup our tests and etc
-use Test::Block qw( $Plan );
-use Test::More;
-use Test::Builder;
-use Module::Pluggable require => 1, search_path => [ __PACKAGE__ ];
+use Test::Block 0.11 qw( $Plan );
+use Test::More 0.96;
+use Test::Builder 0.96;
+use Module::Pluggable 3.9 search_path => [ __PACKAGE__ ];
 
 # auto-export the only sub we have
 use base qw( Exporter );
-our @EXPORT = qw( is_apocalypse_here ); ## no critic ( ProhibitAutomaticExportation )
+our @EXPORT = qw( is_apocalypse_here );
 
 sub is_apocalypse_here {
 	# should we even run those tests?
@@ -24,7 +35,8 @@ sub is_apocalypse_here {
 		plan 'no_plan';
 
 		# load our nifty "catch-all" tests
-		eval "use Test::NoWarnings";		## no critic ( ProhibitStringyEval )
+		# TODO should this be required?
+		eval "use Test::NoWarnings";
 	}
 
 	# The options hash
@@ -66,10 +78,17 @@ sub is_apocalypse_here {
 		}
 	}
 
+	# Print some basic debugging info, thanks POE::Test::Loops::00_info!
+	diag(
+		"Testing with Test::Apocalypse v$Test::Apocalypse::VERSION, ",
+		"Perl $], ",
+		"$^X on $^O",
+	);
+
 	# loop through our plugins ( in alphabetical order! )
-	foreach my $t ( sort { $a cmp $b } __PACKAGE__->plugins() ) {	## no critic ( RequireExplicitInclusion )
-		# localize the stuff
-		local $Plan;
+	foreach my $t ( sort { $a cmp $b } __PACKAGE__->plugins() ) {
+		my $plugin = $t;
+		$plugin =~ s/^Test::Apocalypse:://;
 
 		# Do we want this test?
 		# PERL_APOCALYPSE=1 means run all tests, =0 means default behavior
@@ -77,18 +96,39 @@ sub is_apocalypse_here {
 			if ( exists $opt{'allow'} ) {
 				if ( $t =~ /^Test::Apocalypse::(.+)$/ ) {
 					if ( $1 !~ $opt{'allow'} ) {
-						diag( "Skipping $t ( via allow policy )..." );
+						diag( "Skipping $plugin ( via allow policy )..." );
 						next;
 					}
 				}
 			} elsif ( exists $opt{'deny'} ) {
 				if ( $t =~ /^Test::Apocalypse::(.+)$/ ) {
 					if ( $1 =~ $opt{'deny'} ) {
-						diag( "Skipping $t ( via deny policy )..." );
+						diag( "Skipping $plugin ( via deny policy )..." );
 						next;
 					}
 				}
 			}
+		}
+
+		# Load it, and look for errors
+		eval "use $t";
+		if ( $@ ) {
+			# TODO smarter error detection - missing module, bla bla
+			my $error = "Unable to load $plugin -> $@";
+
+			if ( $ENV{RELEASE_TESTING} or $ENV{PERL_APOCALYPSE} ) {
+				die $error;
+			} else {
+				diag( $error );
+			}
+
+			next;
+		}
+
+		# Is this plugin disabled?
+		if ( $t->can( '_is_disabled' ) and $t->_is_disabled ) {
+			diag( "Skipping $plugin ( plugin is DISABLED )..." );
+			next;
 		}
 
 		# Check for AUTOMATED_TESTING
@@ -97,49 +137,23 @@ sub is_apocalypse_here {
 			next;
 		}
 
-		# Load the modules the plugin needs
-		if ( $t->can( '_load_prereqs' ) ) {
-			my %MODULES = $t->_load_prereqs;
-			my $load_fail = undef;
-
-			while (my ($module, $version) = each %MODULES) {
-				eval "package $t; use $module $version";	## no critic ( ProhibitStringyEval )
-				next unless $@;
-
-				if ( $ENV{RELEASE_TESTING} ) {
-					die 'Could not load release-testing module "' . $module . " v$version\" for $t -> $@";
-				} else {
-					# TODO include $@ here somehow? I want to pretty-print it...
-					$load_fail = "$module v$version";
-					last;
-				}
-			}
-
-			if ( defined $load_fail ) {
-				diag( "Skipping $t ( unable to load required module: $load_fail )..." );
-				next;
-			}
-		} else {
-			diag( "Skipping $t ( unable to parse required modules - YELL AT THE AUTHOR! )..." );
-			next;
-		}
-
 		# do nasty override of Test::Builder::plan
+		local $Plan;
 		my $newplan = sub {
 			my( $self, $cmd, $arg ) = @_;
 			return unless $cmd;
 
 			# handle the cmds
 			if ( $cmd eq 'skip_all' ) {
-				$Plan = { $t => 1 };
+				$Plan = { $plugin => 1 };
 				SKIP: {
-					$self->skip( "skipping $t - $arg", 1 );
+					$self->skip( "$plugin - $arg", 1 );
 				}
 			} elsif ( $cmd eq 'tests' ) {
-				$Plan = { $t => $arg };
+				$Plan = { $plugin => $arg };
 			} elsif ( $cmd eq 'no_plan' ) {
 				# ignore it
-				$Plan = { $t => 0 };
+				$Plan = { $plugin => 0 };
 			} else {
 				die "Unknown cmd: $cmd";
 			}
@@ -149,18 +163,24 @@ sub is_apocalypse_here {
 
 		# Same thing for Test::Builder::create - Test::NoPlan uses it, argh!
 		my $newcreate = sub {
-			diag( "ARGH! $t uses Test::Builder::create() - go patch it!" ) if $ENV{RELEASE_TESTING};
+			diag( "ARGH! $plugin uses Test::Builder::create() - go patch it!" );
 			goto &Test::Builder::new;
 		};
 
-		no warnings 'redefine'; no strict 'refs';	## no critic ( ProhibitNoStrict )
+		no warnings 'redefine'; no strict 'refs';
 		local *{'Test::Builder::plan'} = $newplan;
 		local *{'Test::Builder::create'} = $newcreate;
 
 		# run it!
 		use warnings; use strict;
-		diag( "Running $t..." );
+		diag( "Running $plugin..." );
 		$t->do_test();
+
+#		# TODO oh, I wish it was this easy...
+#		subtest $t => sub {
+#			$t->do_test();
+#		};
+#		ok( 1, "done with $t" );
 	}
 
 	# done with testing
@@ -168,13 +188,21 @@ sub is_apocalypse_here {
 }
 
 1;
-__END__
 
-=for stopwords APOCAL AUTHORs AnnoCPAN CPAN RT al backend debian distro distros dists env hackish plugins testsuite yml pm yay unicode blog precompiled CPANTS com diff github dist
+
+__END__
+=pod
+
+=for stopwords apocal CPAN AUTHORs al backend debian distro distros dists env hackish plugins testsuite yml pm yay unicode blog precompiled
+=for stopwords ap cyclomatic cal dist homebrew imo internet perltidy prefs prereq testrun
 
 =head1 NAME
 
 Test::Apocalypse - Apocalypse's favorite tests bundled into a simple interface
+
+=head1 VERSION
+
+  This document describes v1.000 of Test::Apocalypse - released March 04, 2011 as part of Test-Apocalypse.
 
 =head1 SYNOPSIS
 
@@ -186,14 +214,8 @@ Test::Apocalypse - Apocalypse's favorite tests bundled into a simple interface
 	if ( $@ ) {
 		plan skip_all => 'Test::Apocalypse required for validating the distribution';
 	} else {
-		# lousy hack for kwalitee
-		require Test::NoWarnings; require Test::Pod; require Test::Pod::Coverage;
 		is_apocalypse_here();
 	}
-
-=head1 ABSTRACT
-
-Using this test module simplifies/bundles common distribution tests favored by the CPAN id APOCAL.
 
 =head1 DESCRIPTION
 
@@ -264,8 +286,6 @@ will compile it via C<qr/$str/i>.
 Since this module uses L<Module::Pluggable> you can use this method on the package to find out what plugins are available. Handy if you need
 to know what plugins to skip, for example.
 
-WARNING: We enable the "require" option to L<Module::Pluggable> so that means the plugins returned are objects.
-
 	my @tests = Test::Apocalypse->plugins;
 
 =head1 EXPORT
@@ -276,17 +296,20 @@ Automatically exports the "is_apocalypse_here" sub.
 
 =over 4
 
+=item * Better POD spelling checker?
+
+Test::Spelling is ancient, and often blows up. There's a Test::Pod::Spelling on CPAN but it is flaky too :(
+
+=item * CPAN RT check?
+
+I want a test that checks the CPAN RT for any tickets, and display it when running the test. That would be helpful to remind me to be punctual
+with my tickets, ha!
+
 =item * Document the way we do plugins so others can add to this testsuite :)
 
 =item * POD standards check
 
 Do we have SYNOPSIS, ABSTRACT, SUPPORT, etc sections? ( PerlCritic can do that! Need to investigate more... )
-
-=item * Help with version updates automatically
-
-This little snippet helps a lot, I was wondering if I could integrate it into the testsuite hah!
-
-	find -name '*.pm' | grep -v /blib/ | xargs sed -i "s/\$VERSION = '[^']\+\?';/\$VERSION = '0.10';/"
 
 =item * Integrate Test::UniqueTestNames into the testsuite
 
@@ -317,9 +340,35 @@ This is a crazy test, but would help tremendously in finding regressions in your
 
 I don't exclusively code in Moose, but this could be useful...
 
-=item * Test::Vars
+=item * no internet?
 
-This looks useful to detect unused vars ( copy/paste errors? heh )
+It would be nice to signal INTERNET_TESTING=0 or something zany like that so this testsuite will skip the tests that need internet access...
+
+	<Apocalypse> Is there a convention that signals no internet access? Similar to RELEASE_TESTING, AUTOMATED_TESTING, and etc?
+	<@rjbs> No.
+	<Apocalypse> mmm I ain't in the mood to invent it so I'll just bench it for now :(
+	<Apocalypse> however, if I was to invent it I would call it something like INTERNET_TESTING=0
+	<Apocalypse> Also, why does ILYAZ keep re-inventing the stuff? Use of uninitialized value $ENV{"PERL_RL_TEST_PROMPT_MINLEN"} in bitwise or (|) at test.pl line 33.
+	<@Alias> use LWP::Online ':skip_all';
+	<@Alias> Whack that in the relevant test scripts
+	<Apocalypse> Alias: Hmm, how can I control that at a distance? i.e. disabling inet if I had inet access?
+	<@Alias> You can't
+	<@Alias> It's a pragmatic test, tries to pull some huge site front pages and looks for copyright statements
+	<Apocalypse> At least it's a good start - thanks!
+	<@Alias> So it deals with proxies and airport wireless hijacking etc properly
+	<Apocalypse> Hah yeah I had to do the same thing at $work in the past, we put up a "special" page then had our software try to read it and if the content didn't match it complained :)
+	<@Alias> right
+	<@Alias> So yeah, it automates that
+	<@Alias> I wrote it while in an airport annoyed that something I wrote wasn't falling back on a minicpan properly
+	<Apocalypse> At least it'll be an improvement, but I still need to force no inet for testing... ohwell
+	<Apocalypse> Heh, it seems like us perl hackers do a lot of work while stranded at airports :)
+	<@Alias> If you can break LWP from the environment, that would work
+	<@Alias> Setting a proxy ENVthat is illegal etc
+	<Apocalypse> ah good thinking, I'll read up on the fine points of LWP env vars and try to screw it up
+
+=item * Test::CPAN::Changes
+
+Use the newfangled CPAN Changes spec :)
 
 =back
 
@@ -327,141 +376,207 @@ This looks useful to detect unused vars ( copy/paste errors? heh )
 
 =over 4
 
-=item * Test::MyDeps
+=item * L<Test::Distribution>
 
-Superseded by Test::DependentModules
+This module was a plugin in this testsuite but I don't need it. All the functionality in it is already replicated in the plugins :)
 
-=item * Test::NoTabs
+=item * L<Test::Module::Used> and L<Test::Dependencies>
+
+They were plugins in this testsuite but since I started coding with L<Moose>, they don't work! I've switched to my homebrew solution
+utilizing L<Perl::PrereqScanner> which works nicely for me.
+
+=item * L<Test::MyDeps>
+
+Superseded by L<Test::DependentModules>. Also, I don't want to waste a lot of time on each testrun testing other modules!
+
+=item * L<Test::NoTabs>
 
 I always use tabs! :(
 
-=item * Test::CheckManifest
+=item * L<Test::CheckManifest>
 
-This was a buggy dist that I dropped and is now using Test::DistManifest
+This was a buggy module that I dropped and is now using L<Test::DistManifest>
 
-=item * Test::Dist
+=item * L<Test::Dist>
 
 This is pretty much the same thing as this dist ;)
 
-=item * Test::PureASCII
+=item * L<Test::PureASCII>
 
 This rocks, as I don't care about unicode in my perl! ;)
 
-=item * Test::LatestPrereqs
+=item * L<Test::LatestPrereqs>
 
 This looks cool but we need to fiddle with config files? My OutdatedPrereqs test already covers it pretty well...
 
-=item * Test::Pod::Content
+=item * L<Test::Pod::Content>
 
 This is useful, but not everyone has the same POD layout. It would be too much work to try and generalize this...
 
-=item * Test::GreaterVersion
+=item * L<Test::GreaterVersion>
 
 Since I never use CPAN, this is non-functional for me. However, it might be useful for someone?
 
-=item * Test::Kwalitee
+=item * L<Test::Kwalitee>
 
 This dist rocks, but it doesn't print the info nor utilize the extra metrics. My homebrew solution actually copied
 a lot of code from this, so I have to give it props!
 
-=item * Test::LoadAllModules
+=item * L<Test::LoadAllModules>
 
-This is very similar to Test::UseAllModules but looks more complicated. Also, I already have enough tests that do that ;)
+This is very similar to L<Test::UseAllModules> but looks more complicated. Also, I already have enough tests that do that ;)
 
-=item * Test::ModuleReady
+=item * L<Test::ModuleReady>
 
 This looks like a nice module, but what it does is already covered by the numerous tests in this dist...
 
-=item * Test::PerlTidy
+=item * L<Test::PerlTidy>
 
 Br0ken install at this time... ( PerlCritic can do that! Need to investigate more... ) Also, all it does is... run your module
 through perltidy and compare the outputs. Not that useful imo because I never could get perltidy to match my prefs :(
 
-=item * Test::Install::METArequires
+=item * L<Test::Install::METArequires>
 
 This looks like a lazy way to do auto_install and potentially dangerous! Better to just use the prereq logic in Build.PL/Makefile.PL
 
-=item * Test::Perl::Metrics::Simple
+=item * L<Test::Perl::Metrics::Simple>
 
 This just tests your Cyclomatic complexity and was the starting point for my homebrew solution.
 
 =back
 
-=head1 SEE ALSO
-
-None.
+=for :stopwords cpan testmatrix url annocpan anno bugtracker rt cpants kwalitee diff irc mailto metadata placeholders
 
 =head1 SUPPORT
 
+=head2 Perldoc
+
 You can find documentation for this module with the perldoc command.
 
-    perldoc Test::Apocalypse
+  perldoc Test::Apocalypse
 
 =head2 Websites
 
+The following websites have more information about this module, and may be of help to you. As always,
+in addition to those websites please use your favorite search engine to discover more resources.
+
 =over 4
 
-=item * Search CPAN
+=item *
+
+Search CPAN
 
 L<http://search.cpan.org/dist/Test-Apocalypse>
 
-=item * AnnoCPAN: Annotated CPAN documentation
+=item *
 
-L<http://annocpan.org/dist/Test-Apocalypse>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/Test-Apocalypse>
-
-=item * CPAN Forum
-
-L<http://cpanforum.com/dist/Test-Apocalypse>
-
-=item * RT: CPAN's Request Tracker
+RT: CPAN's Bug Tracker
 
 L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Test-Apocalypse>
 
-=item * CPANTS Kwalitee
+=item *
+
+AnnoCPAN: Annotated CPAN documentation
+
+L<http://annocpan.org/dist/Test-Apocalypse>
+
+=item *
+
+CPAN Ratings
+
+L<http://cpanratings.perl.org/d/Test-Apocalypse>
+
+=item *
+
+CPAN Forum
+
+L<http://cpanforum.com/dist/Test-Apocalypse>
+
+=item *
+
+CPANTS Kwalitee
 
 L<http://cpants.perl.org/dist/overview/Test-Apocalypse>
 
-=item * CPAN Testers Results
+=item *
+
+CPAN Testers Results
 
 L<http://cpantesters.org/distro/T/Test-Apocalypse.html>
 
-=item * CPAN Testers Matrix
+=item *
+
+CPAN Testers Matrix
 
 L<http://matrix.cpantesters.org/?dist=Test-Apocalypse>
 
-=item * Git Source Code Repository
+=back
 
-This code is currently hosted on github.com under the account "apocalypse". Please feel free to browse it
-and pull from it, or whatever. If you want to contribute patches, please send me a diff or prod me to pull
+=head2 Email
+
+You can email the author of this module at C<APOCAL at cpan.org> asking for help with any problems you have.
+
+=head2 Internet Relay Chat
+
+You can get live help by using IRC ( Internet Relay Chat ). If you don't know what IRC is,
+please read this excellent guide: L<http://en.wikipedia.org/wiki/Internet_Relay_Chat>. Please
+be courteous and patient when talking to us, as we might be busy or sleeping! You can join
+those networks/channels and get help:
+
+=over 4
+
+=item *
+
+irc.perl.org
+
+You can connect to the server at 'irc.perl.org' and join this channel: #perl-help then talk to this person for help: Apocalypse.
+
+=item *
+
+irc.freenode.net
+
+You can connect to the server at 'irc.freenode.net' and join this channel: #perl then talk to this person for help: Apocal.
+
+=item *
+
+irc.efnet.org
+
+You can connect to the server at 'irc.efnet.org' and join this channel: #perl then talk to this person for help: Ap0cal.
+
+=back
+
+=head2 Bugs / Feature Requests
+
+Please report any bugs or feature requests by email to C<bug-test-apocalypse at rt.cpan.org>, or through
+the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Test-Apocalypse>. You will be automatically notified of any
+progress on the request by the system.
+
+=head2 Source Code
+
+The code is open to the world, and available for you to hack on. Please feel free to browse it and play
+with it, or whatever. If you want to contribute patches, please send me a diff or prod me to pull
 from your repository :)
 
 L<http://github.com/apocalypse/perl-test-apocalypse>
 
-=back
-
-=head2 Bugs
-
-Please report any bugs or feature requests to C<bug-test-apocalypse at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Test-Apocalypse>.  I will be
-notified, and then you'll automatically be notified of progress on your bug as I make changes.
+  git clone git://github.com/apocalypse/perl-test-apocalypse.git
 
 =head1 AUTHOR
 
-Apocalypse E<lt>apocal@cpan.orgE<gt>
+Apocalypse <APOCAL@cpan.org>
+
+=head1 ACKNOWLEDGEMENTS
 
 Thanks to jawnsy@cpan.org for the prodding and help in getting this package ready to be bundled into debian!
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2010 by Apocalypse
+This software is copyright (c) 2011 by Apocalypse.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
-The full text of the license can be found in the LICENSE file included with this module.
+The full text of the license can be found in the LICENSE file included with this distribution.
 
 =cut
+

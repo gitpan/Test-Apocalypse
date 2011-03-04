@@ -1,24 +1,30 @@
-# Declare our package
-package Test::Apocalypse::Pod_Spelling;
+#
+# This file is part of Test-Apocalypse
+#
+# This software is copyright (c) 2011 by Apocalypse.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 use strict; use warnings;
+package Test::Apocalypse::Pod_Spelling;
+BEGIN {
+  $Test::Apocalypse::Pod_Spelling::VERSION = '1.000';
+}
+BEGIN {
+  $Test::Apocalypse::Pod_Spelling::AUTHORITY = 'cpan:APOCAL';
+}
 
-# Initialize our version
-use vars qw( $VERSION );
-$VERSION = '0.10';
+# ABSTRACT: Plugin for Test::Spelling
 
 use Test::More;
+use Test::Spelling 0.11;
+use File::Spec 3.31;
+use File::Which 1.09;
 
-# RELEASE test only!
-# TODO because goddamn spelling test almost always FAILs even with stopwords added to it...
+# TODO because spelling test almost always FAILs even with stopwords added to it...
 sub _do_automated { 0 }
-
-sub _load_prereqs {
-	return (
-		'Test::Spelling'	=> '0.11',
-		'File::Spec'		=> '3.31',
-		'File::Which'		=> '1.09',
-	);
-}
+sub _is_disabled { 1 }
 
 sub do_test {
 	# Thanks to CPANTESTERS, not everyone have "spell" installed...
@@ -36,21 +42,30 @@ sub do_test {
 	foreach my $p ( Test::Spelling::all_pod_files() ) {
 		foreach my $word ( File::Spec->splitdir( $p ) ) {
 			next if ! length $word;
-			if ( $word eq 'lib' or $word eq 'blib' ) { next }
-			if ( $word =~ /^(.+)\.pm$/ ) { $word = $1 }
-
-			add_stopwords( $word );
+			if ( $word =~ /^(.+)\.\w+$/ ) {
+				add_stopwords( $1 );
+			} else {
+				add_stopwords( $word );
+			}
 		}
 	}
 
 	# Run the test!
-	all_pod_files_spelling_ok();
+	TODO: {
+		local $TODO = "Pod_Spelling";
+		all_pod_files_spelling_ok();
+	}
 
 	return;
 }
 
 1;
+
+
 __END__
+=pod
+
+=for Pod::Coverage do_test
 
 =for stopwords spellchecker stopword stopwords pm
 
@@ -58,39 +73,40 @@ __END__
 
 Test::Apocalypse::Pod_Spelling - Plugin for Test::Spelling
 
-=head1 SYNOPSIS
+=head1 VERSION
 
-	die "Don't use this module directly. Please use Test::Apocalypse instead.";
-
-=head1 ABSTRACT
-
-Encapsulates Test::Spelling functionality.
+  This document describes v1.000 of Test::Apocalypse::Pod_Spelling - released March 04, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 
-Encapsulates Test::Spelling functionality. We also add each filename as a stopword, to reduce "noise" from the spellchecker.
+Encapsulates L<Test::Spelling> functionality. We also add each filename as a stopword, to reduce "noise" from the spellchecker.
 
 If you need to add stopwords, please look at L<Pod::Spell> for ways to add it to each .pm file!
 
-=head2 do_test()
-
-The main entry point for this plugin. Automatically called by L<Test::Apocalypse>, you don't need to know anything more :)
-
 =head1 SEE ALSO
+
+Please see those modules/websites for more information related to this module.
+
+=over 4
+
+=item *
 
 L<Test::Apocalypse>
 
-L<Test::Spelling>
+=back
 
 =head1 AUTHOR
 
-Apocalypse E<lt>apocal@cpan.orgE<gt>
+Apocalypse <APOCAL@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2010 by Apocalypse
+This software is copyright (c) 2011 by Apocalypse.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+The full text of the license can be found in the LICENSE file included with this distribution.
 
 =cut
+

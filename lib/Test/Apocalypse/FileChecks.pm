@@ -1,23 +1,29 @@
-# Declare our package
-package Test::Apocalypse::FileChecks;
+#
+# This file is part of Test-Apocalypse
+#
+# This software is copyright (c) 2011 by Apocalypse.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 use strict; use warnings;
+package Test::Apocalypse::FileChecks;
+BEGIN {
+  $Test::Apocalypse::FileChecks::VERSION = '1.000';
+}
+BEGIN {
+  $Test::Apocalypse::FileChecks::AUTHORITY = 'cpan:APOCAL';
+}
 
-# Initialize our version
-use vars qw( $VERSION );
-$VERSION = '0.10';
+# ABSTRACT: Plugin to test for file sanity
 
 use Test::More;
-
-sub _load_prereqs {
-	return (
-		'File::Find::Rule'	=> '0.32',
-		'Test::File'		=> '1.29',
-	);
-}
+use File::Find::Rule 0.32;
+use Test::File 1.29;
 
 sub do_test {
 	my @files = qw( Changes Build.PL Makefile.PL LICENSE MANIFEST MANIFEST.SKIP README META.yml );
-	my @pmfiles = File::Find::Rule->file()->name( '*.pm' )->in( 'lib' );
+	my @pmfiles = File::Find::Rule->file()->name( qr/\.pm$/ )->in( 'lib' );
 
 	# check SIGNATURE if it's there
 	if ( -e 'SIGNATURE' ) {
@@ -50,7 +56,12 @@ sub do_test {
 }
 
 1;
+
+
 __END__
+=pod
+
+=for Pod::Coverage do_test
 
 =for stopwords dist
 
@@ -58,37 +69,38 @@ __END__
 
 Test::Apocalypse::FileChecks - Plugin to test for file sanity
 
-=head1 SYNOPSIS
+=head1 VERSION
 
-	die "Don't use this module directly. Please use Test::Apocalypse instead.";
-
-=head1 ABSTRACT
-
-This plugin ensures basic sanity for the files in the dist.
+  This document describes v1.000 of Test::Apocalypse::FileChecks - released March 04, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 
 This plugin ensures basic sanity for the files in the dist.
 
-=head2 do_test()
-
-The main entry point for this plugin. Automatically called by L<Test::Apocalypse>, you don't need to know anything more :)
-
 =head1 SEE ALSO
+
+Please see those modules/websites for more information related to this module.
+
+=over 4
+
+=item *
 
 L<Test::Apocalypse>
 
-L<Test::File>
+=back
 
 =head1 AUTHOR
 
-Apocalypse E<lt>apocal@cpan.orgE<gt>
+Apocalypse <APOCAL@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2010 by Apocalypse
+This software is copyright (c) 2011 by Apocalypse.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+The full text of the license can be found in the LICENSE file included with this distribution.
 
 =cut
+

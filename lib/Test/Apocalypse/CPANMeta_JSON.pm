@@ -7,20 +7,26 @@
 # the same terms as the Perl 5 programming language system itself.
 #
 use strict; use warnings;
-package Test::Apocalypse::NoBreakpoints;
+package Test::Apocalypse::CPANMeta_JSON;
 BEGIN {
-  $Test::Apocalypse::NoBreakpoints::VERSION = '1.000';
+  $Test::Apocalypse::CPANMeta_JSON::VERSION = '1.000';
 }
 BEGIN {
-  $Test::Apocalypse::NoBreakpoints::AUTHORITY = 'cpan:APOCAL';
+  $Test::Apocalypse::CPANMeta_JSON::AUTHORITY = 'cpan:APOCAL';
 }
 
-# ABSTRACT: Plugin for Test::NoBreakpoints
+# ABSTRACT: Plugin for Test::CPAN::Meta
 
-use Test::NoBreakpoints 0.13;
+use Test::More;
+use Test::CPAN::Meta::JSON 0.10;
 
 sub do_test {
-	all_files_no_breakpoints_ok();
+	# We need to make sure there's actually a JSON file in the dist!
+	if ( -e 'META.json' ) {
+		meta_json_ok();
+	} else {
+		plan skip_all => 'distro did not come with a META.json file';
+	}
 
 	return;
 }
@@ -35,15 +41,15 @@ __END__
 
 =head1 NAME
 
-Test::Apocalypse::NoBreakpoints - Plugin for Test::NoBreakpoints
+Test::Apocalypse::CPANMeta_JSON - Plugin for Test::CPAN::Meta
 
 =head1 VERSION
 
-  This document describes v1.000 of Test::Apocalypse::NoBreakpoints - released March 04, 2011 as part of Test-Apocalypse.
+  This document describes v1.000 of Test::Apocalypse::CPANMeta_JSON - released March 04, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 
-Encapsulates L<Test::NoBreakpoints> functionality.
+Encapsulates L<Test::CPAN::Meta::JSON> functionality.
 
 =head1 SEE ALSO
 

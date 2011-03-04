@@ -1,62 +1,77 @@
-# Declare our package
-package Test::Apocalypse::FilePortability;
+#
+# This file is part of Test-Apocalypse
+#
+# This software is copyright (c) 2011 by Apocalypse.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 use strict; use warnings;
-
-# Initialize our version
-use vars qw( $VERSION );
-$VERSION = '0.10';
-
-use Test::More;
-
-sub _load_prereqs {
-	return (
-		'Test::Portability::Files'	=> '0.05',
-	);
+package Test::Apocalypse::FilePortability;
+BEGIN {
+  $Test::Apocalypse::FilePortability::VERSION = '1.000';
+}
+BEGIN {
+  $Test::Apocalypse::FilePortability::AUTHORITY = 'cpan:APOCAL';
 }
 
+# ABSTRACT: Plugin for Test::Portability::Files
+
+# TODO oh please don't set plan in import!
+#use Test::Portability::Files 0.05;
+
 sub do_test {
-	run_tests();
+	require Test::Portability::Files;
+	Test::Portability::Files->import;
+	Test::Portability::Files::run_tests();
 
 	return;
 }
 
 1;
+
+
 __END__
+=pod
+
+=for Pod::Coverage do_test
+
 =head1 NAME
 
 Test::Apocalypse::FilePortability - Plugin for Test::Portability::Files
 
-=head1 SYNOPSIS
+=head1 VERSION
 
-	die "Don't use this module directly. Please use Test::Apocalypse instead.";
-
-=head1 ABSTRACT
-
-Encapsulates Test::Portability::Files functionality.
+  This document describes v1.000 of Test::Apocalypse::FilePortability - released March 04, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 
-Encapsulates Test::Portability::Files functionality.
-
-=head2 do_test()
-
-The main entry point for this plugin. Automatically called by L<Test::Apocalypse>, you don't need to know anything more :)
+Encapsulates L<Test::Portability::Files> functionality.
 
 =head1 SEE ALSO
 
+Please see those modules/websites for more information related to this module.
+
+=over 4
+
+=item *
+
 L<Test::Apocalypse>
 
-L<Test::Portability::Files>
+=back
 
 =head1 AUTHOR
 
-Apocalypse E<lt>apocal@cpan.orgE<gt>
+Apocalypse <APOCAL@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2010 by Apocalypse
+This software is copyright (c) 2011 by Apocalypse.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+The full text of the license can be found in the LICENSE file included with this distribution.
 
 =cut
+

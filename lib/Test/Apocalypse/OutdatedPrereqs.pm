@@ -1,25 +1,31 @@
-# Declare our package
-package Test::Apocalypse::OutdatedPrereqs;
+#
+# This file is part of Test-Apocalypse
+#
+# This software is copyright (c) 2011 by Apocalypse.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 use strict; use warnings;
+package Test::Apocalypse::OutdatedPrereqs;
+BEGIN {
+  $Test::Apocalypse::OutdatedPrereqs::VERSION = '1.000';
+}
+BEGIN {
+  $Test::Apocalypse::OutdatedPrereqs::AUTHORITY = 'cpan:APOCAL';
+}
 
-# Initialize our version
-use vars qw( $VERSION );
-$VERSION = '0.10';
+# ABSTRACT: Plugin to detect outdated prereqs
 
 use Test::More;
+use YAML 0.70;
+use CPANPLUS 0.90;
+use CPANPLUS::Configure; # TODO no version here, so we added CPANPLUS 0.90, ( should we use CPANPLUS::Internals instead? )
+use CPANPLUS::Backend;
+use version 0.77;
+use Module::CoreList 2.23;
 
-# RELEASE test only!
 sub _do_automated { 0 }
-
-sub _load_prereqs {
-	return (
-		'YAML'			=> '0.70',
-		'CPANPLUS::Configure'	=> '0.90',
-		'CPANPLUS::Backend'	=> '0.90',
-		'version'		=> '0.77',
-		'Module::CoreList'	=> '2.23',
-	);
-}
 
 sub do_test {
 	# does META.yml exist?
@@ -54,7 +60,6 @@ sub _load_yml {
 	}
 
 	# massage the data
-	## no critic ( ProhibitAccessOfPrivateData )
 	$data = $data->{'requires'};
 	delete $data->{'perl'} if exists $data->{'perl'};
 
@@ -62,16 +67,17 @@ sub _load_yml {
 	my $cpanconfig = CPANPLUS::Configure->new;
 	$cpanconfig->set_conf( 'verbose' => 0 );
 	$cpanconfig->set_conf( 'no_update' => 1 );
+
+	# ARGH, CPANIDX doesn't work well with this kind of search...
+	if ( $cpanconfig->get_conf( 'source_engine' ) =~ /CPANIDX/ ) {
+		diag( "Disabling CPANIDX for CPANPLUS" );
+		$cpanconfig->set_conf( 'source_engine' => 'CPANPLUS::Internals::Source::Memory' );
+	}
+
 	my $cpanplus = CPANPLUS::Backend->new( $cpanconfig );
 
 	# silence CPANPLUS!
-	{
-		# TODO do we need eval's here?
-		no warnings 'redefine';
-		## no critic ( ProhibitStringyEval )
-		eval "sub Log::Message::Handlers::cp_msg { return }";
-		eval "sub Log::Message::Handlers::cp_error { return }";
-	}
+	eval "no warnings; sub Log::Message::store { return }";
 
 	# Okay, how many prereqs do we have?
 	if ( scalar keys %$data == 0 ) {
@@ -89,10 +95,10 @@ sub _load_yml {
 # 	Params::Check::_store_error('Key \'archive\' (/home/apoc/.cpanplus/01mailrc.txt.gz) is of ...', 1) called at /usr/share/perl/5.10/Params/Check.pm line 345
 # 	Params::Check::check('HASH(0x3ce9f50)', 'HASH(0x3cf7b08)') called at /usr/share/perl/5.10/Archive/Extract.pm line 227
 	{
-		my @warn;
-		local $SIG{'__WARN__'} = sub { push @warn, shift };
-		my $module = $cpanplus->parse_module( 'module' => 'Test::Apocalypse' );
-		if ( @warn ) {
+		my $warn_seen = 0;
+		local $SIG{'__WARN__'} = sub { $warn_seen = 1; return; };
+		my $module = $cpanplus->parse_module( 'module' => 'Test::More' );
+		if ( $warn_seen ) {
 			plan skip_all => "Unable to sanely use CPANPLUS, aborting!";
 			return;
 		}
@@ -100,8 +106,11 @@ sub _load_yml {
 
 	# analyze every one of them!
 	plan tests => scalar keys %$data;
-	foreach my $prereq ( keys %$data ) {
-		_check_cpan( $cpanplus, $prereq, $data->{ $prereq } );
+	TODO: {
+		local $TODO = "OutdatedPrereqs";
+		foreach my $prereq ( keys %$data ) {
+			_check_cpan( $cpanplus, $prereq, $data->{ $prereq } );
+		}
 	}
 
 	return;
@@ -129,7 +138,7 @@ sub _check_cpan {
 
 			# sort them by version, descending
 			s/[\s<>=!]+// for @versions;
-			@versions = sort { $b <=> $a }
+			@versions = reverse sort { $a <=> $b }
 				map { version->new( $_ ) } @versions;
 
 			# pick the highest version to use as comparison
@@ -140,8 +149,8 @@ sub _check_cpan {
 		$version = version->new( $version ) if ! ref $version;
 		my $cpanversion = version->new( $module->version );
 
-		# check it!
-		cmp_ok( $cpanversion, '==', $version, "Comparing '$prereq' to CPAN version" );
+		# check it! ( use <= instead of == so we ignore old CPAN versions )
+		cmp_ok( $cpanversion, '<=', $version, "Comparing '$prereq' to CPAN version" );
 	} else {
 		my $release = Module::CoreList->first_release( $prereq );
 		if ( defined $release ) {
@@ -155,43 +164,51 @@ sub _check_cpan {
 }
 
 1;
-__END__
 
-=for stopwords CPAN prereq prereqs
+
+__END__
+=pod
+
+=for Pod::Coverage do_test
+
+=for stopwords CPAN prereq prereqs backend
 
 =head1 NAME
 
 Test::Apocalypse::OutdatedPrereqs - Plugin to detect outdated prereqs
 
-=head1 SYNOPSIS
+=head1 VERSION
 
-	die "Don't use this module directly. Please use Test::Apocalypse instead.";
-
-=head1 ABSTRACT
-
-This plugin detects outdated prereqs in F<META.yml> specified relative to CPAN.
+  This document describes v1.000 of Test::Apocalypse::OutdatedPrereqs - released March 04, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 
-This plugin detects outdated prereqs in F<META.yml> specified relative to CPAN.
-
-=head2 do_test()
-
-The main entry point for this plugin. Automatically called by L<Test::Apocalypse>, you don't need to know anything more :)
+This plugin detects outdated prereqs in F<META.yml> specified relative to CPAN. It uses L<CPANPLUS> as the backend.
 
 =head1 SEE ALSO
 
+Please see those modules/websites for more information related to this module.
+
+=over 4
+
+=item *
+
 L<Test::Apocalypse>
+
+=back
 
 =head1 AUTHOR
 
-Apocalypse E<lt>apocal@cpan.orgE<gt>
+Apocalypse <APOCAL@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2010 by Apocalypse
+This software is copyright (c) 2011 by Apocalypse.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+The full text of the license can be found in the LICENSE file included with this distribution.
 
 =cut
+

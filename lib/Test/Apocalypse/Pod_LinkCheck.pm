@@ -7,20 +7,23 @@
 # the same terms as the Perl 5 programming language system itself.
 #
 use strict; use warnings;
-package Test::Apocalypse::NoBreakpoints;
+package Test::Apocalypse::Pod_LinkCheck;
 BEGIN {
-  $Test::Apocalypse::NoBreakpoints::VERSION = '1.000';
+  $Test::Apocalypse::Pod_LinkCheck::VERSION = '1.000';
 }
 BEGIN {
-  $Test::Apocalypse::NoBreakpoints::AUTHORITY = 'cpan:APOCAL';
+  $Test::Apocalypse::Pod_LinkCheck::AUTHORITY = 'cpan:APOCAL';
 }
 
-# ABSTRACT: Plugin for Test::NoBreakpoints
+# ABSTRACT: Plugin for Test::Pod::LinkCheck
 
-use Test::NoBreakpoints 0.13;
+use Test::Pod::LinkCheck 0.004;
+
+# LinkCheck often FAILs on misconfigured machines
+sub _do_automated { 0 }
 
 sub do_test {
-	all_files_no_breakpoints_ok();
+	Test::Pod::LinkCheck->new->all_pod_ok();
 
 	return;
 }
@@ -35,15 +38,15 @@ __END__
 
 =head1 NAME
 
-Test::Apocalypse::NoBreakpoints - Plugin for Test::NoBreakpoints
+Test::Apocalypse::Pod_LinkCheck - Plugin for Test::Pod::LinkCheck
 
 =head1 VERSION
 
-  This document describes v1.000 of Test::Apocalypse::NoBreakpoints - released March 04, 2011 as part of Test-Apocalypse.
+  This document describes v1.000 of Test::Apocalypse::Pod_LinkCheck - released March 04, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 
-Encapsulates L<Test::NoBreakpoints> functionality.
+Encapsulates L<Test::Pod::LinkCheck> functionality.
 
 =head1 SEE ALSO
 

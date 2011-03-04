@@ -2,6 +2,9 @@ NAME
     Test::Apocalypse - Apocalypse's favorite tests bundled into a simple
     interface
 
+VERSION
+      This document describes v1.000 of Test::Apocalypse - released March 04, 2011 as part of Test-Apocalypse.
+
 SYNOPSIS
             #!/usr/bin/perl
             use strict; use warnings;
@@ -11,14 +14,8 @@ SYNOPSIS
             if ( $@ ) {
                     plan skip_all => 'Test::Apocalypse required for validating the distribution';
             } else {
-                    # lousy hack for kwalitee
-                    require Test::NoWarnings; require Test::Pod; require Test::Pod::Coverage;
                     is_apocalypse_here();
             }
-
-ABSTRACT
-    Using this test module simplifies/bundles common distribution tests
-    favored by the CPAN id APOCAL.
 
 DESCRIPTION
     This module greatly simplifies common author tests for modules heading
@@ -95,15 +92,23 @@ Methods
     package to find out what plugins are available. Handy if you need to
     know what plugins to skip, for example.
 
-    WARNING: We enable the "require" option to Module::Pluggable so that
-    means the plugins returned are objects.
-
             my @tests = Test::Apocalypse->plugins;
 
 EXPORT
     Automatically exports the "is_apocalypse_here" sub.
 
 MORE IDEAS
+    *   Better POD spelling checker?
+
+        Test::Spelling is ancient, and often blows up. There's a
+        Test::Pod::Spelling on CPAN but it is flaky too :(
+
+    *   CPAN RT check?
+
+        I want a test that checks the CPAN RT for any tickets, and display
+        it when running the test. That would be helpful to remind me to be
+        punctual with my tickets, ha!
+
     *   Document the way we do plugins so others can add to this testsuite
         :)
 
@@ -111,13 +116,6 @@ MORE IDEAS
 
         Do we have SYNOPSIS, ABSTRACT, SUPPORT, etc sections? ( PerlCritic
         can do that! Need to investigate more... )
-
-    *   Help with version updates automatically
-
-        This little snippet helps a lot, I was wondering if I could
-        integrate it into the testsuite hah!
-
-                find -name '*.pm' | grep -v /blib/ | xargs sed -i "s/\$VERSION = '[^']\+\?';/\$VERSION = '0.10';/"
 
     *   Integrate Test::UniqueTestNames into the testsuite
 
@@ -156,14 +154,54 @@ MORE IDEAS
 
         I don't exclusively code in Moose, but this could be useful...
 
-    *   Test::Vars
+    *   no internet?
 
-        This looks useful to detect unused vars ( copy/paste errors? heh )
+        It would be nice to signal INTERNET_TESTING=0 or something zany like
+        that so this testsuite will skip the tests that need internet
+        access...
+
+                <Apocalypse> Is there a convention that signals no internet access? Similar to RELEASE_TESTING, AUTOMATED_TESTING, and etc?
+                <@rjbs> No.
+                <Apocalypse> mmm I ain't in the mood to invent it so I'll just bench it for now :(
+                <Apocalypse> however, if I was to invent it I would call it something like INTERNET_TESTING=0
+                <Apocalypse> Also, why does ILYAZ keep re-inventing the stuff? Use of uninitialized value $ENV{"PERL_RL_TEST_PROMPT_MINLEN"} in bitwise or (|) at test.pl line 33.
+                <@Alias> use LWP::Online ':skip_all';
+                <@Alias> Whack that in the relevant test scripts
+                <Apocalypse> Alias: Hmm, how can I control that at a distance? i.e. disabling inet if I had inet access?
+                <@Alias> You can't
+                <@Alias> It's a pragmatic test, tries to pull some huge site front pages and looks for copyright statements
+                <Apocalypse> At least it's a good start - thanks!
+                <@Alias> So it deals with proxies and airport wireless hijacking etc properly
+                <Apocalypse> Hah yeah I had to do the same thing at $work in the past, we put up a "special" page then had our software try to read it and if the content didn't match it complained :)
+                <@Alias> right
+                <@Alias> So yeah, it automates that
+                <@Alias> I wrote it while in an airport annoyed that something I wrote wasn't falling back on a minicpan properly
+                <Apocalypse> At least it'll be an improvement, but I still need to force no inet for testing... ohwell
+                <Apocalypse> Heh, it seems like us perl hackers do a lot of work while stranded at airports :)
+                <@Alias> If you can break LWP from the environment, that would work
+                <@Alias> Setting a proxy ENVthat is illegal etc
+                <Apocalypse> ah good thinking, I'll read up on the fine points of LWP env vars and try to screw it up
+
+    *   Test::CPAN::Changes
+
+        Use the newfangled CPAN Changes spec :)
 
   Modules that I considered but decided against using
+    *   Test::Distribution
+
+        This module was a plugin in this testsuite but I don't need it. All
+        the functionality in it is already replicated in the plugins :)
+
+    *   Test::Module::Used and Test::Dependencies
+
+        They were plugins in this testsuite but since I started coding with
+        Moose, they don't work! I've switched to my homebrew solution
+        utilizing Perl::PrereqScanner which works nicely for me.
+
     *   Test::MyDeps
 
-        Superseded by Test::DependentModules
+        Superseded by Test::DependentModules. Also, I don't want to waste a
+        lot of time on each testrun testing other modules!
 
     *   Test::NoTabs
 
@@ -171,7 +209,7 @@ MORE IDEAS
 
     *   Test::CheckManifest
 
-        This was a buggy dist that I dropped and is now using
+        This was a buggy module that I dropped and is now using
         Test::DistManifest
 
     *   Test::Dist
@@ -231,18 +269,24 @@ MORE IDEAS
         This just tests your Cyclomatic complexity and was the starting
         point for my homebrew solution.
 
-SEE ALSO
-    None.
-
 SUPPORT
+  Perldoc
     You can find documentation for this module with the perldoc command.
 
-        perldoc Test::Apocalypse
+      perldoc Test::Apocalypse
 
   Websites
+    The following websites have more information about this module, and may
+    be of help to you. As always, in addition to those websites please use
+    your favorite search engine to discover more resources.
+
     *   Search CPAN
 
         <http://search.cpan.org/dist/Test-Apocalypse>
+
+    *   RT: CPAN's Bug Tracker
+
+        <http://rt.cpan.org/NoAuth/Bugs.html?Dist=Test-Apocalypse>
 
     *   AnnoCPAN: Annotated CPAN documentation
 
@@ -256,10 +300,6 @@ SUPPORT
 
         <http://cpanforum.com/dist/Test-Apocalypse>
 
-    *   RT: CPAN's Request Tracker
-
-        <http://rt.cpan.org/NoAuth/Bugs.html?Dist=Test-Apocalypse>
-
     *   CPANTS Kwalitee
 
         <http://cpants.perl.org/dist/overview/Test-Apocalypse>
@@ -272,34 +312,62 @@ SUPPORT
 
         <http://matrix.cpantesters.org/?dist=Test-Apocalypse>
 
-    *   Git Source Code Repository
+  Email
+    You can email the author of this module at "APOCAL at cpan.org" asking
+    for help with any problems you have.
 
-        This code is currently hosted on github.com under the account
-        "apocalypse". Please feel free to browse it and pull from it, or
-        whatever. If you want to contribute patches, please send me a diff
-        or prod me to pull from your repository :)
+  Internet Relay Chat
+    You can get live help by using IRC ( Internet Relay Chat ). If you don't
+    know what IRC is, please read this excellent guide:
+    <http://en.wikipedia.org/wiki/Internet_Relay_Chat>. Please be courteous
+    and patient when talking to us, as we might be busy or sleeping! You can
+    join those networks/channels and get help:
 
-        <http://github.com/apocalypse/perl-test-apocalypse>
+    *   irc.perl.org
 
-  Bugs
-    Please report any bugs or feature requests to "bug-test-apocalypse at
-    rt.cpan.org", or through the web interface at
-    <http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Test-Apocalypse>. I will
-    be notified, and then you'll automatically be notified of progress on
-    your bug as I make changes.
+        You can connect to the server at 'irc.perl.org' and join this
+        channel: #perl-help then talk to this person for help: Apocalypse.
+
+    *   irc.freenode.net
+
+        You can connect to the server at 'irc.freenode.net' and join this
+        channel: #perl then talk to this person for help: Apocal.
+
+    *   irc.efnet.org
+
+        You can connect to the server at 'irc.efnet.org' and join this
+        channel: #perl then talk to this person for help: Ap0cal.
+
+  Bugs / Feature Requests
+    Please report any bugs or feature requests by email to
+    "bug-test-apocalypse at rt.cpan.org", or through the web interface at
+    <http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Test-Apocalypse>. You
+    will be automatically notified of any progress on the request by the
+    system.
+
+  Source Code
+    The code is open to the world, and available for you to hack on. Please
+    feel free to browse it and play with it, or whatever. If you want to
+    contribute patches, please send me a diff or prod me to pull from your
+    repository :)
+
+    <http://github.com/apocalypse/perl-test-apocalypse>
+
+      git clone git://github.com/apocalypse/perl-test-apocalypse.git
 
 AUTHOR
-    Apocalypse <apocal@cpan.org>
+    Apocalypse <APOCAL@cpan.org>
 
+ACKNOWLEDGEMENTS
     Thanks to jawnsy@cpan.org for the prodding and help in getting this
     package ready to be bundled into debian!
 
 COPYRIGHT AND LICENSE
-    Copyright 2010 by Apocalypse
+    This software is copyright (c) 2011 by Apocalypse.
 
-    This library is free software; you can redistribute it and/or modify it
-    under the same terms as Perl itself.
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
 
     The full text of the license can be found in the LICENSE file included
-    with this module.
+    with this distribution.
 

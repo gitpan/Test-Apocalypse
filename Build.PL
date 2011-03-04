@@ -1,103 +1,92 @@
-# Build.PL
-use strict; use warnings;
-use Module::Build;
 
-my $build = Module::Build->new(
-	# look up Module::Build::API for the info!
-	'dynamic_config'	=> 0,
-	'module_name'		=> 'Test::Apocalypse',
-	'license'		=> 'perl',
+use strict;
+use warnings;
 
-	'dist_abstract'		=> "Apocalypse's favorite tests bundled into a simple interface",
-	'dist_author'		=> 'Apocalypse <APOCAL@cpan.org>',
+use Module::Build 0.3601;
 
-	'create_packlist'	=> 1,
-	'create_makefile_pl'	=> 'traditional',
-	'create_readme'		=> 1,
-	'create_license'	=> 1,
-	'sign'			=> 0,
 
-	'test_files'		=> 't/*.t',
-
-	'requires'		=> {
-		# FIXME this sucks, I have to repeat the version here and in the Test::Apocalypse::XYZ module...
-		# Dist::Zilla will solve it! I need to switch someday :)
-
-		# Test stuff
-		'Test::More'			=> '0.94',
-		'Test::Compile'			=> '0.11',
-		'Test::Perl::Critic'		=> '1.02',
-		'Test::Dependencies'		=> '0.12',
-		'Test::Distribution'		=> '2.00',
-		'Test::Fixme'			=> '0.04',
-		'Test::HasVersion'		=> '0.012',
-		'Test::MinimumVersion'		=> '0.011',
-		'Test::Pod::Coverage'		=> '1.08',
-		'Test::Spelling'		=> '0.11',
-		'Test::Pod'			=> '1.40',
-		'Test::Prereq'			=> '1.037',
-		'Test::Prereq::Build'		=> '1.037',
-		'Test::Strict'			=> '0.14',
-		'Test::UseAllModules'		=> '0.12',
-		'Test::YAML::Meta'		=> '0.14',
-		'Test::NoWarnings'		=> '0.084',
-		'Test::CheckChanges'		=> '0.08',
-		'Test::File'			=> '1.29',
-		'Test::Dir'			=> '1.006',
-		'Test::Signature'		=> '1.10',
-		'Test::Portability::Files'	=> '0.05',
-		'Test::DistManifest'		=> '1.005',
-#		'Test::Module::Used'		=> '0.1.2',	# M::B::Compat 0.36 doesn't like this!
-		'Test::Module::Used'		=> '0.001002',
-		'Test::Synopsis'		=> '0.06',
-		'Test::CPAN::Meta'		=> '0.13',
-		'Test::NoBreakpoints'		=> '0.13',
-		'Test::EOL'			=> '0.3',
-#		'Test::ConsistentVersion'	=> '0.2.2',	# M::B::Compat 0.36 doesn't like this!
-		'Test::ConsistentVersion'	=> '0.002002',
-		'Test::AutoLoader'		=> '0.03',
-		'Test::Pod::No404s'		=> '0.01',
-		'Test::JSON::Meta'		=> '0.04',
-		'Test::NoPlan'			=> '0.000002',	# Same M::B::Compat issue for 0.0.2
-
-		# handy tools
-		'File::Spec'			=> '3.31',
-		'File::Find::Rule'		=> '0.32',
-		'Module::CPANTS::Analyse'	=> '0.85',
-		'Perl::Metrics::Simple'		=> '0.13',
-		'Test::Block'			=> '0.11',
-		'YAML'				=> '0.70',
-		'version'			=> '0.77',
-		'Devel::PPPort'			=> '3.19',
-		'Module::CoreList'		=> '2.23',
-		'Module::Pluggable'		=> '3.9',
-		'File::Which'			=> '1.09',
-
-		# We can't specify the CPANPLUS::Configure/Backend module because...
-#apoc@blackhole:~/mygit/perl-test-apocalypse$ perl Build.PL
-#Checking prerequisites...
-#  requires:
-#    !  CPANPLUS::Backend (0) is installed, but we need version >= 0.90
-#    !  CPANPLUS::Configure (0) is installed, but we need version >= 0.90
-		'CPANPLUS'			=> '0.90',
-
-		# Perl::Critic extensions so we're sure we are testing every one of them, ha!
-		'Task::Perl::Critic'		=> '1.007',
-
-		# we need a recent perl
-		'perl'				=> '5.008',
-	},
-
-	# include the standard stuff in META.yml
-	'meta_merge'	=> {
-		'resources'	=> {
-			'license'	=> 'http://dev.perl.org/licenses/',
-			'homepage'	=> 'http://search.cpan.org/dist/Test-Apocalypse',
-			'bugtracker'	=> 'http://rt.cpan.org/NoAuth/Bugs.html?Dist=Test-Apocalypse',
-			'repository'	=> 'http://github.com/apocalypse/perl-test-apocalypse',
-		},
-	},
+my %module_build_args = (
+  'build_requires' => {
+    'File::Find' => '0',
+    'File::Temp' => '0',
+    'Module::Build' => '0.3601'
+  },
+  'configure_requires' => {
+    'Module::Build' => '0.3601'
+  },
+  'dist_abstract' => 'Apocalypse\'s favorite tests bundled into a simple interface',
+  'dist_author' => [
+    'Apocalypse <APOCAL@cpan.org>'
+  ],
+  'dist_name' => 'Test-Apocalypse',
+  'dist_version' => '1.000',
+  'license' => 'perl',
+  'module_name' => 'Test::Apocalypse',
+  'recommends' => {},
+  'recursive_test_files' => 1,
+  'requires' => {
+    'CPANPLUS' => '0.90',
+    'CPANPLUS::Backend' => '0',
+    'CPANPLUS::Configure' => '0',
+    'Capture::Tiny' => '0.10',
+    'Data::Dumper' => '0',
+    'Devel::PPPort' => '3.19',
+    'Exporter' => '0',
+    'File::Find::Rule' => '0.32',
+    'File::Slurp' => '9999.13',
+    'File::Spec' => '3.31',
+    'File::Which' => '1.09',
+    'JSON::Any' => '1.25',
+    'Module::CPANTS::Analyse' => '0.85',
+    'Module::CoreList' => '2.23',
+    'Module::Pluggable' => '3.9',
+    'Perl::Critic::Utils::Constants' => '0',
+    'Perl::Metrics::Simple' => '0.13',
+    'Perl::PrereqScanner' => '1.000',
+    'Pod::Coverage::TrustPod' => '0.092830',
+    'Task::Perl::Critic' => '1.007',
+    'Test::AutoLoader' => '0.03',
+    'Test::Block' => '0.11',
+    'Test::Builder' => '0.96',
+    'Test::CPAN::Meta' => '0.18',
+    'Test::CPAN::Meta::JSON' => '0.10',
+    'Test::CPAN::Meta::YAML' => '0.17',
+    'Test::CheckChanges' => '0',
+    'Test::Compile' => '0.11',
+    'Test::ConsistentVersion' => '0.2.2',
+    'Test::Deep' => '0.108',
+    'Test::Dir' => '1.006',
+    'Test::DistManifest' => '1.005',
+    'Test::EOL' => '0.3',
+    'Test::File' => '1.29',
+    'Test::Fixme' => '0.04',
+    'Test::HasVersion' => '0.012',
+    'Test::MinimumVersion' => '0.101080',
+    'Test::More' => '0.96',
+    'Test::NoBreakpoints' => '0.13',
+    'Test::NoPlan' => '0.0.6',
+    'Test::Perl::Critic' => '1.02',
+    'Test::Pod' => '1.41',
+    'Test::Pod::Coverage' => '1.08',
+    'Test::Pod::LinkCheck' => '0.004',
+    'Test::Pod::No404s' => '0.01',
+    'Test::Pod::Spelling::CommonMistakes' => '1.000',
+    'Test::Portability::Files' => '0',
+    'Test::Script' => '1.07',
+    'Test::Signature' => '1.10',
+    'Test::Spelling' => '0.11',
+    'Test::Strict' => '0.14',
+    'Test::Synopsis' => '0.06',
+    'Test::Vars' => '0.001',
+    'YAML' => '0.70',
+    'YAML::Any' => '0.72',
+    'perl' => '5.008',
+    'version' => '0.77'
+  },
+  'script_files' => []
 );
 
-# all done!
+
+my $build = Module::Build->new(%module_build_args);
+
 $build->create_build_script;

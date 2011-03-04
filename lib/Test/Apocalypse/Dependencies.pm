@@ -1,72 +1,142 @@
-# Declare our package
-package Test::Apocalypse::Dependencies;
+#
+# This file is part of Test-Apocalypse
+#
+# This software is copyright (c) 2011 by Apocalypse.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 use strict; use warnings;
-
-# Initialize our version
-use vars qw( $VERSION );
-$VERSION = '0.10';
-
-use Test::More;
-
-# RELEASE test only!
-sub _do_automated { 0 }
-
-sub _load_prereqs {
-	return (
-		'Test::Dependencies'	=> '0.12 ()',
-	);
+package Test::Apocalypse::Dependencies;
+BEGIN {
+  $Test::Apocalypse::Dependencies::VERSION = '1.000';
+}
+BEGIN {
+  $Test::Apocalypse::Dependencies::AUTHORITY = 'cpan:APOCAL';
 }
 
+# ABSTRACT: Plugin to check for metadata dependencies
+
+use Test::More;
+use File::Slurp 9999.13;
+use YAML::Any 0.72;
+use JSON::Any 1.25;
+use File::Find::Rule 0.32;
+use Perl::PrereqScanner 1.000;
+use Test::Deep 0.108;
+
+sub _do_automated { 0 }
+
 sub do_test {
-	# build up our exclude list of usual installers that we never use() but T::D is stupid to detect :(
-	my @exclude = qw( Module::Build Module::Install ExtUtils::MakeMaker );
+	# load the metadata
+	my $runtime_req;
+	my $test_req;
+	if ( -e 'META.json' ) {
+		my $file = read_file( 'META.json' );
+		my $metadata = JSON::Any->new->Load( $file );
+		$runtime_req = $metadata->{'prereqs'}{'runtime'}{'requires'};
+		$test_req = $metadata->{'prereqs'}{'test'}{'requires'};
+	} elsif ( -e 'META.yml' ) {
+		my $file = read_file( 'META.yml' );
+		my $metadata = Load( $file );
+		$runtime_req = $metadata->{'requires'};
+	} else {
+		die 'No META.(json|yml) found!';
+	}
 
-	# Also, add some more stupid deps that T::D fucks up
-	push( @exclude, 'Test::More' );
+	# remove 'perl' dep - we check it in MinimumVersion anyway
+	delete $runtime_req->{'perl'} if exists $runtime_req->{'perl'};
+	delete $test_req->{'perl'} if defined $test_req and exists $test_req->{'perl'};
 
-	Test::Dependencies->import( exclude => \@exclude, style => 'light' );
-	ok_dependencies();
+	# Convert version objects to regular
+	$runtime_req->{ $_ } =~ s/^v// for keys %$runtime_req;
+	$test_req->{ $_ } =~ s/^v// for keys %$test_req;
+
+	# Okay, scan the files
+	my $found_runtime = Version::Requirements->new;
+	my $found_test = Version::Requirements->new;
+	foreach my $file ( File::Find::Rule->file()->name( qr/\.pm$/ )->in( 'lib' ) ) {
+		$found_runtime->add_requirements( Perl::PrereqScanner->new->scan_file( $file ) );
+	}
+
+	# scan the test dir only if we have test metadata
+	if ( defined $test_req ) {
+		foreach my $file ( File::Find::Rule->file()->name( qr/\.(pm|t|pl)$/ )->in( 't' ) ) {
+			$found_test->add_requirements( Perl::PrereqScanner->new->scan_file( $file ) );
+		}
+	}
+
+	# Okay, the spec says that anything already in the runtime req shouldn't be listed in test req
+	# That means we need to "fake" the prereq and make sure the comparison is OK
+	if ( defined $test_req ) {
+		my %temp = %{ $found_test->as_string_hash };
+		foreach my $mod ( keys %temp ) {
+			if ( ! exists $test_req->{ $mod } and exists $runtime_req->{ $mod } ) {
+				# don't copy runtime_req's version because it might be different and cmp_deeply will complain!
+				$test_req->{ $mod } = $temp{ $mod };
+			}
+		}
+	}
+
+	# Do the actual comparison!
+	if ( defined $test_req ) {
+		plan tests => 2;
+	} else {
+		plan tests => 1;
+	}
+
+	cmp_deeply( $found_runtime->as_string_hash, $runtime_req, "Runtime requires" );
+	cmp_deeply( $found_test->as_string_hash, $test_req, "Test requires" ) if defined $test_req;
 
 	return;
 }
 
 1;
+
+
 __END__
+=pod
+
+=for Pod::Coverage do_test
+
+=for stopwords metadata
+
 =head1 NAME
 
-Test::Apocalypse::Dependencies - Plugin for Test::Dependencies
+Test::Apocalypse::Dependencies - Plugin to check for metadata dependencies
 
-=head1 SYNOPSIS
+=head1 VERSION
 
-	die "Don't use this module directly. Please use Test::Apocalypse instead.";
-
-=head1 ABSTRACT
-
-Encapsulates Test::Dependencies functionality.
+  This document describes v1.000 of Test::Apocalypse::Dependencies - released March 04, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 
-Encapsulates Test::Dependencies functionality. We enable the "light" style of parsing. We also add some "standard" modules to exclude from the checks.
-
-=head2 do_test()
-
-The main entry point for this plugin. Automatically called by L<Test::Apocalypse>, you don't need to know anything more :)
+Loads the metadata and uses L<Perl::PrereqScanner> to look for dependencies and compares the lists.
 
 =head1 SEE ALSO
 
+Please see those modules/websites for more information related to this module.
+
+=over 4
+
+=item *
+
 L<Test::Apocalypse>
 
-L<Test::Dependencies>
+=back
 
 =head1 AUTHOR
 
-Apocalypse E<lt>apocal@cpan.orgE<gt>
+Apocalypse <APOCAL@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2010 by Apocalypse
+This software is copyright (c) 2011 by Apocalypse.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+The full text of the license can be found in the LICENSE file included with this distribution.
 
 =cut
+

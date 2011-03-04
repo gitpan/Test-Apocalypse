@@ -1,62 +1,81 @@
-# Declare our package
-package Test::Apocalypse::Pod_Coverage;
+#
+# This file is part of Test-Apocalypse
+#
+# This software is copyright (c) 2011 by Apocalypse.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 use strict; use warnings;
-
-# Initialize our version
-use vars qw( $VERSION );
-$VERSION = '0.10';
-
-use Test::More;
-
-sub _load_prereqs {
-	return (
-		'Test::Pod::Coverage'	=> '1.08',
-	);
+package Test::Apocalypse::Pod_Coverage;
+BEGIN {
+  $Test::Apocalypse::Pod_Coverage::VERSION = '1.000';
+}
+BEGIN {
+  $Test::Apocalypse::Pod_Coverage::AUTHORITY = 'cpan:APOCAL';
 }
 
+# ABSTRACT: Plugin for Test::Pod::Coverage
+
+use Test::More;
+use Test::Pod::Coverage 1.08;
+use Pod::Coverage::TrustPod 0.092830;
+
 sub do_test {
-	all_pod_coverage_ok( 'lib/');
+	TODO: {
+		local $TODO = "Pod_Coverage";
+		all_pod_coverage_ok( {
+			coverage_class => 'Pod::Coverage::TrustPod',
+		} );
+	}
 
 	return;
 }
 
 1;
+
+
 __END__
+=pod
+
+=for Pod::Coverage do_test
+
 =head1 NAME
 
 Test::Apocalypse::Pod_Coverage - Plugin for Test::Pod::Coverage
 
-=head1 SYNOPSIS
+=head1 VERSION
 
-	die "Don't use this module directly. Please use Test::Apocalypse instead.";
-
-=head1 ABSTRACT
-
-Encapsulates Test::Pod::Coverage functionality.
+  This document describes v1.000 of Test::Apocalypse::Pod_Coverage - released March 04, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 
-Encapsulates Test::Pod::Coverage functionality.
-
-=head2 do_test()
-
-The main entry point for this plugin. Automatically called by L<Test::Apocalypse>, you don't need to know anything more :)
+Encapsulates L<Test::Pod::Coverage> functionality. Automatically uses the L<Pod::Coverage::TrustPod> class.
 
 =head1 SEE ALSO
 
+Please see those modules/websites for more information related to this module.
+
+=over 4
+
+=item *
+
 L<Test::Apocalypse>
 
-L<Test::Pod::Coverage>
+=back
 
 =head1 AUTHOR
 
-Apocalypse E<lt>apocal@cpan.orgE<gt>
+Apocalypse <APOCAL@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2010 by Apocalypse
+This software is copyright (c) 2011 by Apocalypse.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+The full text of the license can be found in the LICENSE file included with this distribution.
 
 =cut
+

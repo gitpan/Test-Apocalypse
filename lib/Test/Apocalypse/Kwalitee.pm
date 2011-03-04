@@ -1,36 +1,52 @@
-# Declare our package
-package Test::Apocalypse::Kwalitee;
+#
+# This file is part of Test-Apocalypse
+#
+# This software is copyright (c) 2011 by Apocalypse.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 use strict; use warnings;
-
-# Initialize our version
-use vars qw( $VERSION );
-$VERSION = '0.10';
-
-use Test::More;
-
-# RELEASE test only!
-sub _do_automated { 0 }
-
-sub _load_prereqs {
-	return (
-		'Module::CPANTS::Analyse'	=> '0.85',
-		'version'			=> '0.77',
-	);
+package Test::Apocalypse::Kwalitee;
+BEGIN {
+  $Test::Apocalypse::Kwalitee::VERSION = '1.000';
+}
+BEGIN {
+  $Test::Apocalypse::Kwalitee::AUTHORITY = 'cpan:APOCAL';
 }
 
-sub do_test {
-	## no critic ( ProhibitAccessOfPrivateData )
+# ABSTRACT: Plugin for Test::Kwalitee
 
+use Test::More;
+use Module::CPANTS::Analyse 0.85;
+use version 0.77;
+
+sub _do_automated { 0 }
+
+sub do_test {
 	# the following code was copied/plagarized/transformed from Test::Kwalitee, thanks!
 	# The reason why I didn't just use that module is because it doesn't print the kwalitee or consider extra metrics...
 
 	# init CPANTS with the latest tarball
-	my $tarball = _get_tarball();
+	my $tarball = _get_tarball( '.' );
 	if ( ! defined $tarball ) {
-		plan tests => 1;
-		fail( 'Distribution tarball not found, unable to run CPANTS Kwalitee tests!' );
-		return;
+		# Dist::Zilla-specific code, the tarball we want is 3 levels up ( when using dzp::TestRelease :)
+		# [@Apocalyptic/TestRelease] Extracting /home/apoc/mygit/perl-pod-weaver-pluginbundle-apocalyptic/Pod-Weaver-PluginBundle-Apocalyptic-0.001.tar.gz to .build/MiNXla4CY7
+		$tarball = _get_tarball( '../../..' );
+		if ( ! defined $tarball ) {
+			plan skip_all => 'Distribution tarball not found, unable to run CPANTS Kwalitee tests!';
+			return;
+		}
 	}
+
+	_analyze( $tarball ) if defined $tarball;
+
+	return;
+}
+
+sub _analyze {
+	my $tarball = shift;
+
 	my $analyzer = Module::CPANTS::Analyse->new({
 		'dist'	=> $tarball,
 	});
@@ -100,8 +116,10 @@ sub do_test {
 }
 
 sub _get_tarball {
+	my $path = shift;
+
 	# get our list of stuff, and try to find the latest tarball
-	opendir( my $dir, '.' ) or die "Unable to opendir: $!";
+	opendir( my $dir, $path ) or die "Unable to opendir: $!";
 	my @dirlist = readdir( $dir );
 	closedir( $dir ) or die "Unable to closedir: $!";
 
@@ -114,7 +132,6 @@ sub _get_tarball {
 	}
 
 	# get the versions
-	## no critic ( ProhibitAccessOfPrivateData )
 	@dirlist = map { [ $_, $_ ] } @dirlist;
 	for ( @dirlist ) {
 		$_->[0] =~ s/^.*\-([^\-]+)(?:tar(?:\.gz|\.bz2)?|tgz|zip)$/$1/;
@@ -122,9 +139,10 @@ sub _get_tarball {
 	}
 
 	# sort by version
-	@dirlist = sort { $b->[0] <=> $a->[0] } @dirlist;
+	@dirlist = reverse sort { $a->[0] <=> $b->[0] } @dirlist;
 
-	return $dirlist[0]->[1];
+	# TODO should we use file::spec and stuff here?
+	return $path . '/' . $dirlist[0]->[1];
 }
 
 # Module::CPANTS::Kwalitee::Distros suck!
@@ -149,7 +167,12 @@ sub _cleanup_debian_files {
 }
 
 1;
+
+
 __END__
+=pod
+
+=for Pod::Coverage do_test
 
 =for stopwords kwalitee
 
@@ -157,37 +180,38 @@ __END__
 
 Test::Apocalypse::Kwalitee - Plugin for Test::Kwalitee
 
-=head1 SYNOPSIS
+=head1 VERSION
 
-	die "Don't use this module directly. Please use Test::Apocalypse instead.";
-
-=head1 ABSTRACT
-
-Encapsulates Test::Kwalitee functionality.
+  This document describes v1.000 of Test::Apocalypse::Kwalitee - released March 04, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 
-Encapsulates Test::Kwalitee functionality. This plugin also processes the extra metrics, and prints out the kwalitee as a diag() for info.
-
-=head2 do_test()
-
-The main entry point for this plugin. Automatically called by L<Test::Apocalypse>, you don't need to know anything more :)
+Encapsulates L<Test::Kwalitee> functionality. This plugin also processes the extra metrics, and prints out the kwalitee as a diag() for info.
 
 =head1 SEE ALSO
 
+Please see those modules/websites for more information related to this module.
+
+=over 4
+
+=item *
+
 L<Test::Apocalypse>
 
-L<Test::Kwalitee>
+=back
 
 =head1 AUTHOR
 
-Apocalypse E<lt>apocal@cpan.orgE<gt>
+Apocalypse <APOCAL@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2010 by Apocalypse
+This software is copyright (c) 2011 by Apocalypse.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+The full text of the license can be found in the LICENSE file included with this distribution.
 
 =cut
+
