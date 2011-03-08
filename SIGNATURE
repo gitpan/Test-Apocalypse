@@ -14,61 +14,62 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 ea8b1fa641e009d3dfd50b269077e244908500eb Build.PL
-SHA1 b164c63cd67ecc087498dc9353beb172da523a65 Changes
-SHA1 f7229c4d69aace7b238ecf706dcd9ee588bcd6d3 CommitLog
+SHA1 6b8da2eb50ab83a5b7118febb3061a726c65d399 Build.PL
+SHA1 e6abd8bf7b71db17bbf75a97c335a1f11b310793 Changes
+SHA1 90f4a6fb64154462c341cfc3253a8b145bf32deb CommitLog
 SHA1 d62944bed09e0ad8510c352578b4a0962f0baf82 INSTALL
 SHA1 263360e99a0de4d587fedefe1a919dcf61af1d10 LICENSE
-SHA1 e6090d5bb0f04211b0d12b51b5a6f5618de3494c MANIFEST
+SHA1 5b9c62c2c2501f76e60aeaeecfb8b4a59a5b50d7 MANIFEST
 SHA1 9dfc07c5655b958e800189837f3ddd37ca050bfe MANIFEST.SKIP
-SHA1 430dadbf3e83150b09510a8ff8b57b6d8fd91191 META.json
-SHA1 c950dfc69543d38badd85e9b4bec26a9374083c4 META.yml
-SHA1 8667827bebfd578b20433879ad92c726be8d198d Makefile.PL
-SHA1 31c0e25184aec880d743f9a8f0e673072caa138e README
+SHA1 f3eec10eaba56baf04968bee5436bb381c3d6cbf META.json
+SHA1 3bb6840c1ee8e1f8678e86d98741f02948e62055 META.yml
+SHA1 77ff6d7c02436ce423fc1583a2f2de6f187c8fa6 Makefile.PL
+SHA1 a48c85b2c7ec40c221baa68f79fab8fbb5b6ec76 README
 SHA1 41279f39e264a013f1cd6fd8076a68c2d27548a8 dist.ini
 SHA1 4c2250a617b2f460bde994687625a99a4a57be36 examples/simple.pl
-SHA1 237b36851d1c79bec963d59229e9c97cd67ae820 lib/Test/Apocalypse.pm
-SHA1 8c2ef839d4640054d0083bfb56fe5e159b6f732a lib/Test/Apocalypse/AutoLoader.pm
-SHA1 f4574961bd231c71c23ec72d6ebf5392fdbc4b1f lib/Test/Apocalypse/CPANMeta.pm
-SHA1 dad1d3f9a24d061930f554cf90ffef8448ce7c35 lib/Test/Apocalypse/CPANMeta_JSON.pm
-SHA1 cc634148248e090b9b30d2d79e8b31e1d73a8661 lib/Test/Apocalypse/CPANMeta_YAML.pm
-SHA1 439f7ba227caddb070a5e8d7b8b2c4a384f938b9 lib/Test/Apocalypse/CheckChanges.pm
-SHA1 96256a9808857f8d85407e6441c8b4b9125d03df lib/Test/Apocalypse/Compile.pm
-SHA1 7772efc22bfd311d8d4173a7335a7245ccb6cb36 lib/Test/Apocalypse/ConsistentVersion.pm
-SHA1 b28cc6478b1efee7e6a238ff74ccd563b6ca9477 lib/Test/Apocalypse/DOSnewline.pm
-SHA1 026ca4f590986dcc8bffe2574e98dea8723cbc01 lib/Test/Apocalypse/Dependencies.pm
-SHA1 13985fff55e51f58920a8c9e8c356c48c4e09e83 lib/Test/Apocalypse/DirChecks.pm
-SHA1 5bcdae361b8438d8cad86dd18a93870208d6d5f5 lib/Test/Apocalypse/DistManifest.pm
-SHA1 50c371f0e5b08ec50c7688e833da29b2cbba99b2 lib/Test/Apocalypse/EOL.pm
-SHA1 5193f27d8adb2e1a7fd625e8c8a8bc3ec5be83b1 lib/Test/Apocalypse/FileChecks.pm
-SHA1 a77981386ab6a2d5fd0941f89ca1d48982421fc9 lib/Test/Apocalypse/FilePortability.pm
-SHA1 d45e259320387240773c070f2de023764a97d11f lib/Test/Apocalypse/Fixme.pm
-SHA1 1ed721c00393c21ffc9900526cdc60ed0561be6b lib/Test/Apocalypse/HasVersion.pm
-SHA1 593dd793f0e8b8480da3b61289c32422e9abe105 lib/Test/Apocalypse/Kwalitee.pm
-SHA1 92e253ee31d3f66cd995210037e61ee8ee13d573 lib/Test/Apocalypse/MinimumVersion.pm
-SHA1 6a3f82dbacab23f294c87f058f87908b69f3bba3 lib/Test/Apocalypse/NoBreakpoints.pm
-SHA1 17f94d7a38564e49df96e9db22bb7b061cffbcc2 lib/Test/Apocalypse/NoPlan.pm
-SHA1 6e02e03ccad2de9e9ac68aecf9613073fe536137 lib/Test/Apocalypse/OutdatedPrereqs.pm
-SHA1 8c37bc1d6e63f384cbce23c623cd34fc2ed39f36 lib/Test/Apocalypse/PPPort.pm
-SHA1 baf3b493435b917a6e3aadd2c47eaa5e419c71b4 lib/Test/Apocalypse/PerlCritic.pm
-SHA1 5161eed3d36c55ccc4eba94eb54cb4e5065bedf5 lib/Test/Apocalypse/PerlMetrics.pm
-SHA1 30767c2c0b19edb1a5f742c66016d287881642fd lib/Test/Apocalypse/Pod.pm
-SHA1 a315133f1e3d6d00daf0542ae5d0f1ec8260ec12 lib/Test/Apocalypse/Pod_CommonMistakes.pm
-SHA1 157f253d8bd5318826f4a8bb1ad42d88b3cc751f lib/Test/Apocalypse/Pod_Coverage.pm
-SHA1 37b47bf3db442002e1b0e4cf900cf0a1aefdc2cf lib/Test/Apocalypse/Pod_LinkCheck.pm
-SHA1 f0bfe53be29be39829eff83afa223be53fdb4e47 lib/Test/Apocalypse/Pod_No404s.pm
-SHA1 1093fedc8b5491a00a6914d03fb4e0e796b94efe lib/Test/Apocalypse/Pod_Spelling.pm
-SHA1 4e48be1fbb5417d67d67e9d92470274f0a633059 lib/Test/Apocalypse/Script.pm
-SHA1 e476726602edc6c83419beef9c2dc4eaf7553381 lib/Test/Apocalypse/Signature.pm
-SHA1 3bf71f3771e4418045de3b2b9c8220470e503ea9 lib/Test/Apocalypse/Strict.pm
-SHA1 23c1e13f7062b6d7301762e8cbbbe420540649c3 lib/Test/Apocalypse/Synopsis.pm
-SHA1 8b08dd52643d7591980fe8ceed9e92693554afe5 lib/Test/Apocalypse/UnusedVars.pm
+SHA1 6a81a4fea2c5ed3b31696dd1debf16281e033556 lib/Test/Apocalypse.pm
+SHA1 46e66cece8f23d9b5f5e3b49289fb45cee07457d lib/Test/Apocalypse/AutoLoader.pm
+SHA1 b6caf5c2ed3cdc1e8d77c1c310bfed4d1d397fc9 lib/Test/Apocalypse/CPANMeta.pm
+SHA1 87646bfecc5cd00ab4d4cb6c60dddf1f8d487063 lib/Test/Apocalypse/CPANMeta_JSON.pm
+SHA1 8939eb4b752e9a30490d9ea00f1aa94e36dab893 lib/Test/Apocalypse/CPANMeta_YAML.pm
+SHA1 4e825554d080f0993aba0c9db7820659028be382 lib/Test/Apocalypse/CheckChanges.pm
+SHA1 f2eb145883d4bcc19872e86215803004b3058c42 lib/Test/Apocalypse/Compile.pm
+SHA1 f8ba5d9a86adb0c18eaec73040ebcf14276851ac lib/Test/Apocalypse/ConsistentVersion.pm
+SHA1 77e41fd9e106c505c39ef9ff7dcae08974332ce2 lib/Test/Apocalypse/DOSnewline.pm
+SHA1 458b8599b2f6c63a7cf2609eec83779664832104 lib/Test/Apocalypse/Dependencies.pm
+SHA1 34f438c772fdc486d011d24deca2953d26327bc7 lib/Test/Apocalypse/DirChecks.pm
+SHA1 3d05c72cfd9dffc6415d14c2c9b5b97552805e71 lib/Test/Apocalypse/DistManifest.pm
+SHA1 eb8bbbf322ae016fb9aa7dfd6e5f335e3dfd7895 lib/Test/Apocalypse/EOL.pm
+SHA1 c3d2d28744d69e1d9eebbfca45cf0edaf5ce3c8b lib/Test/Apocalypse/FileChecks.pm
+SHA1 12cc0f330f21fe5473bf8c6c4c793c5d25d8f5d5 lib/Test/Apocalypse/FilePortability.pm
+SHA1 f3138e609ff721cd04c6e840180a1672b5030778 lib/Test/Apocalypse/Fixme.pm
+SHA1 064da78f69aa23a71da972eace7046620b122221 lib/Test/Apocalypse/HasVersion.pm
+SHA1 9599d735bdc65fd0488862552fff503a9c2df93b lib/Test/Apocalypse/Kwalitee.pm
+SHA1 bfc3d532765bf9a0caad75dfe5105fa1f5104a92 lib/Test/Apocalypse/MinimumVersion.pm
+SHA1 569380d86fbe205dae0a3689c59ed7c4dac3c7a2 lib/Test/Apocalypse/NoBreakpoints.pm
+SHA1 2833e8a351443b075b4223b3bc17c126ffb1b1f0 lib/Test/Apocalypse/NoPlan.pm
+SHA1 dd4aeed3750216cb7e9299762cdc5d9f4d3909b7 lib/Test/Apocalypse/OutdatedPrereqs.pm
+SHA1 a3dc8f4a7f207b28d5cd67b7b6436b291972a8d7 lib/Test/Apocalypse/PPPort.pm
+SHA1 733bf72927480285954a0567931d42a8c9890e18 lib/Test/Apocalypse/PerlCritic.pm
+SHA1 08b7fac926088c901c2ecb0b51c5c1dfd7859b7f lib/Test/Apocalypse/PerlMetrics.pm
+SHA1 c1c07f0d59d35aa95d3ac323d0934babe5de9b99 lib/Test/Apocalypse/Pod.pm
+SHA1 7f7e4a519c5b22262a038c59d7541c22d89cbe75 lib/Test/Apocalypse/Pod_CommonMistakes.pm
+SHA1 d01915e5db1242ebaed8c60ceed65e48afda77ff lib/Test/Apocalypse/Pod_Coverage.pm
+SHA1 c17d057bbac6b16d88f7b9e5763272bb384ef57c lib/Test/Apocalypse/Pod_LinkCheck.pm
+SHA1 42a98c1ab1ee9cc12e53672ef1656edaeed563b7 lib/Test/Apocalypse/Pod_No404s.pm
+SHA1 12471f0e331ef4e759b1e12e3ccc05fef3188148 lib/Test/Apocalypse/Pod_Spelling.pm
+SHA1 ecb5abf0e449f61fc606e0dcd45143aeac1c77de lib/Test/Apocalypse/Script.pm
+SHA1 c01a0083080f0b0529443c3e6593c7caf1f90490 lib/Test/Apocalypse/Signature.pm
+SHA1 d97061c11ac52bb6449e2ffd081d20e0f428c682 lib/Test/Apocalypse/Strict.pm
+SHA1 12cadd3c6bac8f7d564810a2e3b0b171210f4640 lib/Test/Apocalypse/Synopsis.pm
+SHA1 30b3542b4fbf1870923b76649b6cc4e1b24ac350 lib/Test/Apocalypse/UnusedVars.pm
 SHA1 d831177f30cef55f1d4d2f2d46d2c125a5c68cfb t/00-compile.t
-SHA1 9568e439cdcf84b9c028a5e3bd7321f5e8b4bf79 t/000-report-versions-tiny.t
+SHA1 9323440577ecb0aa8bd95524914bdf7b6f349fca t/000-report-versions-tiny.t
+SHA1 ec909a303d2bcfc8d42268db20f1b557336e4bc0 t/apocalypse.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.9 (GNU/Linux)
 
-iEYEARECAAYFAk1xd8IACgkQGfr7vsGKgxwHfACgsDxKDVe+G4vXyLGS0v8N4Yni
-nyoAnj+16O54G4isv58DLZKwF2gtQhEo
-=7SsS
+iEYEARECAAYFAk12oaAACgkQGfr7vsGKgxyjbQCg63kIuELMf52q7kP3ncX/WwrS
+cqoAoJ/x6j2FfWjBmxhjmKD82i1iPiK+
+=YAHy
 -----END PGP SIGNATURE-----

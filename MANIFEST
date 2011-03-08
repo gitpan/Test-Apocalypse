@@ -50,3 +50,4 @@ lib/Test/Apocalypse/Synopsis.pm
 lib/Test/Apocalypse/UnusedVars.pm
 t/00-compile.t
 t/000-report-versions-tiny.t
+t/apocalypse.t

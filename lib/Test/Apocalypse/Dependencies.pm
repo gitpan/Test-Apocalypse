@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse::Dependencies;
 BEGIN {
-  $Test::Apocalypse::Dependencies::VERSION = '1.000';
+  $Test::Apocalypse::Dependencies::VERSION = '1.001';
 }
 BEGIN {
   $Test::Apocalypse::Dependencies::AUTHORITY = 'cpan:APOCAL';
@@ -31,15 +31,18 @@ sub do_test {
 	# load the metadata
 	my $runtime_req;
 	my $test_req;
+	my $provides;
 	if ( -e 'META.json' ) {
 		my $file = read_file( 'META.json' );
 		my $metadata = JSON::Any->new->Load( $file );
 		$runtime_req = $metadata->{'prereqs'}{'runtime'}{'requires'};
 		$test_req = $metadata->{'prereqs'}{'test'}{'requires'};
+		$provides = $metadata->{'provides'} if exists $metadata->{'provides'};
 	} elsif ( -e 'META.yml' ) {
 		my $file = read_file( 'META.yml' );
 		my $metadata = Load( $file );
 		$runtime_req = $metadata->{'requires'};
+		$provides = $metadata->{'provides'} if exists $metadata->{'provides'};
 	} else {
 		die 'No META.(json|yml) found!';
 	}
@@ -78,6 +81,14 @@ sub do_test {
 		}
 	}
 
+	# We remove any prereqs that we provided in the package
+	if ( defined $provides ) {
+		foreach my $p ( keys %$provides ) {
+			$found_runtime->clear_requirement( $p );
+			$found_test->clear_requirement( $p );
+		}
+	}
+
 	# Do the actual comparison!
 	if ( defined $test_req ) {
 		plan tests => 2;
@@ -97,9 +108,11 @@ sub do_test {
 __END__
 =pod
 
-=for Pod::Coverage do_test
+=for :stopwords Apocalypse
 
-=for stopwords metadata
+=encoding utf-8
+
+=for Pod::Coverage do_test
 
 =head1 NAME
 
@@ -107,11 +120,13 @@ Test::Apocalypse::Dependencies - Plugin to check for metadata dependencies
 
 =head1 VERSION
 
-  This document describes v1.000 of Test::Apocalypse::Dependencies - released March 04, 2011 as part of Test-Apocalypse.
+  This document describes v1.001 of Test::Apocalypse::Dependencies - released March 08, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 
 Loads the metadata and uses L<Perl::PrereqScanner> to look for dependencies and compares the lists.
+
+=for stopwords metadata
 
 =head1 SEE ALSO
 
@@ -121,7 +136,7 @@ Please see those modules/websites for more information related to this module.
 
 =item *
 
-L<Test::Apocalypse>
+L<Test::Apocalypse|Test::Apocalypse>
 
 =back
 
@@ -137,6 +152,29 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 The full text of the license can be found in the LICENSE file included with this distribution.
+
+=head1 DISCLAIMER OF WARRANTY
+
+BECAUSE THIS SOFTWARE IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
+FOR THE SOFTWARE, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT
+WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER
+PARTIES PROVIDE THE SOFTWARE "AS IS" WITHOUT WARRANTY OF ANY KIND,
+EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE
+SOFTWARE IS WITH YOU. SHOULD THE SOFTWARE PROVE DEFECTIVE, YOU ASSUME
+THE COST OF ALL NECESSARY SERVICING, REPAIR, OR CORRECTION.
+
+IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
+WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR
+REDISTRIBUTE THE SOFTWARE AS PERMITTED BY THE ABOVE LICENCE, BE LIABLE
+TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL, OR
+CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE
+SOFTWARE (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING
+RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
+FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
+SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
+DAMAGES.
 
 =cut
 

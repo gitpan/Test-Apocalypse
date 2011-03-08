@@ -19,7 +19,7 @@ my %module_build_args = (
     'Apocalypse <APOCAL@cpan.org>'
   ],
   'dist_name' => 'Test-Apocalypse',
-  'dist_version' => '1.000',
+  'dist_version' => '1.001',
   'license' => 'perl',
   'module_name' => 'Test::Apocalypse',
   'recommends' => {},
@@ -80,7 +80,8 @@ my %module_build_args = (
     'Test::Vars' => '0.001',
     'YAML' => '0.70',
     'YAML::Any' => '0.72',
-    'perl' => '5.008',
+    'parent' => '0',
+    'perl' => '5.006',
     'version' => '0.77'
   },
   'script_files' => []

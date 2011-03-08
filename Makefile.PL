@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 
-BEGIN { require 5.008; }
+BEGIN { require 5.006; }
 
 use ExtUtils::MakeMaker 6.31;
 
@@ -79,9 +79,10 @@ my %WriteMakefileArgs = (
     'Test::Vars' => '0.001',
     'YAML' => '0.70',
     'YAML::Any' => '0.72',
+    'parent' => '0',
     'version' => '0.77'
   },
-  'VERSION' => '1.000',
+  'VERSION' => '1.001',
   'test' => {
     'TESTS' => 't/*.t'
   }

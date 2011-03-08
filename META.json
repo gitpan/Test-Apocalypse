@@ -87,7 +87,8 @@
             "Test::Vars" : "0.001",
             "YAML" : "0.70",
             "YAML::Any" : "0.72",
-            "perl" : "5.008",
+            "parent" : 0,
+            "perl" : "5.006",
             "version" : "0.77"
          }
       },
@@ -101,147 +102,147 @@
    "provides" : {
       "Test::Apocalypse" : {
          "file" : "lib/Test/Apocalypse.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::AutoLoader" : {
          "file" : "lib/Test/Apocalypse/AutoLoader.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::CPANMeta" : {
          "file" : "lib/Test/Apocalypse/CPANMeta.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::CPANMeta_JSON" : {
          "file" : "lib/Test/Apocalypse/CPANMeta_JSON.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::CPANMeta_YAML" : {
          "file" : "lib/Test/Apocalypse/CPANMeta_YAML.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::CheckChanges" : {
          "file" : "lib/Test/Apocalypse/CheckChanges.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::Compile" : {
          "file" : "lib/Test/Apocalypse/Compile.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::ConsistentVersion" : {
          "file" : "lib/Test/Apocalypse/ConsistentVersion.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::DOSnewline" : {
          "file" : "lib/Test/Apocalypse/DOSnewline.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::Dependencies" : {
          "file" : "lib/Test/Apocalypse/Dependencies.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::DirChecks" : {
          "file" : "lib/Test/Apocalypse/DirChecks.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::DistManifest" : {
          "file" : "lib/Test/Apocalypse/DistManifest.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::EOL" : {
          "file" : "lib/Test/Apocalypse/EOL.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::FileChecks" : {
          "file" : "lib/Test/Apocalypse/FileChecks.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::FilePortability" : {
          "file" : "lib/Test/Apocalypse/FilePortability.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::Fixme" : {
          "file" : "lib/Test/Apocalypse/Fixme.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::HasVersion" : {
          "file" : "lib/Test/Apocalypse/HasVersion.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::Kwalitee" : {
          "file" : "lib/Test/Apocalypse/Kwalitee.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::MinimumVersion" : {
          "file" : "lib/Test/Apocalypse/MinimumVersion.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::NoBreakpoints" : {
          "file" : "lib/Test/Apocalypse/NoBreakpoints.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::NoPlan" : {
          "file" : "lib/Test/Apocalypse/NoPlan.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::OutdatedPrereqs" : {
          "file" : "lib/Test/Apocalypse/OutdatedPrereqs.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::PPPort" : {
          "file" : "lib/Test/Apocalypse/PPPort.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::PerlCritic" : {
          "file" : "lib/Test/Apocalypse/PerlCritic.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::PerlMetrics" : {
          "file" : "lib/Test/Apocalypse/PerlMetrics.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::Pod" : {
          "file" : "lib/Test/Apocalypse/Pod.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::Pod_CommonMistakes" : {
          "file" : "lib/Test/Apocalypse/Pod_CommonMistakes.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::Pod_Coverage" : {
          "file" : "lib/Test/Apocalypse/Pod_Coverage.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::Pod_LinkCheck" : {
          "file" : "lib/Test/Apocalypse/Pod_LinkCheck.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::Pod_No404s" : {
          "file" : "lib/Test/Apocalypse/Pod_No404s.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::Pod_Spelling" : {
          "file" : "lib/Test/Apocalypse/Pod_Spelling.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::Script" : {
          "file" : "lib/Test/Apocalypse/Script.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::Signature" : {
          "file" : "lib/Test/Apocalypse/Signature.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::Strict" : {
          "file" : "lib/Test/Apocalypse/Strict.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::Synopsis" : {
          "file" : "lib/Test/Apocalypse/Synopsis.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       },
       "Test::Apocalypse::UnusedVars" : {
          "file" : "lib/Test/Apocalypse/UnusedVars.pm",
-         "version" : "1.000"
+         "version" : "1.001"
       }
    },
    "release_status" : "stable",
@@ -260,7 +261,7 @@
          "web" : "http://github.com/apocalypse/perl-test-apocalypse"
       }
    },
-   "version" : "1.000",
+   "version" : "1.001",
    "x_BuiltWith" : {
       "modules" : {
          "CPANPLUS" : "0.9010",
@@ -321,6 +322,7 @@
          "Test::Vars" : "0.001",
          "YAML" : "0.72",
          "YAML::Any" : "0.72",
+         "parent" : "0.224",
          "perl" : "NA(skipped: perl)",
          "version" : "0.86"
       },
@@ -372,6 +374,11 @@
             "class" : "Dist::Zilla::Plugin::CompileTests",
             "name" : "@Apocalyptic/CompileTests",
             "version" : "1.103030"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::ApocalypseTests",
+            "name" : "@Apocalyptic/ApocalypseTests",
+            "version" : "1.001"
          },
          {
             "class" : "Dist::Zilla::Plugin::ReportVersions::Tiny",
@@ -526,6 +533,11 @@
             "class" : "Dist::Zilla::Plugin::Git::Check",
             "name" : "@Apocalyptic/Git::Check",
             "version" : "1.110500"
+         },
+         {
+            "class" : "Dist::Zilla::Plugin::TestRelease",
+            "name" : "@Apocalyptic/TestRelease",
+            "version" : "4.200005"
          },
          {
             "class" : "Dist::Zilla::Plugin::ConfirmRelease",

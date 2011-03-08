@@ -12,7 +12,7 @@ my $v = "\n";
 
 eval {                     # no excuses!
     # report our Perl details
-    my $want = '5.008';
+    my $want = '5.006';
     my $pv = ($^V || $]);
     $v .= "perl: $pv (wanted $want) on $^O from $^X\n\n";
 };
@@ -106,6 +106,7 @@ eval { $v .= pmver('Test::Synopsis','0.06') };
 eval { $v .= pmver('Test::Vars','0.001') };
 eval { $v .= pmver('YAML','0.70') };
 eval { $v .= pmver('YAML::Any','0.72') };
+eval { $v .= pmver('parent','any version') };
 eval { $v .= pmver('version','0.77') };
 
 

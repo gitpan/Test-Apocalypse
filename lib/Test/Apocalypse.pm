@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse;
 BEGIN {
-  $Test::Apocalypse::VERSION = '1.000';
+  $Test::Apocalypse::VERSION = '1.001';
 }
 BEGIN {
   $Test::Apocalypse::AUTHORITY = 'cpan:APOCAL';
@@ -24,7 +24,7 @@ use Test::Builder 0.96;
 use Module::Pluggable 3.9 search_path => [ __PACKAGE__ ];
 
 # auto-export the only sub we have
-use base qw( Exporter );
+use parent 'Exporter';
 our @EXPORT = qw( is_apocalypse_here );
 
 sub is_apocalypse_here {
@@ -193,8 +193,10 @@ sub is_apocalypse_here {
 __END__
 =pod
 
-=for stopwords apocal CPAN AUTHORs al backend debian distro distros dists env hackish plugins testsuite yml pm yay unicode blog precompiled
-=for stopwords ap cyclomatic cal dist homebrew imo internet perltidy prefs prereq testrun
+=for :stopwords Apocalypse cpan testmatrix url annocpan anno bugtracker rt cpants kwalitee
+diff irc mailto metadata placeholders
+
+=encoding utf-8
 
 =head1 NAME
 
@@ -202,7 +204,7 @@ Test::Apocalypse - Apocalypse's favorite tests bundled into a simple interface
 
 =head1 VERSION
 
-  This document describes v1.000 of Test::Apocalypse - released March 04, 2011 as part of Test-Apocalypse.
+  This document describes v1.001 of Test::Apocalypse - released March 08, 2011 as part of Test-Apocalypse.
 
 =head1 SYNOPSIS
 
@@ -242,6 +244,9 @@ you can do this:
 	perl Build.PL			# sets up the dist ( duh, hah )
 	./Build dist			# makes the tarball ( so certain plugins can process it )
 	RELEASE_TESTING=1 ./Build test	# runs the testsuite!
+
+=for stopwords apocal CPAN AUTHORs al backend debian distro distros dists env hackish plugins testsuite yml pm yay unicode blog precompiled
+=for stopwords ap cyclomatic cal dist homebrew imo internet perltidy prefs prereq testrun
 
 =head1 Methods
 
@@ -445,8 +450,6 @@ This just tests your Cyclomatic complexity and was the starting point for my hom
 
 =back
 
-=for :stopwords cpan testmatrix url annocpan anno bugtracker rt cpants kwalitee diff irc mailto metadata placeholders
-
 =head1 SUPPORT
 
 =head2 Perldoc
@@ -577,6 +580,29 @@ This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
 
 The full text of the license can be found in the LICENSE file included with this distribution.
+
+=head1 DISCLAIMER OF WARRANTY
+
+BECAUSE THIS SOFTWARE IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
+FOR THE SOFTWARE, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT
+WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER
+PARTIES PROVIDE THE SOFTWARE "AS IS" WITHOUT WARRANTY OF ANY KIND,
+EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE
+SOFTWARE IS WITH YOU. SHOULD THE SOFTWARE PROVE DEFECTIVE, YOU ASSUME
+THE COST OF ALL NECESSARY SERVICING, REPAIR, OR CORRECTION.
+
+IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
+WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR
+REDISTRIBUTE THE SOFTWARE AS PERMITTED BY THE ABOVE LICENCE, BE LIABLE
+TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL, OR
+CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE
+SOFTWARE (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING
+RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
+FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
+SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
+DAMAGES.
 
 =cut
 
