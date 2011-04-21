@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse::CheckChanges;
 BEGIN {
-  $Test::Apocalypse::CheckChanges::VERSION = '1.001';
+  $Test::Apocalypse::CheckChanges::VERSION = '1.002';
 }
 BEGIN {
   $Test::Apocalypse::CheckChanges::AUTHORITY = 'cpan:APOCAL';
@@ -48,7 +48,7 @@ Test::Apocalypse::CheckChanges - Plugin for Test::CheckChanges
 
 =head1 VERSION
 
-  This document describes v1.001 of Test::Apocalypse::CheckChanges - released March 08, 2011 as part of Test-Apocalypse.
+  This document describes v1.002 of Test::Apocalypse::CheckChanges - released April 21, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

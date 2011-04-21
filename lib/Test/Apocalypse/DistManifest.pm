@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse::DistManifest;
 BEGIN {
-  $Test::Apocalypse::DistManifest::VERSION = '1.001';
+  $Test::Apocalypse::DistManifest::VERSION = '1.002';
 }
 BEGIN {
   $Test::Apocalypse::DistManifest::AUTHORITY = 'cpan:APOCAL';
@@ -43,7 +43,7 @@ Test::Apocalypse::DistManifest - Plugin for Test::DistManifest
 
 =head1 VERSION
 
-  This document describes v1.001 of Test::Apocalypse::DistManifest - released March 08, 2011 as part of Test-Apocalypse.
+  This document describes v1.002 of Test::Apocalypse::DistManifest - released April 21, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

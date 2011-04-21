@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse::Fixme;
 BEGIN {
-  $Test::Apocalypse::Fixme::VERSION = '1.001';
+  $Test::Apocalypse::Fixme::VERSION = '1.002';
 }
 BEGIN {
   $Test::Apocalypse::Fixme::AUTHORITY = 'cpan:APOCAL';
@@ -53,7 +53,7 @@ Test::Apocalypse::Fixme - Plugin for Test::Fixme
 
 =head1 VERSION
 
-  This document describes v1.001 of Test::Apocalypse::Fixme - released March 08, 2011 as part of Test-Apocalypse.
+  This document describes v1.002 of Test::Apocalypse::Fixme - released April 21, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

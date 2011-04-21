@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse::Pod_Coverage;
 BEGIN {
-  $Test::Apocalypse::Pod_Coverage::VERSION = '1.001';
+  $Test::Apocalypse::Pod_Coverage::VERSION = '1.002';
 }
 BEGIN {
   $Test::Apocalypse::Pod_Coverage::AUTHORITY = 'cpan:APOCAL';
@@ -50,7 +50,7 @@ Test::Apocalypse::Pod_Coverage - Plugin for Test::Pod::Coverage
 
 =head1 VERSION
 
-  This document describes v1.001 of Test::Apocalypse::Pod_Coverage - released March 08, 2011 as part of Test-Apocalypse.
+  This document describes v1.002 of Test::Apocalypse::Pod_Coverage - released April 21, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

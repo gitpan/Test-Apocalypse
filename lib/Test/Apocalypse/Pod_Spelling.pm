@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse::Pod_Spelling;
 BEGIN {
-  $Test::Apocalypse::Pod_Spelling::VERSION = '1.001';
+  $Test::Apocalypse::Pod_Spelling::VERSION = '1.002';
 }
 BEGIN {
   $Test::Apocalypse::Pod_Spelling::AUTHORITY = 'cpan:APOCAL';
@@ -65,7 +65,7 @@ sub do_test {
 __END__
 =pod
 
-=for :stopwords Apocalypse
+=for :stopwords Apocalypse spellchecker stopword stopwords pm
 
 =encoding utf-8
 
@@ -77,15 +77,13 @@ Test::Apocalypse::Pod_Spelling - Plugin for Test::Spelling
 
 =head1 VERSION
 
-  This document describes v1.001 of Test::Apocalypse::Pod_Spelling - released March 08, 2011 as part of Test-Apocalypse.
+  This document describes v1.002 of Test::Apocalypse::Pod_Spelling - released April 21, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 
 Encapsulates L<Test::Spelling> functionality. We also add each filename as a stopword, to reduce "noise" from the spellchecker.
 
 If you need to add stopwords, please look at L<Pod::Spell> for ways to add it to each .pm file!
-
-=for stopwords spellchecker stopword stopwords pm
 
 =head1 SEE ALSO
 

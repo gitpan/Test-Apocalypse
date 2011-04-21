@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse::OutdatedPrereqs;
 BEGIN {
-  $Test::Apocalypse::OutdatedPrereqs::VERSION = '1.001';
+  $Test::Apocalypse::OutdatedPrereqs::VERSION = '1.002';
 }
 BEGIN {
   $Test::Apocalypse::OutdatedPrereqs::AUTHORITY = 'cpan:APOCAL';
@@ -146,10 +146,15 @@ sub _check_cpan {
 		$version = version->new( $version ) if ! ref $version;
 		my $cpanversion = version->new( $module->version );
 
-		# check it! ( use <= instead of == so we ignore old CPAN versions )
-		TODO: {
-			local $TODO = "OutdatedPrereqs";
-			cmp_ok( $cpanversion, '<=', $version, "Comparing '$prereq' to CPAN version" );
+		# Make sure that the prereq version exists on CPAN
+		if ( $cpanversion < $version ) {
+			fail( "Warning: '$prereq' version $version is not found on CPAN!" );
+		} else {
+			# The version we specified should be the latest CPAN version
+			TODO: {
+				local $TODO = "OutdatedPrereqs";
+				cmp_ok( $cpanversion, '==', $version, "Comparing '$prereq' to CPAN version" );
+			}
 		}
 	} else {
 		my $release = Module::CoreList->first_release( $prereq );
@@ -169,7 +174,7 @@ sub _check_cpan {
 __END__
 =pod
 
-=for :stopwords Apocalypse
+=for :stopwords Apocalypse CPAN prereq prereqs backend
 
 =encoding utf-8
 
@@ -181,13 +186,11 @@ Test::Apocalypse::OutdatedPrereqs - Plugin to detect outdated prereqs
 
 =head1 VERSION
 
-  This document describes v1.001 of Test::Apocalypse::OutdatedPrereqs - released March 08, 2011 as part of Test-Apocalypse.
+  This document describes v1.002 of Test::Apocalypse::OutdatedPrereqs - released April 21, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 
 This plugin detects outdated prereqs in F<META.yml> specified relative to CPAN. It uses L<CPANPLUS> as the backend.
-
-=for stopwords CPAN prereq prereqs backend
 
 =head1 SEE ALSO
 

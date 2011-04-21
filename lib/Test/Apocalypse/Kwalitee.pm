@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse::Kwalitee;
 BEGIN {
-  $Test::Apocalypse::Kwalitee::VERSION = '1.001';
+  $Test::Apocalypse::Kwalitee::VERSION = '1.002';
 }
 BEGIN {
   $Test::Apocalypse::Kwalitee::AUTHORITY = 'cpan:APOCAL';
@@ -172,7 +172,7 @@ sub _cleanup_debian_files {
 __END__
 =pod
 
-=for :stopwords Apocalypse
+=for :stopwords Apocalypse kwalitee
 
 =encoding utf-8
 
@@ -184,13 +184,11 @@ Test::Apocalypse::Kwalitee - Plugin for Test::Kwalitee
 
 =head1 VERSION
 
-  This document describes v1.001 of Test::Apocalypse::Kwalitee - released March 08, 2011 as part of Test-Apocalypse.
+  This document describes v1.002 of Test::Apocalypse::Kwalitee - released April 21, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 
 Encapsulates L<Test::Kwalitee> functionality. This plugin also processes the extra metrics, and prints out the kwalitee as a diag() for info.
-
-=for stopwords kwalitee
 
 =head1 SEE ALSO
 

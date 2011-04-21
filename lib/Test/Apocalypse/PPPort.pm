@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse::PPPort;
 BEGIN {
-  $Test::Apocalypse::PPPort::VERSION = '1.001';
+  $Test::Apocalypse::PPPort::VERSION = '1.002';
 }
 BEGIN {
   $Test::Apocalypse::PPPort::AUTHORITY = 'cpan:APOCAL';
@@ -112,7 +112,7 @@ sub do_test {
 __END__
 =pod
 
-=for :stopwords Apocalypse
+=for :stopwords Apocalypse ppport
 
 =encoding utf-8
 
@@ -124,14 +124,12 @@ Test::Apocalypse::PPPort - Plugin to test for Devel::PPPort warnings
 
 =head1 VERSION
 
-  This document describes v1.001 of Test::Apocalypse::PPPort - released March 08, 2011 as part of Test-Apocalypse.
+  This document describes v1.002 of Test::Apocalypse::PPPort - released April 21, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 
 Plugin to test for L<Devel::PPPort> warnings. It automatically updates your bundled F<ppport.h> file to the latest provided by L<Devel::PPPort>!
 Also, it will strip the F<ppport.h> file to make it smaller.
-
-=for stopwords ppport
 
 =head1 SEE ALSO
 

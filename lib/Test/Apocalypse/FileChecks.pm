@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse::FileChecks;
 BEGIN {
-  $Test::Apocalypse::FileChecks::VERSION = '1.001';
+  $Test::Apocalypse::FileChecks::VERSION = '1.002';
 }
 BEGIN {
   $Test::Apocalypse::FileChecks::AUTHORITY = 'cpan:APOCAL';
@@ -61,7 +61,7 @@ sub do_test {
 __END__
 =pod
 
-=for :stopwords Apocalypse
+=for :stopwords Apocalypse dist
 
 =encoding utf-8
 
@@ -73,13 +73,11 @@ Test::Apocalypse::FileChecks - Plugin to test for file sanity
 
 =head1 VERSION
 
-  This document describes v1.001 of Test::Apocalypse::FileChecks - released March 08, 2011 as part of Test-Apocalypse.
+  This document describes v1.002 of Test::Apocalypse::FileChecks - released April 21, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 
 This plugin ensures basic sanity for the files in the dist.
-
-=for stopwords dist
 
 =head1 SEE ALSO
 

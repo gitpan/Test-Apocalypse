@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse::Strict;
 BEGIN {
-  $Test::Apocalypse::Strict::VERSION = '1.001';
+  $Test::Apocalypse::Strict::VERSION = '1.002';
 }
 BEGIN {
   $Test::Apocalypse::Strict::AUTHORITY = 'cpan:APOCAL';
@@ -55,7 +55,7 @@ Test::Apocalypse::Strict - Plugin for Test::Strict
 
 =head1 VERSION
 
-  This document describes v1.001 of Test::Apocalypse::Strict - released March 08, 2011 as part of Test-Apocalypse.
+  This document describes v1.002 of Test::Apocalypse::Strict - released April 21, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

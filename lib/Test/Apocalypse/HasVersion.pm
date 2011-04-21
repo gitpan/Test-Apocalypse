@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse::HasVersion;
 BEGIN {
-  $Test::Apocalypse::HasVersion::VERSION = '1.001';
+  $Test::Apocalypse::HasVersion::VERSION = '1.002';
 }
 BEGIN {
   $Test::Apocalypse::HasVersion::AUTHORITY = 'cpan:APOCAL';
@@ -43,7 +43,7 @@ Test::Apocalypse::HasVersion - Plugin for Test::HasVersion
 
 =head1 VERSION
 
-  This document describes v1.001 of Test::Apocalypse::HasVersion - released March 08, 2011 as part of Test-Apocalypse.
+  This document describes v1.002 of Test::Apocalypse::HasVersion - released April 21, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

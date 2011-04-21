@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse::UnusedVars;
 BEGIN {
-  $Test::Apocalypse::UnusedVars::VERSION = '1.001';
+  $Test::Apocalypse::UnusedVars::VERSION = '1.002';
 }
 BEGIN {
   $Test::Apocalypse::UnusedVars::AUTHORITY = 'cpan:APOCAL';
@@ -47,7 +47,7 @@ Test::Apocalypse::UnusedVars - Plugin for Test::Vars
 
 =head1 VERSION
 
-  This document describes v1.001 of Test::Apocalypse::UnusedVars - released March 08, 2011 as part of Test-Apocalypse.
+  This document describes v1.002 of Test::Apocalypse::UnusedVars - released April 21, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

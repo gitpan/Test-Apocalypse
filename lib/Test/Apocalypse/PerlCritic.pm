@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse::PerlCritic;
 BEGIN {
-  $Test::Apocalypse::PerlCritic::VERSION = '1.001';
+  $Test::Apocalypse::PerlCritic::VERSION = '1.002';
 }
 BEGIN {
   $Test::Apocalypse::PerlCritic::AUTHORITY = 'cpan:APOCAL';
@@ -105,9 +105,10 @@ sub _default_perlcriticrc {
 [-NamingConventions::ProhibitMixedCaseVars]
 [-Subroutines::ProhibitExcessComplexity]
 [-Tics::ProhibitLongLines]
+[-ValuesAndExpressions::ProhibitEscapedCharacters]
 [-ValuesAndExpressions::ProhibitMagicNumbers]
 [-ValuesAndExpressions::ProhibitNoisyQuotes]
-
+[-ValuesAndExpressions::RestrictLongStrings]
 
 # ---------------------------------------------
 # miscellaneous policies that is just plain annoying
@@ -116,8 +117,9 @@ sub _default_perlcriticrc {
 [-BuiltinFunctions::ProhibitStringyEval]
 [-BuiltinFunctions::ProhibitStringySplit]
 [-Compatibility::ProhibitThreeArgumentOpen]
-[-ControlStructures::ProhibitPostfixControls]
 [-ControlStructures::ProhibitCascadingIfElse]
+[-ControlStructures::ProhibitDeepNests]
+[-ControlStructures::ProhibitPostfixControls]
 [-ErrorHandling::RequireCarping]
 [-ErrorHandling::RequireCheckingReturnValueOfEval]
 [-ErrorHandling::RequireUseOfExceptions]
@@ -127,6 +129,7 @@ sub _default_perlcriticrc {
 [-Lax::ProhibitStringyEval::ExceptForRequire]
 [-Miscellanea::ProhibitTies]
 [-Modules::ProhibitAutomaticExportation]
+[-Modules::RequireBarewordIncludes]
 [-Modules::RequireExplicitPackage]
 [-NamingConventions::ProhibitMixedCaseSubs]
 [-References::ProhibitDoubleSigils]
@@ -152,6 +155,7 @@ sub _default_perlcriticrc {
 [-ValuesAndExpressions::RequireInterpolationOfMetachars]
 [-Variables::ProhibitLocalVars]
 [-Variables::ProhibitPunctuationVars]
+[-Variables::ProhibitPackageVars]
 [-Variables::RequireInitializationForLocalVars]
 
 # ---------------------------------------------
@@ -176,8 +180,14 @@ sub _default_perlcriticrc {
 [-Modules::RequireExplicitInclusion]
 # while this makes sense sometimes it's a drag to list the modules that you *know* a prereq will pull in...
 
+[-RegularExpressions::ProhibitComplexRegexes]
+# while this is true it's unavoidable in some cases...
+
 [-RegularExpressions::ProhibitUnusualDelimiters]
 # sometimes we like other delims...
+
+[-Subroutines::ProhibitBuiltinHomonyms]
+# in POE "shutdown" is commonly used, also in some classes we define convenience methods like "print" and etc...
 
 [-ValuesAndExpressions::ProhibitMixedBooleanOperators]
 # sometimes it feels "natural" to code in that style...
@@ -208,7 +218,7 @@ Test::Apocalypse::PerlCritic - Plugin for Test::Perl::Critic
 
 =head1 VERSION
 
-  This document describes v1.001 of Test::Apocalypse::PerlCritic - released March 08, 2011 as part of Test-Apocalypse.
+  This document describes v1.002 of Test::Apocalypse::PerlCritic - released April 21, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

@@ -19,7 +19,7 @@ my %module_build_args = (
     'Apocalypse <APOCAL@cpan.org>'
   ],
   'dist_name' => 'Test-Apocalypse',
-  'dist_version' => '1.001',
+  'dist_version' => '1.002',
   'license' => 'perl',
   'module_name' => 'Test::Apocalypse',
   'recommends' => {},

@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse::MinimumVersion;
 BEGIN {
-  $Test::Apocalypse::MinimumVersion::VERSION = '1.001';
+  $Test::Apocalypse::MinimumVersion::VERSION = '1.002';
 }
 BEGIN {
   $Test::Apocalypse::MinimumVersion::AUTHORITY = 'cpan:APOCAL';
@@ -43,7 +43,7 @@ Test::Apocalypse::MinimumVersion - Plugin for Test::MinimumVersion
 
 =head1 VERSION
 
-  This document describes v1.001 of Test::Apocalypse::MinimumVersion - released March 08, 2011 as part of Test-Apocalypse.
+  This document describes v1.002 of Test::Apocalypse::MinimumVersion - released April 21, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

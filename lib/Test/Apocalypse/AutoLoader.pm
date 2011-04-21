@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse::AutoLoader;
 BEGIN {
-  $Test::Apocalypse::AutoLoader::VERSION = '1.001';
+  $Test::Apocalypse::AutoLoader::VERSION = '1.002';
 }
 BEGIN {
   $Test::Apocalypse::AutoLoader::AUTHORITY = 'cpan:APOCAL';
@@ -114,7 +114,7 @@ Test::Apocalypse::AutoLoader - Plugin for Test::AutoLoader
 
 =head1 VERSION
 
-  This document describes v1.001 of Test::Apocalypse::AutoLoader - released March 08, 2011 as part of Test-Apocalypse.
+  This document describes v1.002 of Test::Apocalypse::AutoLoader - released April 21, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

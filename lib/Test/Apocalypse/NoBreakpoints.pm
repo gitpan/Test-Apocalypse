@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse::NoBreakpoints;
 BEGIN {
-  $Test::Apocalypse::NoBreakpoints::VERSION = '1.001';
+  $Test::Apocalypse::NoBreakpoints::VERSION = '1.002';
 }
 BEGIN {
   $Test::Apocalypse::NoBreakpoints::AUTHORITY = 'cpan:APOCAL';
@@ -43,7 +43,7 @@ Test::Apocalypse::NoBreakpoints - Plugin for Test::NoBreakpoints
 
 =head1 VERSION
 
-  This document describes v1.001 of Test::Apocalypse::NoBreakpoints - released March 08, 2011 as part of Test-Apocalypse.
+  This document describes v1.002 of Test::Apocalypse::NoBreakpoints - released April 21, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

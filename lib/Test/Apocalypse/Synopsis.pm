@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse::Synopsis;
 BEGIN {
-  $Test::Apocalypse::Synopsis::VERSION = '1.001';
+  $Test::Apocalypse::Synopsis::VERSION = '1.002';
 }
 BEGIN {
   $Test::Apocalypse::Synopsis::AUTHORITY = 'cpan:APOCAL';
@@ -43,7 +43,7 @@ Test::Apocalypse::Synopsis - Plugin for Test::Synopsis
 
 =head1 VERSION
 
-  This document describes v1.001 of Test::Apocalypse::Synopsis - released March 08, 2011 as part of Test-Apocalypse.
+  This document describes v1.002 of Test::Apocalypse::Synopsis - released April 21, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

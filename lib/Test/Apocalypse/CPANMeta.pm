@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse::CPANMeta;
 BEGIN {
-  $Test::Apocalypse::CPANMeta::VERSION = '1.001';
+  $Test::Apocalypse::CPANMeta::VERSION = '1.002';
 }
 BEGIN {
   $Test::Apocalypse::CPANMeta::AUTHORITY = 'cpan:APOCAL';
@@ -43,7 +43,7 @@ Test::Apocalypse::CPANMeta - Plugin for Test::CPAN::Meta
 
 =head1 VERSION
 
-  This document describes v1.001 of Test::Apocalypse::CPANMeta - released March 08, 2011 as part of Test-Apocalypse.
+  This document describes v1.002 of Test::Apocalypse::CPANMeta - released April 21, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

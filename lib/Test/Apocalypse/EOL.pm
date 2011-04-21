@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse::EOL;
 BEGIN {
-  $Test::Apocalypse::EOL::VERSION = '1.001';
+  $Test::Apocalypse::EOL::VERSION = '1.002';
 }
 BEGIN {
   $Test::Apocalypse::EOL::AUTHORITY = 'cpan:APOCAL';
@@ -46,7 +46,7 @@ Test::Apocalypse::EOL - Plugin for Test::EOL
 
 =head1 VERSION
 
-  This document describes v1.001 of Test::Apocalypse::EOL - released March 08, 2011 as part of Test-Apocalypse.
+  This document describes v1.002 of Test::Apocalypse::EOL - released April 21, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

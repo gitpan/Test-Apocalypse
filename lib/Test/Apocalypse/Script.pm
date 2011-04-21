@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse::Script;
 BEGIN {
-  $Test::Apocalypse::Script::VERSION = '1.001';
+  $Test::Apocalypse::Script::VERSION = '1.002';
 }
 BEGIN {
   $Test::Apocalypse::Script::AUTHORITY = 'cpan:APOCAL';
@@ -57,7 +57,7 @@ Test::Apocalypse::Script - Plugin for Test::Script
 
 =head1 VERSION
 
-  This document describes v1.001 of Test::Apocalypse::Script - released March 08, 2011 as part of Test-Apocalypse.
+  This document describes v1.002 of Test::Apocalypse::Script - released April 21, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

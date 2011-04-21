@@ -2,6 +2,54 @@
 9999-99-99 99:99:99 +0000 HEAD
 ==============================
 
+  commit fa3c0457a8ac5a1ed6540bbc04f60e0c320e66ba
+  Author: Apocalypse <perl@0ne.us>
+  Date:   Thu Apr 21 10:13:42 2011 -0700
+  
+    more critic exclusion from linkcheck
+
+  commit 19a6ca116ce17ba3c2c7e903ada1abff194d90e4
+  Author: Apocalypse <perl@0ne.us>
+  Date:   Thu Apr 14 09:31:06 2011 -0700
+  
+    more perlcritic exclusion
+
+  commit 97ab4aecb79636cd9c8fe7648f948b0dfaafb972
+  Author: Apocalypse <perl@0ne.us>
+  Date:   Thu Mar 31 14:35:51 2011 -0700
+  
+    explicitly fail if prereq ver is not on CPAN
+
+  commit 2d0a8a74ff8d0e0d752990ac0aec6ee724841d45
+  Author: Apocalypse <perl@0ne.us>
+  Date:   Mon Mar 28 17:07:07 2011 -0700
+  
+    make dependencies test even better
+
+  commit 87983e80c7c40d55a297a69b57063c536d2fe9f1
+  Author: Apocalypse <perl@0ne.us>
+  Date:   Wed Mar 23 22:00:55 2011 -0700
+  
+    add yet more policies to skip 
+
+=======================================
+2011-03-08 14:38:36 -0700 release-1.001
+=======================================
+
+  commit e8320d91290b5262ff8915e8153fd6c5910643d8
+  Author: Apocalypse <perl@0ne.us>
+  Date:   Tue Mar 8 14:38:36 2011 -0700
+  
+    New CPAN release of Test-Apocalypse - v1.001
+
+    Released: 2011-03-08 21:37:20 UTC
+
+    Tweaked the OutdatedPrereqs test so it will correctly FAIL if a
+    prereq wasn't found on CPAN
+
+    Tweaked the Dependencies test so it correctly filters provided
+    packages
+
   commit d7fdac71194ee33e33a3f2328e78c81e86053724
   Author: Apocalypse <perl@0ne.us>
   Date:   Tue Mar 8 14:35:07 2011 -0700

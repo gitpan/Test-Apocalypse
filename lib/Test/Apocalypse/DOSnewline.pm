@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse::DOSnewline;
 BEGIN {
-  $Test::Apocalypse::DOSnewline::VERSION = '1.001';
+  $Test::Apocalypse::DOSnewline::VERSION = '1.002';
 }
 BEGIN {
   $Test::Apocalypse::DOSnewline::AUTHORITY = 'cpan:APOCAL';
@@ -52,7 +52,7 @@ sub do_test {
 __END__
 =pod
 
-=for :stopwords Apocalypse
+=for :stopwords Apocalypse dist
 
 =encoding utf-8
 
@@ -64,13 +64,11 @@ Test::Apocalypse::DOSnewline - Plugin to detect presence of DOS newlines
 
 =head1 VERSION
 
-  This document describes v1.001 of Test::Apocalypse::DOSnewline - released March 08, 2011 as part of Test-Apocalypse.
+  This document describes v1.002 of Test::Apocalypse::DOSnewline - released April 21, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 
 This plugin detects the presence of DOS newlines in the dist.
-
-=for stopwords dist
 
 =head1 SEE ALSO
 

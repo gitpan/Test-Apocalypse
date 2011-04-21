@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse::PerlMetrics;
 BEGIN {
-  $Test::Apocalypse::PerlMetrics::VERSION = '1.001';
+  $Test::Apocalypse::PerlMetrics::VERSION = '1.002';
 }
 BEGIN {
   $Test::Apocalypse::PerlMetrics::AUTHORITY = 'cpan:APOCAL';
@@ -93,7 +93,7 @@ Test::Apocalypse::PerlMetrics - Plugin for Perl::Metrics::Simple
 
 =head1 VERSION
 
-  This document describes v1.001 of Test::Apocalypse::PerlMetrics - released March 08, 2011 as part of Test-Apocalypse.
+  This document describes v1.002 of Test::Apocalypse::PerlMetrics - released April 21, 2011 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

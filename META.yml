@@ -22,112 +22,112 @@ no_index:
 provides:
   Test::Apocalypse:
     file: lib/Test/Apocalypse.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::AutoLoader:
     file: lib/Test/Apocalypse/AutoLoader.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::CPANMeta:
     file: lib/Test/Apocalypse/CPANMeta.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::CPANMeta_JSON:
     file: lib/Test/Apocalypse/CPANMeta_JSON.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::CPANMeta_YAML:
     file: lib/Test/Apocalypse/CPANMeta_YAML.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::CheckChanges:
     file: lib/Test/Apocalypse/CheckChanges.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::Compile:
     file: lib/Test/Apocalypse/Compile.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::ConsistentVersion:
     file: lib/Test/Apocalypse/ConsistentVersion.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::DOSnewline:
     file: lib/Test/Apocalypse/DOSnewline.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::Dependencies:
     file: lib/Test/Apocalypse/Dependencies.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::DirChecks:
     file: lib/Test/Apocalypse/DirChecks.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::DistManifest:
     file: lib/Test/Apocalypse/DistManifest.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::EOL:
     file: lib/Test/Apocalypse/EOL.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::FileChecks:
     file: lib/Test/Apocalypse/FileChecks.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::FilePortability:
     file: lib/Test/Apocalypse/FilePortability.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::Fixme:
     file: lib/Test/Apocalypse/Fixme.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::HasVersion:
     file: lib/Test/Apocalypse/HasVersion.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::Kwalitee:
     file: lib/Test/Apocalypse/Kwalitee.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::MinimumVersion:
     file: lib/Test/Apocalypse/MinimumVersion.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::NoBreakpoints:
     file: lib/Test/Apocalypse/NoBreakpoints.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::NoPlan:
     file: lib/Test/Apocalypse/NoPlan.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::OutdatedPrereqs:
     file: lib/Test/Apocalypse/OutdatedPrereqs.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::PPPort:
     file: lib/Test/Apocalypse/PPPort.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::PerlCritic:
     file: lib/Test/Apocalypse/PerlCritic.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::PerlMetrics:
     file: lib/Test/Apocalypse/PerlMetrics.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::Pod:
     file: lib/Test/Apocalypse/Pod.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::Pod_CommonMistakes:
     file: lib/Test/Apocalypse/Pod_CommonMistakes.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::Pod_Coverage:
     file: lib/Test/Apocalypse/Pod_Coverage.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::Pod_LinkCheck:
     file: lib/Test/Apocalypse/Pod_LinkCheck.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::Pod_No404s:
     file: lib/Test/Apocalypse/Pod_No404s.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::Pod_Spelling:
     file: lib/Test/Apocalypse/Pod_Spelling.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::Script:
     file: lib/Test/Apocalypse/Script.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::Signature:
     file: lib/Test/Apocalypse/Signature.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::Strict:
     file: lib/Test/Apocalypse/Strict.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::Synopsis:
     file: lib/Test/Apocalypse/Synopsis.pm
-    version: 1.001
+    version: 1.002
   Test::Apocalypse::UnusedVars:
     file: lib/Test/Apocalypse/UnusedVars.pm
-    version: 1.001
+    version: 1.002
 requires:
   CPANPLUS: 0.90
   CPANPLUS::Backend: 0
@@ -192,12 +192,12 @@ resources:
   homepage: http://search.cpan.org/dist/Test-Apocalypse/
   license: http://dev.perl.org/licenses/
   repository: git://github.com/apocalypse/perl-test-apocalypse.git
-version: 1.001
+version: 1.002
 x_BuiltWith:
   modules:
-    CPANPLUS: 0.9010
-    CPANPLUS::Backend: 0.9010
-    CPANPLUS::Configure: 0.9010
+    CPANPLUS: 0.9103
+    CPANPLUS::Backend: 0.9103
+    CPANPLUS::Configure: 0.9103
     Capture::Tiny: 0.10
     Data::Dumper: 2.128
     Devel::PPPort: 3.19
@@ -302,7 +302,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::ReportVersions::Tiny
       name: '@Apocalyptic/ReportVersions::Tiny'
-      version: 1.02
+      version: 1.03
     -
       class: Dist::Zilla::Plugin::Prepender
       name: '@Apocalyptic/Prepender'
@@ -310,7 +310,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Authority
       name: '@Apocalyptic/Authority'
-      version: 1.003
+      version: 1.005
     -
       class: Dist::Zilla::Plugin::PkgVersion
       name: '@Apocalyptic/PkgVersion'
@@ -330,7 +330,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::MinimumPerl
       name: '@Apocalyptic/MinimumPerl'
-      version: 1.001
+      version: 1.003
     -
       class: Dist::Zilla::Plugin::Bugtracker
       name: '@Apocalyptic/Bugtracker'

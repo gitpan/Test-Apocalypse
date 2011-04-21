@@ -9,7 +9,7 @@
 use strict; use warnings;
 package Test::Apocalypse;
 BEGIN {
-  $Test::Apocalypse::VERSION = '1.001';
+  $Test::Apocalypse::VERSION = '1.002';
 }
 BEGIN {
   $Test::Apocalypse::AUTHORITY = 'cpan:APOCAL';
@@ -194,7 +194,10 @@ __END__
 =pod
 
 =for :stopwords Apocalypse cpan testmatrix url annocpan anno bugtracker rt cpants kwalitee
-diff irc mailto metadata placeholders
+diff irc mailto metadata placeholders apocal CPAN AUTHORs al backend debian
+distro distros dists env hackish plugins testsuite yml pm yay unicode blog
+precompiled =for stopwords ap cyclomatic cal dist homebrew imo internet
+perltidy prefs prereq testrun
 
 =encoding utf-8
 
@@ -204,7 +207,7 @@ Test::Apocalypse - Apocalypse's favorite tests bundled into a simple interface
 
 =head1 VERSION
 
-  This document describes v1.001 of Test::Apocalypse - released March 08, 2011 as part of Test-Apocalypse.
+  This document describes v1.002 of Test::Apocalypse - released April 21, 2011 as part of Test-Apocalypse.
 
 =head1 SYNOPSIS
 
@@ -244,9 +247,6 @@ you can do this:
 	perl Build.PL			# sets up the dist ( duh, hah )
 	./Build dist			# makes the tarball ( so certain plugins can process it )
 	RELEASE_TESTING=1 ./Build test	# runs the testsuite!
-
-=for stopwords apocal CPAN AUTHORs al backend debian distro distros dists env hackish plugins testsuite yml pm yay unicode blog precompiled
-=for stopwords ap cyclomatic cal dist homebrew imo internet perltidy prefs prereq testrun
 
 =head1 Methods
 
@@ -300,6 +300,10 @@ Automatically exports the "is_apocalypse_here" sub.
 =head1 MORE IDEAS
 
 =over 4
+
+=item * Test::NoSmartComments
+
+I don't use Smart::Comments but it might be useful? I LOVE BLOAT! :)
 
 =item * Better POD spelling checker?
 
@@ -469,17 +473,23 @@ in addition to those websites please use your favorite search engine to discover
 
 Search CPAN
 
+The default CPAN search engine, useful to view POD in HTML format.
+
 L<http://search.cpan.org/dist/Test-Apocalypse>
 
 =item *
 
 RT: CPAN's Bug Tracker
 
+The RT ( Request Tracker ) website is the default bug/issue tracking system for CPAN.
+
 L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=Test-Apocalypse>
 
 =item *
 
-AnnoCPAN: Annotated CPAN documentation
+AnnoCPAN
+
+The AnnoCPAN is a website that allows community annonations of Perl module documentation.
 
 L<http://annocpan.org/dist/Test-Apocalypse>
 
@@ -487,31 +497,49 @@ L<http://annocpan.org/dist/Test-Apocalypse>
 
 CPAN Ratings
 
+The CPAN Ratings is a website that allows community ratings and reviews of Perl modules.
+
 L<http://cpanratings.perl.org/d/Test-Apocalypse>
 
 =item *
 
 CPAN Forum
 
+The CPAN Forum is a web forum for discussing Perl modules.
+
 L<http://cpanforum.com/dist/Test-Apocalypse>
 
 =item *
 
-CPANTS Kwalitee
+CPANTS
+
+The CPANTS is a website that analyzes the Kwalitee ( code metrics ) of a distribution.
 
 L<http://cpants.perl.org/dist/overview/Test-Apocalypse>
 
 =item *
 
-CPAN Testers Results
+CPAN Testers
 
-L<http://cpantesters.org/distro/T/Test-Apocalypse.html>
+The CPAN Testers is a network of smokers who run automated tests on uploaded CPAN distributions.
+
+L<http://www.cpantesters.org/distro/T/Test-Apocalypse>
 
 =item *
 
 CPAN Testers Matrix
 
+The CPAN Testers Matrix is a website that provides a visual way to determine what Perls/platforms PASSed for a distribution.
+
 L<http://matrix.cpantesters.org/?dist=Test-Apocalypse>
+
+=item *
+
+CPAN Testers Dependencies
+
+The CPAN Testers Dependencies is a website that shows a chart of the test results of all dependencies for a distribution.
+
+L<http://deps.cpantesters.org/?module=Test::Apocalypse>
 
 =back
 
