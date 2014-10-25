@@ -8,8 +8,8 @@
 #
 use strict; use warnings;
 package Test::Apocalypse;
-# git description: release-1.003-8-g2aa664d
-$Test::Apocalypse::VERSION = '1.004';
+# git description: release-1.005-0-g6408495
+$Test::Apocalypse::VERSION = '1.006';
 BEGIN {
   $Test::Apocalypse::AUTHORITY = 'cpan:APOCAL';
 }
@@ -196,7 +196,7 @@ Test::Apocalypse - Apocalypse's favorite tests bundled into a simple interface
 
 =head1 VERSION
 
-  This document describes v1.004 of Test::Apocalypse - released October 24, 2014 as part of Test-Apocalypse.
+  This document describes v1.006 of Test::Apocalypse - released October 25, 2014 as part of Test-Apocalypse.
 
 =head1 SYNOPSIS
 

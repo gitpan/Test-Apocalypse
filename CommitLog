@@ -3,8 +3,41 @@ Changes from 2013-10-25 00:00:00 +0000 to present.
 ==================================================
 
 ------------------------------------------
-version 1.004 at 2014-10-25 05:07:29 +0000
+version 1.005 at 2014-10-25 20:06:12 +0000
 ------------------------------------------
+
+  Change: 6408495efe592a8706ca0bc0a0c4224940820af5
+  Author: Apocalypse <APOCAL@cpan.org>
+  Date : 2014-10-25 13:06:12 +0000
+
+    New CPAN release of Test-Apocalypse - v1.005
+
+    FakeRelease to test my dzil configs! 
+
+  Change: 079488833715302cf10ab1da3c4bdec80dc1e5fc
+  Author: Apocalypse <APOCAL@cpan.org>
+  Date : 2014-10-24 22:51:43 +0000
+
+    add missing Changes commit from previous rls, I need to fix this... 
+
+------------------------------------------
+version 1.004 at 2014-10-25 05:09:19 +0000
+------------------------------------------
+
+  Change: 06ec3c18e22eb14588ff2c513dc42040b3cdee90
+  Author: Apocalypse <APOCAL@cpan.org>
+  Date : 2014-10-24 22:09:19 +0000
+
+    New CPAN release of Test-Apocalypse - v1.004
+
+    Tweak how we skip/disable plugins because of the recent subtest
+    change, I broke some stuff :(
+
+    I give up on the Pod::No404s test, the internet is too flaky
+    everywhere :(
+
+    Removed the OutdatedPrereqs test because I now use
+    Dist::Zilla::Plugin::PromptIfStale, thanks ETHER! 
 
   Change: 2aa664de9c9b1ae5f39e7d8b268fd56d760bdfbb
   Author: Apocalypse <APOCAL@cpan.org>

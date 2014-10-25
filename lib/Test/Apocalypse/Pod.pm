@@ -8,7 +8,7 @@
 #
 use strict; use warnings;
 package Test::Apocalypse::Pod;
-$Test::Apocalypse::Pod::VERSION = '1.004';
+$Test::Apocalypse::Pod::VERSION = '1.006';
 BEGIN {
   $Test::Apocalypse::Pod::AUTHORITY = 'cpan:APOCAL';
 }
@@ -41,7 +41,7 @@ Test::Apocalypse::Pod - Plugin for Test::Pod
 
 =head1 VERSION
 
-  This document describes v1.004 of Test::Apocalypse::Pod - released October 24, 2014 as part of Test-Apocalypse.
+  This document describes v1.006 of Test::Apocalypse::Pod - released October 25, 2014 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

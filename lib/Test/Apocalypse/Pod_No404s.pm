@@ -8,7 +8,7 @@
 #
 use strict; use warnings;
 package Test::Apocalypse::Pod_No404s;
-$Test::Apocalypse::Pod_No404s::VERSION = '1.004';
+$Test::Apocalypse::Pod_No404s::VERSION = '1.006';
 BEGIN {
   $Test::Apocalypse::Pod_No404s::AUTHORITY = 'cpan:APOCAL';
 }
@@ -49,7 +49,7 @@ Test::Apocalypse::Pod_No404s - Plugin for Test::Pod::No404s
 
 =head1 VERSION
 
-  This document describes v1.004 of Test::Apocalypse::Pod_No404s - released October 24, 2014 as part of Test-Apocalypse.
+  This document describes v1.006 of Test::Apocalypse::Pod_No404s - released October 25, 2014 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

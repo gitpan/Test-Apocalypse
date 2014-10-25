@@ -8,7 +8,7 @@
 #
 use strict; use warnings;
 package Test::Apocalypse::Signature;
-$Test::Apocalypse::Signature::VERSION = '1.004';
+$Test::Apocalypse::Signature::VERSION = '1.006';
 BEGIN {
   $Test::Apocalypse::Signature::AUTHORITY = 'cpan:APOCAL';
 }
@@ -52,7 +52,7 @@ Test::Apocalypse::Signature - Plugin for Test::Signature
 
 =head1 VERSION
 
-  This document describes v1.004 of Test::Apocalypse::Signature - released October 24, 2014 as part of Test-Apocalypse.
+  This document describes v1.006 of Test::Apocalypse::Signature - released October 25, 2014 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

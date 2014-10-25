@@ -8,7 +8,7 @@
 #
 use strict; use warnings;
 package Test::Apocalypse::Kwalitee;
-$Test::Apocalypse::Kwalitee::VERSION = '1.004';
+$Test::Apocalypse::Kwalitee::VERSION = '1.006';
 BEGIN {
   $Test::Apocalypse::Kwalitee::AUTHORITY = 'cpan:APOCAL';
 }
@@ -175,7 +175,7 @@ Test::Apocalypse::Kwalitee - Plugin for Test::Kwalitee
 
 =head1 VERSION
 
-  This document describes v1.004 of Test::Apocalypse::Kwalitee - released October 24, 2014 as part of Test-Apocalypse.
+  This document describes v1.006 of Test::Apocalypse::Kwalitee - released October 25, 2014 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

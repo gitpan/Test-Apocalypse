@@ -8,7 +8,7 @@
 #
 use strict; use warnings;
 package Test::Apocalypse::NoBreakpoints;
-$Test::Apocalypse::NoBreakpoints::VERSION = '1.004';
+$Test::Apocalypse::NoBreakpoints::VERSION = '1.006';
 BEGIN {
   $Test::Apocalypse::NoBreakpoints::AUTHORITY = 'cpan:APOCAL';
 }
@@ -41,7 +41,7 @@ Test::Apocalypse::NoBreakpoints - Plugin for Test::NoBreakpoints
 
 =head1 VERSION
 
-  This document describes v1.004 of Test::Apocalypse::NoBreakpoints - released October 24, 2014 as part of Test-Apocalypse.
+  This document describes v1.006 of Test::Apocalypse::NoBreakpoints - released October 25, 2014 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

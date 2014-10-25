@@ -8,7 +8,7 @@
 #
 use strict; use warnings;
 package Test::Apocalypse::CPANChanges;
-$Test::Apocalypse::CPANChanges::VERSION = '1.004';
+$Test::Apocalypse::CPANChanges::VERSION = '1.006';
 BEGIN {
   $Test::Apocalypse::CPANChanges::AUTHORITY = 'cpan:APOCAL';
 }
@@ -39,7 +39,7 @@ Test::Apocalypse::CPANChanges - Plugin for Test::CPAN::Changes
 
 =head1 VERSION
 
-  This document describes v1.004 of Test::Apocalypse::CPANChanges - released October 24, 2014 as part of Test-Apocalypse.
+  This document describes v1.006 of Test::Apocalypse::CPANChanges - released October 25, 2014 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

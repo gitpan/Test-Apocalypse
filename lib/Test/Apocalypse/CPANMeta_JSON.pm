@@ -8,7 +8,7 @@
 #
 use strict; use warnings;
 package Test::Apocalypse::CPANMeta_JSON;
-$Test::Apocalypse::CPANMeta_JSON::VERSION = '1.004';
+$Test::Apocalypse::CPANMeta_JSON::VERSION = '1.006';
 BEGIN {
   $Test::Apocalypse::CPANMeta_JSON::AUTHORITY = 'cpan:APOCAL';
 }
@@ -49,7 +49,7 @@ Test::Apocalypse::CPANMeta_JSON - Plugin for Test::CPAN::Meta
 
 =head1 VERSION
 
-  This document describes v1.004 of Test::Apocalypse::CPANMeta_JSON - released October 24, 2014 as part of Test-Apocalypse.
+  This document describes v1.006 of Test::Apocalypse::CPANMeta_JSON - released October 25, 2014 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

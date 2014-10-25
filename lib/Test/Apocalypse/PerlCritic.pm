@@ -8,7 +8,7 @@
 #
 use strict; use warnings;
 package Test::Apocalypse::PerlCritic;
-$Test::Apocalypse::PerlCritic::VERSION = '1.004';
+$Test::Apocalypse::PerlCritic::VERSION = '1.006';
 BEGIN {
   $Test::Apocalypse::PerlCritic::AUTHORITY = 'cpan:APOCAL';
 }
@@ -235,7 +235,7 @@ Test::Apocalypse::PerlCritic - Plugin for Test::Perl::Critic
 
 =head1 VERSION
 
-  This document describes v1.004 of Test::Apocalypse::PerlCritic - released October 24, 2014 as part of Test-Apocalypse.
+  This document describes v1.006 of Test::Apocalypse::PerlCritic - released October 25, 2014 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 
