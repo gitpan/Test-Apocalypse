@@ -1,15 +1,22 @@
-# Declare our package
-package Test::Apocalypse::Compile;
+#
+# This file is part of Test-Apocalypse
+#
+# This software is copyright (c) 2014 by Apocalypse.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 use strict; use warnings;
+package Test::Apocalypse::Compile;
+$Test::Apocalypse::Compile::VERSION = '1.003';
+BEGIN {
+  $Test::Apocalypse::Compile::AUTHORITY = 'cpan:APOCAL';
+}
 
-# Initialize our version
-use vars qw( $VERSION );
-$VERSION = '0.01';
+# ABSTRACT: Plugin for Test::Compile
 
-# setup our tests and etc
-use Test::Compile;
+use Test::Compile 0.11;
 
-# does our stuff!
 sub do_test {
 	all_pm_files_ok();
 
@@ -17,42 +24,74 @@ sub do_test {
 }
 
 1;
+
 __END__
+
+=pod
+
+=encoding UTF-8
+
+=for :stopwords Apocalypse Niebur Ryan
+
+=for Pod::Coverage do_test
+
 =head1 NAME
 
 Test::Apocalypse::Compile - Plugin for Test::Compile
 
-=head1 SYNOPSIS
+=head1 VERSION
 
-	Please do not use this module directly.
-
-=head1 ABSTRACT
-
-Encapsulates Test::Compile functionality.
+  This document describes v1.003 of Test::Apocalypse::Compile - released October 24, 2014 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 
-Encapsulates Test::Compile functionality.
-
-=head1 EXPORT
-
-None.
+Encapsulates L<Test::Compile> functionality.
 
 =head1 SEE ALSO
 
-L<Test::Apocalypse>
+Please see those modules/websites for more information related to this module.
 
-L<Test::Compile>
+=over 4
+
+=item *
+
+L<Test::Apocalypse|Test::Apocalypse>
+
+=back
 
 =head1 AUTHOR
 
-Apocalypse E<lt>apocal@cpan.orgE<gt>
+Apocalypse <APOCAL@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2009 by Apocalypse
+This software is copyright (c) 2014 by Apocalypse.
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
+
+The full text of the license can be found in the
+F<LICENSE> file included with this distribution.
+
+=head1 DISCLAIMER OF WARRANTY
+
+THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY
+APPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT
+HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM "AS IS" WITHOUT WARRANTY
+OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO,
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM
+IS WITH YOU.  SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF
+ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
+
+IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
+WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES AND/OR CONVEYS
+THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY
+GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE
+USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF
+DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD
+PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS),
+EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF
+SUCH DAMAGES.
 
 =cut

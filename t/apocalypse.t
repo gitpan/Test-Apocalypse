@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!perl
 #
 # This file is part of Test-Apocalypse
 #
@@ -11,10 +11,11 @@ use strict; use warnings;
 use strict; use warnings;
 
 use Test::More;
-
-eval "use Test::Apocalypse";
+eval "use Test::Apocalypse 1.000";
 if ( $@ ) {
 	plan skip_all => 'Test::Apocalypse required for validating the distribution';
 } else {
-	is_apocalypse_here();
+	is_apocalypse_here( {
+		
+	} );
 }

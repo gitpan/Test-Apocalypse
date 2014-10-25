@@ -7,52 +7,21 @@
 # the same terms as the Perl 5 programming language system itself.
 #
 use strict; use warnings;
-package Test::Apocalypse::Pod_Spelling;
-$Test::Apocalypse::Pod_Spelling::VERSION = '1.003';
+package Test::Apocalypse::ConsistentVersion;
+$Test::Apocalypse::ConsistentVersion::VERSION = '1.003';
 BEGIN {
-  $Test::Apocalypse::Pod_Spelling::AUTHORITY = 'cpan:APOCAL';
+  $Test::Apocalypse::ConsistentVersion::AUTHORITY = 'cpan:APOCAL';
 }
 
-# ABSTRACT: Plugin for Test::Spelling
+# ABSTRACT: Plugin for Test::ConsistentVersion
 
-use Test::More;
-use Test::Spelling 0.11;
-use File::Spec 3.31;
-use File::Which 1.09;
-
-# TODO because spelling test almost always FAILs even with stopwords added to it...
-sub _do_automated { 0 }
-sub _is_disabled { 1 }
+use Test::ConsistentVersion 0.2.2;
 
 sub do_test {
-	# Thanks to CPANTESTERS, not everyone have "spell" installed...
-	# FIXME pester Test::Spelling author to be more smarter about this failure mode!
-	my $binary = which( 'spell' );
-	if ( ! defined $binary ) {
-		plan skip_all => 'The binary "spell" is not found, unable to test spelling!';
-		return;
-	} else {
-		# Set the spell path, to be sure!
-		set_spell_cmd( $binary );
-	}
-
-	# get our list of files, and add the "namespaces" as stopwords
-	foreach my $p ( Test::Spelling::all_pod_files() ) {
-		foreach my $word ( File::Spec->splitdir( $p ) ) {
-			next if ! length $word;
-			if ( $word =~ /^(.+)\.\w+$/ ) {
-				add_stopwords( $1 );
-			} else {
-				add_stopwords( $word );
-			}
-		}
-	}
-
-	# Run the test!
-	TODO: {
-		local $TODO = "Pod_Spelling";
-		all_pod_files_spelling_ok();
-	}
+	Test::ConsistentVersion::check_consistent_versions(
+		no_pod		=> 1,
+		no_readme	=> 1,
+	);
 
 	return;
 }
@@ -65,23 +34,22 @@ __END__
 
 =encoding UTF-8
 
-=for :stopwords Apocalypse Niebur Ryan spellchecker stopword stopwords pm
+=for :stopwords Apocalypse Niebur Ryan
 
 =for Pod::Coverage do_test
 
 =head1 NAME
 
-Test::Apocalypse::Pod_Spelling - Plugin for Test::Spelling
+Test::Apocalypse::ConsistentVersion - Plugin for Test::ConsistentVersion
 
 =head1 VERSION
 
-  This document describes v1.003 of Test::Apocalypse::Pod_Spelling - released October 24, 2014 as part of Test-Apocalypse.
+  This document describes v1.003 of Test::Apocalypse::ConsistentVersion - released October 24, 2014 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 
-Encapsulates L<Test::Spelling> functionality. We also add each filename as a stopword, to reduce "noise" from the spellchecker.
-
-If you need to add stopwords, please look at L<Pod::Spell> for ways to add it to each .pm file!
+Encapsulates L<Test::ConsistentVersion> functionality. We disable the pod/readme checks because it's not "common practice" to put
+them in POD, I think...
 
 =head1 SEE ALSO
 

@@ -7,51 +7,36 @@
 # the same terms as the Perl 5 programming language system itself.
 #
 use strict; use warnings;
-package Test::Apocalypse::Pod_Spelling;
-$Test::Apocalypse::Pod_Spelling::VERSION = '1.003';
+package Test::Apocalypse::Script;
+$Test::Apocalypse::Script::VERSION = '1.003';
 BEGIN {
-  $Test::Apocalypse::Pod_Spelling::AUTHORITY = 'cpan:APOCAL';
+  $Test::Apocalypse::Script::AUTHORITY = 'cpan:APOCAL';
 }
 
-# ABSTRACT: Plugin for Test::Spelling
+# ABSTRACT: Plugin for Test::Script
 
 use Test::More;
-use Test::Spelling 0.11;
-use File::Spec 3.31;
-use File::Which 1.09;
-
-# TODO because spelling test almost always FAILs even with stopwords added to it...
-sub _do_automated { 0 }
-sub _is_disabled { 1 }
+use Test::Script 1.07;
+use File::Find::Rule 0.32;
 
 sub do_test {
-	# Thanks to CPANTESTERS, not everyone have "spell" installed...
-	# FIXME pester Test::Spelling author to be more smarter about this failure mode!
-	my $binary = which( 'spell' );
-	if ( ! defined $binary ) {
-		plan skip_all => 'The binary "spell" is not found, unable to test spelling!';
-		return;
+	# TODO we need to search more locations/extensions/etc?
+
+	# TODO Stupid FFR complains if the dir doesn't exist?!?
+	my @dirs;
+	foreach my $d ( qw( examples bin scripts ) ) {
+		push @dirs, $d if -d $d;
+	}
+	my @files = File::Find::Rule->file->name( qr/\.pl$/ )->in( @dirs );
+
+	# Skip if no scripts
+	if ( ! scalar @files ) {
+		plan skip_all => 'No script files found in the distribution';
 	} else {
-		# Set the spell path, to be sure!
-		set_spell_cmd( $binary );
-	}
-
-	# get our list of files, and add the "namespaces" as stopwords
-	foreach my $p ( Test::Spelling::all_pod_files() ) {
-		foreach my $word ( File::Spec->splitdir( $p ) ) {
-			next if ! length $word;
-			if ( $word =~ /^(.+)\.\w+$/ ) {
-				add_stopwords( $1 );
-			} else {
-				add_stopwords( $word );
-			}
+		plan tests => scalar @files;
+		foreach my $f ( @files ) {
+			script_compiles( $f );
 		}
-	}
-
-	# Run the test!
-	TODO: {
-		local $TODO = "Pod_Spelling";
-		all_pod_files_spelling_ok();
 	}
 
 	return;
@@ -65,23 +50,21 @@ __END__
 
 =encoding UTF-8
 
-=for :stopwords Apocalypse Niebur Ryan spellchecker stopword stopwords pm
+=for :stopwords Apocalypse Niebur Ryan
 
 =for Pod::Coverage do_test
 
 =head1 NAME
 
-Test::Apocalypse::Pod_Spelling - Plugin for Test::Spelling
+Test::Apocalypse::Script - Plugin for Test::Script
 
 =head1 VERSION
 
-  This document describes v1.003 of Test::Apocalypse::Pod_Spelling - released October 24, 2014 as part of Test-Apocalypse.
+  This document describes v1.003 of Test::Apocalypse::Script - released October 24, 2014 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 
-Encapsulates L<Test::Spelling> functionality. We also add each filename as a stopword, to reduce "noise" from the spellchecker.
-
-If you need to add stopwords, please look at L<Pod::Spell> for ways to add it to each .pm file!
+Encapsulates L<Test::Script> functionality.
 
 =head1 SEE ALSO
 
