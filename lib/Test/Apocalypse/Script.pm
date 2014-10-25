@@ -8,7 +8,7 @@
 #
 use strict; use warnings;
 package Test::Apocalypse::Script;
-$Test::Apocalypse::Script::VERSION = '1.003';
+$Test::Apocalypse::Script::VERSION = '1.004';
 BEGIN {
   $Test::Apocalypse::Script::AUTHORITY = 'cpan:APOCAL';
 }
@@ -19,24 +19,26 @@ use Test::More;
 use Test::Script 1.07;
 use File::Find::Rule 0.32;
 
-sub do_test {
-	# TODO we need to search more locations/extensions/etc?
-
+# TODO we need to search more locations/extensions/etc?
+my @files;
+sub _is_disabled {
 	# TODO Stupid FFR complains if the dir doesn't exist?!?
 	my @dirs;
 	foreach my $d ( qw( examples bin scripts ) ) {
 		push @dirs, $d if -d $d;
 	}
-	my @files = File::Find::Rule->file->name( qr/\.pl$/ )->in( @dirs );
+	@files = File::Find::Rule->file->name( qr/\.pl$/ )->in( @dirs );
 
 	# Skip if no scripts
 	if ( ! scalar @files ) {
-		plan skip_all => 'No script files found in the distribution';
-	} else {
-		plan tests => scalar @files;
-		foreach my $f ( @files ) {
-			script_compiles( $f );
-		}
+		return 'No script files found in the distribution';
+	}
+}
+
+sub do_test {
+	plan tests => scalar @files;
+	foreach my $f ( @files ) {
+		script_compiles( $f );
 	}
 
 	return;
@@ -60,7 +62,7 @@ Test::Apocalypse::Script - Plugin for Test::Script
 
 =head1 VERSION
 
-  This document describes v1.003 of Test::Apocalypse::Script - released October 24, 2014 as part of Test-Apocalypse.
+  This document describes v1.004 of Test::Apocalypse::Script - released October 24, 2014 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

@@ -8,7 +8,7 @@
 #
 use strict; use warnings;
 package Test::Apocalypse::DOSnewline;
-$Test::Apocalypse::DOSnewline::VERSION = '1.003';
+$Test::Apocalypse::DOSnewline::VERSION = '1.004';
 BEGIN {
   $Test::Apocalypse::DOSnewline::AUTHORITY = 'cpan:APOCAL';
 }
@@ -62,7 +62,7 @@ Test::Apocalypse::DOSnewline - Plugin to detect presence of DOS newlines
 
 =head1 VERSION
 
-  This document describes v1.003 of Test::Apocalypse::DOSnewline - released October 24, 2014 as part of Test-Apocalypse.
+  This document describes v1.004 of Test::Apocalypse::DOSnewline - released October 24, 2014 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

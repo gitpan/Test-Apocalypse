@@ -8,7 +8,7 @@
 #
 use strict; use warnings;
 package Test::Apocalypse::Signature;
-$Test::Apocalypse::Signature::VERSION = '1.003';
+$Test::Apocalypse::Signature::VERSION = '1.004';
 BEGIN {
   $Test::Apocalypse::Signature::AUTHORITY = 'cpan:APOCAL';
 }
@@ -21,13 +21,15 @@ use Test::Signature 1.10;
 # Various people have said SIGNATURE tests are INSANE on end-user install...
 sub _do_automated { 0 }
 
-sub do_test {
-	# do we have a signature file?
-	if ( -e 'SIGNATURE' ) {
-		signature_ok();
-	} else {
-		plan skip_all => 'No SIGNATURE file found';
+# do we have a signature file?
+sub _is_disabled {
+	if ( ! -e 'SIGNATURE' ) {
+		return 'No SIGNATURE file found';
 	}
+}
+
+sub do_test {
+	signature_ok();
 
 	return;
 }
@@ -50,7 +52,7 @@ Test::Apocalypse::Signature - Plugin for Test::Signature
 
 =head1 VERSION
 
-  This document describes v1.003 of Test::Apocalypse::Signature - released October 24, 2014 as part of Test-Apocalypse.
+  This document describes v1.004 of Test::Apocalypse::Signature - released October 24, 2014 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

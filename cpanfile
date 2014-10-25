@@ -1,7 +1,4 @@
 requires "CPAN::Meta::Requirements" => "2.113640";
-requires "CPANPLUS" => "0.90";
-requires "CPANPLUS::Backend" => "0";
-requires "CPANPLUS::Configure" => "0";
 requires "Capture::Tiny" => "0.10";
 requires "Data::Dumper" => "0";
 requires "Devel::PPPort" => "3.19";
@@ -12,7 +9,6 @@ requires "File::Spec" => "3.31";
 requires "File::Which" => "1.09";
 requires "JSON::Any" => "1.25";
 requires "Module::CPANTS::Analyse" => "0.95";
-requires "Module::CoreList" => "2.23";
 requires "Module::Pluggable" => "3.9";
 requires "Perl::Critic::Deprecated" => "1.108";
 requires "Perl::Critic::Itch" => "0.07";

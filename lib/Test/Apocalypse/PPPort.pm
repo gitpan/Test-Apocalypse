@@ -8,7 +8,7 @@
 #
 use strict; use warnings;
 package Test::Apocalypse::PPPort;
-$Test::Apocalypse::PPPort::VERSION = '1.003';
+$Test::Apocalypse::PPPort::VERSION = '1.004';
 BEGIN {
   $Test::Apocalypse::PPPort::AUTHORITY = 'cpan:APOCAL';
 }
@@ -122,7 +122,7 @@ Test::Apocalypse::PPPort - Plugin to test for Devel::PPPort warnings
 
 =head1 VERSION
 
-  This document describes v1.003 of Test::Apocalypse::PPPort - released October 24, 2014 as part of Test-Apocalypse.
+  This document describes v1.004 of Test::Apocalypse::PPPort - released October 24, 2014 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

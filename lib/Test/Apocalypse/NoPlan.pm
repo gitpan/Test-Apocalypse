@@ -8,7 +8,7 @@
 #
 use strict; use warnings;
 package Test::Apocalypse::NoPlan;
-$Test::Apocalypse::NoPlan::VERSION = '1.003';
+$Test::Apocalypse::NoPlan::VERSION = '1.004';
 BEGIN {
   $Test::Apocalypse::NoPlan::AUTHORITY = 'cpan:APOCAL';
 }
@@ -45,7 +45,7 @@ Test::Apocalypse::NoPlan - Plugin for Test::NoPlan
 
 =head1 VERSION
 
-  This document describes v1.003 of Test::Apocalypse::NoPlan - released October 24, 2014 as part of Test-Apocalypse.
+  This document describes v1.004 of Test::Apocalypse::NoPlan - released October 24, 2014 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

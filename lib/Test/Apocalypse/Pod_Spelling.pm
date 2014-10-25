@@ -8,7 +8,7 @@
 #
 use strict; use warnings;
 package Test::Apocalypse::Pod_Spelling;
-$Test::Apocalypse::Pod_Spelling::VERSION = '1.003';
+$Test::Apocalypse::Pod_Spelling::VERSION = '1.004';
 BEGIN {
   $Test::Apocalypse::Pod_Spelling::AUTHORITY = 'cpan:APOCAL';
 }
@@ -20,22 +20,22 @@ use Test::Spelling 0.11;
 use File::Spec 3.31;
 use File::Which 1.09;
 
-# TODO because spelling test almost always FAILs even with stopwords added to it...
+# Spelling test almost always FAILs even with stopwords added to it...
 sub _do_automated { 0 }
-sub _is_disabled { 1 }
-
-sub do_test {
+sub _is_disabled {
 	# Thanks to CPANTESTERS, not everyone have "spell" installed...
 	# FIXME pester Test::Spelling author to be more smarter about this failure mode!
 	my $binary = which( 'spell' );
 	if ( ! defined $binary ) {
-		plan skip_all => 'The binary "spell" is not found, unable to test spelling!';
-		return;
+		return 'The binary "spell" is not found, unable to test spelling!';
 	} else {
 		# Set the spell path, to be sure!
 		set_spell_cmd( $binary );
+		return;
 	}
+}
 
+sub do_test {
 	# get our list of files, and add the "namespaces" as stopwords
 	foreach my $p ( Test::Spelling::all_pod_files() ) {
 		foreach my $word ( File::Spec->splitdir( $p ) ) {
@@ -75,7 +75,7 @@ Test::Apocalypse::Pod_Spelling - Plugin for Test::Spelling
 
 =head1 VERSION
 
-  This document describes v1.003 of Test::Apocalypse::Pod_Spelling - released October 24, 2014 as part of Test-Apocalypse.
+  This document describes v1.004 of Test::Apocalypse::Pod_Spelling - released October 24, 2014 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

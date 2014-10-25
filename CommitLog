@@ -3,8 +3,90 @@ Changes from 2013-10-25 00:00:00 +0000 to present.
 ==================================================
 
 ------------------------------------------
-version 1.003 at 2014-10-25 00:12:11 +0000
+version 1.004 at 2014-10-25 05:07:29 +0000
 ------------------------------------------
+
+  Change: 2aa664de9c9b1ae5f39e7d8b268fd56d760bdfbb
+  Author: Apocalypse <APOCAL@cpan.org>
+  Date : 2014-10-24 22:03:01 +0000
+
+    fix reused variable name error, arg 
+
+  Change: b4874d37f54ad1faf8a5fbcf6a70b9383241802b
+  Author: Apocalypse <APOCAL@cpan.org>
+  Date : 2014-10-24 21:21:15 +0000
+
+    remove OutdatedPrereqs as I move to DZP::PromptIfStale 
+
+  Change: 1e897cd853926ad36e413da97694f71f1e23dd32
+  Author: Apocalypse <APOCAL@cpan.org>
+  Date : 2014-10-24 20:33:52 +0000
+
+    remove useless 'Executing plugin...' now that subtest prints too... 
+
+  Change: 279301ef1eaeb3f9cf0930e392563e2f9f2b49d7
+  Author: Apocalypse <APOCAL@cpan.org>
+  Date : 2014-10-24 20:33:03 +0000
+
+    disable 404s test 
+
+  Change: 2b521e722fb87eb8548a5bbee956d6875aae71c7
+  Author: Apocalypse <APOCAL@cpan.org>
+  Date : 2014-10-24 19:36:22 +0000
+
+    Test::Portability::Files is still br0ken :X 
+
+  Change: fcd04e95a0eacd4c36c7a00ce7d6264c7d9945fb
+  Author: Apocalypse <APOCAL@cpan.org>
+  Date : 2014-10-24 19:18:29 +0000
+
+    add changelog note 
+
+  Change: 81e690ba6f6f94e8b867dea39493129e041236f0
+  Author: Apocalypse <APOCAL@cpan.org>
+  Date : 2014-10-24 19:14:50 +0000
+
+    Tweak the way we skip/disable tests due to the new subtest style 
+
+  Change: a72dc9adaa1d4dcbac0e48cd36dcfa012f66a780
+  Author: Apocalypse <APOCAL@cpan.org>
+  Date : 2014-10-24 18:31:17 +0000
+
+    fix missing Changes commit 
+
+------------------------------------------
+version 1.003 at 2014-10-25 00:15:37 +0000
+------------------------------------------
+
+  Change: 52d4d513ab32013ba226285884632612bfe7f473
+  Author: Apocalypse <APOCAL@cpan.org>
+  Date : 2014-10-24 17:15:37 +0000
+
+    New CPAN release of Test-Apocalypse - v1.003
+
+    Add Test::Mojibake to the dist
+
+    Add more exclusions to the standard Perl::Critic config
+
+    Add PERL_CRITIC_STRICT env var to skip the bundled Perl::Critic
+    config
+
+    Fix an error in Test::Apocalypse::Script
+
+    Use Test::CPAN::Changes instead of the outdated Test::CheckChanges
+
+    Ripped out the dysfunctional Test::NoWarnings in favor of
+    Test::FailWarnings, thanks DAGOLDEN!
+
+    Ignore the 'perl' dependency when checking deps
+
+    Fix version mismatch error when checking dependencies ( 'v0.0.6' vs
+    '0.0.6' )
+
+    Thanks everyone who sent RT tickets to clean up the FAILs :)
+
+    Finally enabled the Test::Vars plugin as I've switched over to using
+    subtests instead of Test::Block 
 
   Change: 47fa54f510bf4608f50418f9d7a242afe52d20d4
   Author: Apocalypse <APOCAL@cpan.org>

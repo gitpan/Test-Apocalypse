@@ -8,7 +8,7 @@
 #
 use strict; use warnings;
 package Test::Apocalypse::Pod_No404s;
-$Test::Apocalypse::Pod_No404s::VERSION = '1.003';
+$Test::Apocalypse::Pod_No404s::VERSION = '1.004';
 BEGIN {
   $Test::Apocalypse::Pod_No404s::AUTHORITY = 'cpan:APOCAL';
 }
@@ -18,11 +18,9 @@ BEGIN {
 use Test::More;
 use Test::Pod::No404s 0.01;
 
-# TODO since cpants is down, all of my tests FAIL... :(
-sub _is_disabled { 1 }
-
 # Don't hammer the internet on smokers' machines :)
 sub _do_automated { 0 }
+sub _is_disabled { 'I give up on the internet...' }
 
 sub do_test {
 	TODO: {
@@ -51,7 +49,7 @@ Test::Apocalypse::Pod_No404s - Plugin for Test::Pod::No404s
 
 =head1 VERSION
 
-  This document describes v1.003 of Test::Apocalypse::Pod_No404s - released October 24, 2014 as part of Test-Apocalypse.
+  This document describes v1.004 of Test::Apocalypse::Pod_No404s - released October 24, 2014 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

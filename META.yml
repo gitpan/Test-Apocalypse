@@ -13,7 +13,7 @@ build_requires:
 configure_requires:
   Module::Build: '0.28'
 dynamic_config: '0'
-generated_by: 'Dist::Zilla version 5.020, CPAN::Meta::Converter version 2.141520'
+generated_by: 'Dist::Zilla version 5.021, CPAN::Meta::Converter version 2.142690'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -25,120 +25,114 @@ no_index:
 provides:
   Test::Apocalypse:
     file: lib/Test/Apocalypse.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::AutoLoader:
     file: lib/Test/Apocalypse/AutoLoader.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::CPANChanges:
     file: lib/Test/Apocalypse/CPANChanges.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::CPANMeta:
     file: lib/Test/Apocalypse/CPANMeta.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::CPANMeta_JSON:
     file: lib/Test/Apocalypse/CPANMeta_JSON.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::CPANMeta_YAML:
     file: lib/Test/Apocalypse/CPANMeta_YAML.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::Compile:
     file: lib/Test/Apocalypse/Compile.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::ConsistentVersion:
     file: lib/Test/Apocalypse/ConsistentVersion.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::DOSnewline:
     file: lib/Test/Apocalypse/DOSnewline.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::Dependencies:
     file: lib/Test/Apocalypse/Dependencies.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::DirChecks:
     file: lib/Test/Apocalypse/DirChecks.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::DistManifest:
     file: lib/Test/Apocalypse/DistManifest.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::EOL:
     file: lib/Test/Apocalypse/EOL.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::FileChecks:
     file: lib/Test/Apocalypse/FileChecks.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::FilePortability:
     file: lib/Test/Apocalypse/FilePortability.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::Fixme:
     file: lib/Test/Apocalypse/Fixme.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::HasVersion:
     file: lib/Test/Apocalypse/HasVersion.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::Kwalitee:
     file: lib/Test/Apocalypse/Kwalitee.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::MinimumVersion:
     file: lib/Test/Apocalypse/MinimumVersion.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::Mojibake:
     file: lib/Test/Apocalypse/Mojibake.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::NoBreakpoints:
     file: lib/Test/Apocalypse/NoBreakpoints.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::NoPlan:
     file: lib/Test/Apocalypse/NoPlan.pm
-    version: '1.003'
-  Test::Apocalypse::OutdatedPrereqs:
-    file: lib/Test/Apocalypse/OutdatedPrereqs.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::PPPort:
     file: lib/Test/Apocalypse/PPPort.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::PerlCritic:
     file: lib/Test/Apocalypse/PerlCritic.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::PerlMetrics:
     file: lib/Test/Apocalypse/PerlMetrics.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::Pod:
     file: lib/Test/Apocalypse/Pod.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::Pod_CommonMistakes:
     file: lib/Test/Apocalypse/Pod_CommonMistakes.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::Pod_Coverage:
     file: lib/Test/Apocalypse/Pod_Coverage.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::Pod_LinkCheck:
     file: lib/Test/Apocalypse/Pod_LinkCheck.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::Pod_No404s:
     file: lib/Test/Apocalypse/Pod_No404s.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::Pod_Spelling:
     file: lib/Test/Apocalypse/Pod_Spelling.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::Script:
     file: lib/Test/Apocalypse/Script.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::Signature:
     file: lib/Test/Apocalypse/Signature.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::Strict:
     file: lib/Test/Apocalypse/Strict.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::Synopsis:
     file: lib/Test/Apocalypse/Synopsis.pm
-    version: '1.003'
+    version: '1.004'
   Test::Apocalypse::UnusedVars:
     file: lib/Test/Apocalypse/UnusedVars.pm
-    version: '1.003'
+    version: '1.004'
 requires:
   CPAN::Meta::Requirements: '2.113640'
-  CPANPLUS: '0.90'
-  CPANPLUS::Backend: '0'
-  CPANPLUS::Configure: '0'
   Capture::Tiny: '0.10'
   Data::Dumper: '0'
   Devel::PPPort: '3.19'
@@ -149,7 +143,6 @@ requires:
   File::Which: '1.09'
   JSON::Any: '1.25'
   Module::CPANTS::Analyse: '0.95'
-  Module::CoreList: '2.23'
   Module::Pluggable: '3.9'
   Perl::Critic::Deprecated: '1.108'
   Perl::Critic::Itch: '0.07'
@@ -203,15 +196,12 @@ resources:
   homepage: http://search.cpan.org/dist/Test-Apocalypse/
   license: http://dev.perl.org/licenses/
   repository: git://github.com/apocalypse/perl-test-apocalypse.git
-version: '1.003'
+version: '1.004'
 x_BuiltWith:
   modules:
-    CPAN::Meta::Requirements: '2.125'
-    CPANPLUS: '0.9152'
-    CPANPLUS::Backend: '0.9152'
-    CPANPLUS::Configure: '0.9152'
+    CPAN::Meta::Requirements: '2.128'
     Capture::Tiny: '0.25'
-    Data::Dumper: '2.151'
+    Data::Dumper: '2.154'
     Devel::PPPort: '3.24'
     Exporter: '5.70'
     File::Find::Rule: '0.33'
@@ -222,9 +212,8 @@ x_BuiltWith:
     IO::Handle: '1.34'
     IPC::Open3: '1.13'
     JSON::Any: '1.38'
-    Module::Build: '0.4206'
+    Module::Build: '0.4210'
     Module::CPANTS::Analyse: '0.95'
-    Module::CoreList: '5.20141002'
     Module::Pluggable: '5.1'
     Perl::Critic::Deprecated: '1.119'
     Perl::Critic::Itch: '0.07'
@@ -246,11 +235,11 @@ x_BuiltWith:
     Test::EOL: '1.5'
     Test::FailWarnings: '0.008'
     Test::File: '1.41'
-    Test::Fixme: '0.11'
+    Test::Fixme: '0.14'
     Test::HasVersion: '0.012'
     Test::MinimumVersion: '0.101081'
     Test::Mojibake: '1.0'
-    Test::More: '1.001006'
+    Test::More: '1.001008'
     Test::NoBreakpoints: '0.15'
     Test::NoPlan: 0.0.6
     Test::Perl::Critic: '1.02'
@@ -262,12 +251,12 @@ x_BuiltWith:
     Test::Portability::Files: '0.06'
     Test::Script: '1.07'
     Test::Signature: '1.10'
-    Test::Spelling: '0.19'
-    Test::Strict: '0.24'
+    Test::Spelling: '0.20'
+    Test::Strict: '0.26'
     Test::Synopsis: '0.11'
     Test::Vars: '0.005'
-    YAML: '1.12'
-    YAML::Any: '1.12'
+    YAML: '1.13'
+    YAML::Any: '1.13'
     parent: '0.228'
     strict: '1.07'
     version: '0.9909'
@@ -286,13 +275,6 @@ x_Dist_Zilla:
     version: '5.018002'
   plugins:
     -
-      class: Dist::Zilla::Plugin::ReportPhase
-      config:
-        Dist::Zilla::Role::TestRunner:
-          default_jobs: '1'
-      name: '@Apocalyptic/ENTER'
-      version: '0.03'
-    -
       class: Dist::Zilla::Plugin::Git::NextVersion
       config:
         Dist::Zilla::Plugin::Git::NextVersion:
@@ -302,32 +284,41 @@ x_Dist_Zilla:
         Dist::Zilla::Role::Git::Repo:
           repo_root: .
       name: '@Apocalyptic/Git::NextVersion'
-      version: '2.024'
+      version: '2.025'
     -
       class: Dist::Zilla::Plugin::Git::GatherDir
       config:
+        Dist::Zilla::Plugin::GatherDir:
+          exclude_filename:
+            - README.pod
+          exclude_match: []
+          follow_symlinks: '0'
+          include_dotfiles: '0'
+          prefix: ''
+          prune_directory: []
+          root: .
         Dist::Zilla::Plugin::Git::GatherDir:
           include_untracked: '0'
         Dist::Zilla::Role::Git::Repo:
           repo_root: .
       name: '@Apocalyptic/Git::GatherDir'
-      version: '2.024'
+      version: '2.025'
     -
       class: Dist::Zilla::Plugin::PruneCruft
       name: '@Apocalyptic/PruneCruft'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::AutoPrereqs
       name: '@Apocalyptic/AutoPrereqs'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::GenerateFile
       name: '@Apocalyptic/MANIFEST.SKIP'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::ManifestSkip
       name: '@Apocalyptic/ManifestSkip'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::Test::Compile
       config:
@@ -344,7 +335,7 @@ x_Dist_Zilla:
             - ':ExecFiles'
           skips: []
       name: '@Apocalyptic/Test::Compile'
-      version: '2.046'
+      version: '2.051'
     -
       class: Dist::Zilla::Plugin::ApocalypseTests
       name: '@Apocalyptic/ApocalypseTests'
@@ -368,7 +359,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::PkgVersion
       name: '@Apocalyptic/PkgVersion'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::PodWeaver
       config:
@@ -480,7 +471,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::NextRelease
       name: '@Apocalyptic/NextRelease'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::ChangelogFromGit
       name: '@Apocalyptic/ChangelogFromGit'
@@ -500,7 +491,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::MetaConfig
       name: '@Apocalyptic/MetaConfig'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::ContributorsFromGit
       name: '@Apocalyptic/ContributorsFromGit'
@@ -527,11 +518,11 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::MetaResources
       name: '@Apocalyptic/MetaResources'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::MetaNoIndex
       name: '@Apocalyptic/MetaNoIndex'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::MetaProvides::Package
       config:
@@ -540,7 +531,7 @@ x_Dist_Zilla:
             -
               class: Dist::Zilla::Plugin::FinderCode
               name: '@Apocalyptic/MetaProvides::Package/AUTOVIV/:InstallModulesPM'
-              version: '5.020'
+              version: '5.021'
         Dist::Zilla::Role::MetaProvider::Provider:
           inherit_missing: '1'
           inherit_version: '1'
@@ -550,21 +541,21 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::License
       name: '@Apocalyptic/License'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::MakeMaker
       config:
         Dist::Zilla::Role::TestRunner:
           default_jobs: '1'
       name: '@Apocalyptic/MakeMaker'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::ModuleBuild
       config:
         Dist::Zilla::Role::TestRunner:
           default_jobs: '1'
       name: '@Apocalyptic/ModuleBuild'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::DualBuilders
       name: '@Apocalyptic/DualBuilders'
@@ -572,11 +563,11 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::MetaYAML
       name: '@Apocalyptic/MetaYAML'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::MetaJSON
       name: '@Apocalyptic/MetaJSON'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::InstallGuide
       name: '@Apocalyptic/InstallGuide'
@@ -584,7 +575,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::DOAP
       name: '@Apocalyptic/DOAP'
-      version: '0.002'
+      version: '0.003'
     -
       class: Dist::Zilla::Plugin::Covenant
       name: '@Apocalyptic/Covenant'
@@ -592,14 +583,14 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::CPANFile
       name: '@Apocalyptic/CPANFile'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::ReadmeAnyFromPod
       name: '@Apocalyptic/ReadmeAnyFromPod'
       version: '0.142470'
     -
       class: Dist::Zilla::Plugin::ReadmeAnyFromPod
-      name: '@Apocalyptic/PodRoot'
+      name: '@Apocalyptic/pod for github'
       version: '0.142470'
     -
       class: Dist::Zilla::Plugin::Signature
@@ -608,7 +599,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Manifest
       name: '@Apocalyptic/Manifest'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::CheckChangesHasContent
       name: '@Apocalyptic/CheckChangesHasContent'
@@ -626,7 +617,7 @@ x_Dist_Zilla:
         Dist::Zilla::Role::Git::Repo:
           repo_root: .
       name: '@Apocalyptic/Git::Check'
-      version: '2.024'
+      version: '2.025'
     -
       class: Dist::Zilla::Plugin::Git::CheckFor::CorrectBranch
       config:
@@ -642,9 +633,24 @@ x_Dist_Zilla:
       name: '@Apocalyptic/Git::CheckFor::MergeConflicts'
       version: '0.011'
     -
+      class: Dist::Zilla::Plugin::Git::Remote::Check
+      name: '@Apocalyptic/Git::Remote::Check'
+      version: 0.1.2
+    -
+      class: Dist::Zilla::Plugin::PromptIfStale
+      config:
+        Dist::Zilla::Plugin::PromptIfStale:
+          check_all_plugins: '1'
+          check_all_prereqs: '1'
+          modules: []
+          phase: release
+          skip: []
+      name: '@Apocalyptic/PromptIfStale'
+      version: '0.028'
+    -
       class: Dist::Zilla::Plugin::TestRelease
       name: '@Apocalyptic/TestRelease'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::CheckPrereqsIndexed
       name: '@Apocalyptic/CheckPrereqsIndexed'
@@ -664,11 +670,11 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::ConfirmRelease
       name: '@Apocalyptic/ConfirmRelease'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::UploadToCPAN
       name: '@Apocalyptic/UploadToCPAN'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::ArchiveRelease
       name: '@Apocalyptic/ArchiveRelease'
@@ -689,21 +695,21 @@ x_Dist_Zilla:
         Dist::Zilla::Role::Git::Repo:
           repo_root: .
       name: '@Apocalyptic/Git::Commit'
-      version: '2.024'
+      version: '2.025'
     -
       class: Dist::Zilla::Plugin::Git::Tag
       config:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: '0'
-          tag: release-1.003
+          tag: release-1.004
           tag_format: release-%v
           tag_message: 'Tagged release-%v'
           time_zone: local
         Dist::Zilla::Role::Git::Repo:
           repo_root: .
       name: '@Apocalyptic/Git::Tag'
-      version: '2.024'
+      version: '2.025'
     -
       class: Dist::Zilla::Plugin::Git::Push
       config:
@@ -714,7 +720,7 @@ x_Dist_Zilla:
         Dist::Zilla::Role::Git::Repo:
           repo_root: .
       name: '@Apocalyptic/Git::Push'
-      version: '2.024'
+      version: '2.025'
     -
       class: Dist::Zilla::Plugin::Clean
       name: '@Apocalyptic/Clean'
@@ -724,53 +730,46 @@ x_Dist_Zilla:
       name: '@Apocalyptic/SchwartzRatio'
       version: 0.2.0
     -
-      class: Dist::Zilla::Plugin::ReportPhase
-      config:
-        Dist::Zilla::Role::TestRunner:
-          default_jobs: '1'
-      name: '@Apocalyptic/EXIT'
-      version: '0.03'
-    -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':InstallModules'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':IncModules'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':TestFiles'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':ExecFiles'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':ShareFiles'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':MainModule'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':AllFiles'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':NoFiles'
-      version: '5.020'
+      version: '5.021'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: '@Apocalyptic/MetaProvides::Package/AUTOVIV/:InstallModulesPM'
-      version: '5.020'
+      version: '5.021'
   zilla:
     class: Dist::Zilla::Dist::Builder
     config:
       is_trial: '0'
-    version: '5.020'
+    version: '5.021'
 x_author_pledge:
   version: '1'
 x_authority: cpan:APOCAL

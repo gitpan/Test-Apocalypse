@@ -8,7 +8,7 @@
 #
 use strict; use warnings;
 package Test::Apocalypse::CPANMeta_JSON;
-$Test::Apocalypse::CPANMeta_JSON::VERSION = '1.003';
+$Test::Apocalypse::CPANMeta_JSON::VERSION = '1.004';
 BEGIN {
   $Test::Apocalypse::CPANMeta_JSON::AUTHORITY = 'cpan:APOCAL';
 }
@@ -18,13 +18,15 @@ BEGIN {
 use Test::More;
 use Test::CPAN::Meta::JSON 0.10;
 
-sub do_test {
-	# We need to make sure there's actually a JSON file in the dist!
-	if ( -e 'META.json' ) {
-		meta_json_ok();
-	} else {
-		plan skip_all => 'distro did not come with a META.json file';
+# We need to make sure there's actually a JSON file in the dist!
+sub _is_disabled {
+	if ( ! -e 'META.json' ) {
+		return 'Distro did not come with a META.json file';
 	}
+}
+
+sub do_test {
+	meta_json_ok();
 
 	return;
 }
@@ -47,7 +49,7 @@ Test::Apocalypse::CPANMeta_JSON - Plugin for Test::CPAN::Meta
 
 =head1 VERSION
 
-  This document describes v1.003 of Test::Apocalypse::CPANMeta_JSON - released October 24, 2014 as part of Test-Apocalypse.
+  This document describes v1.004 of Test::Apocalypse::CPANMeta_JSON - released October 24, 2014 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

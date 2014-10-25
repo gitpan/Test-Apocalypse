@@ -8,7 +8,7 @@
 #
 use strict; use warnings;
 package Test::Apocalypse::DirChecks;
-$Test::Apocalypse::DirChecks::VERSION = '1.003';
+$Test::Apocalypse::DirChecks::VERSION = '1.004';
 BEGIN {
   $Test::Apocalypse::DirChecks::AUTHORITY = 'cpan:APOCAL';
 }
@@ -47,7 +47,7 @@ Test::Apocalypse::DirChecks - Plugin for Test::Dir
 
 =head1 VERSION
 
-  This document describes v1.003 of Test::Apocalypse::DirChecks - released October 24, 2014 as part of Test-Apocalypse.
+  This document describes v1.004 of Test::Apocalypse::DirChecks - released October 24, 2014 as part of Test-Apocalypse.
 
 =head1 DESCRIPTION
 

@@ -49,9 +49,6 @@ sub pmver {
 }
 
 eval { $v .= pmver('CPAN::Meta::Requirements','2.113640') };
-eval { $v .= pmver('CPANPLUS','0.90') };
-eval { $v .= pmver('CPANPLUS::Backend','any version') };
-eval { $v .= pmver('CPANPLUS::Configure','any version') };
 eval { $v .= pmver('Capture::Tiny','0.10') };
 eval { $v .= pmver('Data::Dumper','any version') };
 eval { $v .= pmver('Devel::PPPort','3.19') };
@@ -66,7 +63,6 @@ eval { $v .= pmver('IPC::Open3','any version') };
 eval { $v .= pmver('JSON::Any','1.25') };
 eval { $v .= pmver('Module::Build','0.28') };
 eval { $v .= pmver('Module::CPANTS::Analyse','0.95') };
-eval { $v .= pmver('Module::CoreList','2.23') };
 eval { $v .= pmver('Module::Pluggable','3.9') };
 eval { $v .= pmver('Perl::Critic::Deprecated','1.108') };
 eval { $v .= pmver('Perl::Critic::Itch','0.07') };

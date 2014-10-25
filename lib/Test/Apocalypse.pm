@@ -8,8 +8,8 @@
 #
 use strict; use warnings;
 package Test::Apocalypse;
-# git description: release-1.002-29-g47fa54f
-$Test::Apocalypse::VERSION = '1.003';
+# git description: release-1.003-8-g2aa664d
+$Test::Apocalypse::VERSION = '1.004';
 BEGIN {
   $Test::Apocalypse::AUTHORITY = 'cpan:APOCAL';
 }
@@ -119,9 +119,12 @@ sub is_apocalypse_here {
 		}
 
 		# Is this plugin disabled?
-		if ( $t->can( '_is_disabled' ) and $t->_is_disabled and ! $ENV{PERL_APOCALYPSE} ) {
-			diag( "Skipping $plugin ( plugin is DISABLED )..." );
-			next;
+		if ( $t->can( '_is_disabled' ) and ! $ENV{PERL_APOCALYPSE} ) {
+			my $ret = $t->_is_disabled;
+			if ( $ret ) {
+				diag( "Skipping $plugin => $ret" );
+				next;
+			}
 		}
 
 		# Check for AUTOMATED_TESTING
@@ -131,7 +134,6 @@ sub is_apocalypse_here {
 		}
 
 		# run it!
-		diag( "Executing $plugin..." );
 		subtest $plugin => sub {
 			eval {
 				# TODO ignore annoying gpg warnings like 'WARNING: This key is not certified with a trusted signature!' at /usr/local/share/perl/5.18.2/Module/Signature.pm line 265.
@@ -194,7 +196,7 @@ Test::Apocalypse - Apocalypse's favorite tests bundled into a simple interface
 
 =head1 VERSION
 
-  This document describes v1.003 of Test::Apocalypse - released October 24, 2014 as part of Test-Apocalypse.
+  This document describes v1.004 of Test::Apocalypse - released October 24, 2014 as part of Test-Apocalypse.
 
 =head1 SYNOPSIS
 
